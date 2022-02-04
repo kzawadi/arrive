@@ -1,1 +1,33 @@
 include: package:pedantic/analysis_options.yaml
+
+
+
+# linter:
+#   rules:
+#     public_member_api_docs: false
+#     sort_pub_dependencies: false
+#     library_private_types_in_public_api: false
+#     always_declare_return_types: true
+#     prefer_const_constructors: true
+#     omit_local_variable_types: false
+    
+
+
+analyzer:
+  errors:
+    missing_required_param: error
+    missing_return: error
+    must_be_immutable: error
+    sort_unnamed_constructors_first: error
+    invalid_annotation_target: ignore
+    always_declare_return_types: ignore
+    omit_local_variable_types: ignore
+
+exclude: 
+  - build/**
+  - lib/**.freezed.dart
+  - lib/**.g.dart
+  - lib/**.config.dart
+  - lib/**.gr.dart
+  - test/**.mocks.dart
+  - test/**.config.dart

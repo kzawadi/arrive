@@ -1,11 +1,9 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_commons/at_commons.dart';
-import 'package:at_events_flutter/models/event_key_location_model.dart';
 import 'package:at_events_flutter/services/at_event_notification_listener.dart';
 import 'package:at_location_flutter/common_components/custom_toast.dart';
 import 'package:at_location_flutter/service/at_location_notification_listener.dart';
 import 'package:atsign_location_app/common_components/dialog_box/location_prompt_dialog.dart';
-import 'package:atsign_location_app/data_services/hive/hive_db.dart';
 import 'package:atsign_location_app/models/event_and_location.dart';
 import 'package:atsign_location_app/services/nav_service.dart';
 import 'package:atsign_location_app/utils/constants/constants.dart';
@@ -14,14 +12,12 @@ import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_location_flutter/location_modal/key_location_model.dart';
 import 'package:flutter/material.dart';
-import 'package:at_location_flutter/service/send_location_notification.dart';
 
 class LocationProvider extends BaseModel {
   LocationProvider();
   List<EventAndLocationHybrid> allNotifications = [];
   List<KeyLocationModel> allLocationNotifications = [];
   List<EventKeyLocationModel> allEventNotifications = [];
-  final HiveDataProvider _hiveDataProvider = HiveDataProvider();
   String locationSharingKey =
       'issharing-${AtClientManager.getInstance().atClient.getCurrentAtSign().replaceAll('@', '')}';
   bool isSharing = false,
@@ -55,7 +51,7 @@ class LocationProvider extends BaseModel {
 
     // AtClientManager.getInstance().notificationService.stopAllSubscriptions();
 
-    initialiseLocationSharing();
+    await initialiseLocationSharing();
 
     await initializeLocationService(
       navKey,

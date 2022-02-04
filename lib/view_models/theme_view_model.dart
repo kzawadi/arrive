@@ -1,5 +1,4 @@
 import 'package:atsign_location_app/data_services/hive/hive_db.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'base_model.dart';
 

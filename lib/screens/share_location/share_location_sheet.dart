@@ -1,5 +1,4 @@
 import 'package:at_contact/at_contact.dart';
-import 'package:at_contacts_flutter/screens/contacts_screen.dart';
 import 'package:at_contacts_group_flutter/screens/group_contact_view/group_contact_view.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_location_flutter/common_components/custom_toast.dart';
@@ -41,7 +40,7 @@ class _ShareLocationSheetState extends State<ShareLocationSheet> {
           CustomAppBar(
             centerTitle: false,
             title: TextStrings.shareLocation,
-            action: PopButton(label:TextStrings.cancel),
+            action: PopButton(label: TextStrings.cancel),
           ),
           SizedBox(
             height: 25,
@@ -122,7 +121,7 @@ class _ShareLocationSheetState extends State<ShareLocationSheet> {
               : SizedBox(),
           SizedBox(height: 25),
           Text(
-           TextStrings.duration,
+            TextStrings.duration,
             style: CustomTextStyles().greyLabel14,
           ),
           SizedBox(height: 10),
@@ -247,7 +246,8 @@ class _ShareLocationSheetState extends State<ShareLocationSheet> {
       });
       Navigator.of(context).pop();
     } else {
-      CustomToast().show(TextStrings.somethingWentWrong, context, isError: true);
+      CustomToast()
+          .show(TextStrings.somethingWentWrong, context, isError: true);
       setState(() {
         isLoading = false;
       });

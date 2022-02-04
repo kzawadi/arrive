@@ -242,7 +242,8 @@ class _SplashState extends State<Splash> {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        TextStrings.authenticating,
+                                                        TextStrings
+                                                            .authenticating,
                                                         textScaleFactor: 1,
                                                         style:
                                                             CustomTextStyles()
@@ -327,14 +328,18 @@ class _SplashState extends State<Splash> {
     bool isSelectAtsign = false;
     bool isSelectAll = false;
     var atsignsList = await KeychainUtil.getAtsignList();
-    if (atsignsList == null) {
-      atsignsList = [];
-    }
+
+    // Just better dart code usage
+    // instead of if (atsignsList == null) {
+    //                atsignsList = [];
+    //              }
+
+    atsignsList ??= [];
     Map atsignMap = {};
     for (String atsign in atsignsList) {
       atsignMap[atsign] = false;
     }
-    showDialog(
+    await showDialog(
         barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {

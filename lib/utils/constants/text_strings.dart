@@ -1,7 +1,7 @@
 class TextStrings {
   TextStrings._();
-  static TextStrings _instance = TextStrings._();
-  factory TextStrings() => _instance;
+  // static TextStrings _instance = TextStrings._();
+  // factory TextStrings() => _instance;
 
   static final String resetButton = 'Reset';
   static const String resetDescription =
