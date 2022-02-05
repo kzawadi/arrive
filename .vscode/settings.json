@@ -37,6 +37,7 @@
       "**/*.iml": false,
       "**/*.md": false
    },
-   "explorerExclude.backup": null
+   "explorerExclude.backup": null,
+   "dart.flutterSdkPath": "C:\\Users\\kelvi\\Desktop\\atsign\\arrive\\.fvm\\flutter_sdk"
    
 }

@@ -5,9 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "atsign-location-app",
+            "name": "arrive",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "arrive (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
         }
     ]
 }
