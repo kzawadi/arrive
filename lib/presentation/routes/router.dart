@@ -1,4 +1,4 @@
-import 'package:atsign_location_app/screens/splash/splash.dart';
+import 'package:atsign_location_app/app.dart';
 import 'package:auto_route/annotations.dart';
 
 /*
@@ -13,7 +13,7 @@ other stuff. AutoRoute does all that for you and much more.
 */
 @CupertinoAutoRouter(
   routes: <AutoRoute>[
-    CupertinoRoute<dynamic>(page: Splash),
+    CupertinoRoute<dynamic>(page: MyApp),
   ],
 )
 class $Router {}

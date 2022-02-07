@@ -13,7 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i3;
 
-import '../../screens/splash/splash.dart' as _i1;
+import '../../app.dart' as _i1;
 
 class Router extends _i2.RootStackRouter {
   Router([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
@@ -21,21 +21,21 @@ class Router extends _i2.RootStackRouter {
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
+    MyAppRoute.name: (routeData) {
       return _i2.CupertinoPageX<dynamic>(
-          routeData: routeData, child: _i1.Splash());
+          routeData: routeData, child: _i1.MyApp());
     }
   };
 
   @override
   List<_i2.RouteConfig> get routes =>
-      [_i2.RouteConfig(SplashRoute.name, path: '/Splash')];
+      [_i2.RouteConfig(MyAppRoute.name, path: '/my-app')];
 }
 
 /// generated route for
-/// [_i1.Splash]
-class SplashRoute extends _i2.PageRouteInfo<void> {
-  const SplashRoute() : super(SplashRoute.name, path: '/Splash');
+/// [_i1.MyApp]
+class MyAppRoute extends _i2.PageRouteInfo<void> {
+  const MyAppRoute() : super(MyAppRoute.name, path: '/my-app');
 
-  static const String name = 'SplashRoute';
+  static const String name = 'MyAppRoute';
 }
