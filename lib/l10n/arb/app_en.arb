@@ -1,0 +1,112 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2021-11-15T13:27:03.624",
+  "cancelledByUser": "Heylo",
+  "serverError": "You have Cancelled the login in",
+  "heyloAppBarTittle": "Server error",
+  "emailAlreadyInUse": "Email already in use, Use another e-mail",
+  "invalidEmailAndPasswordCombination": "The email and password enter are wrong",
+  "ok": "Ok",
+  "createAccont": "Create Your Account",
+  "name": "Name",
+  "email": "Email",
+  "password": "Password",
+  "invalidEmail": "InvalidEmail",
+  "shortPassword": "Short password",
+  "keepMeIn": "Keep me in",
+  "orSignInWith": "Or sign in with",
+  "google": "Google",
+  "facebook": "Facebook",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "signIn": "Sign in",
+  "@cancelledByUser": {
+    "placeholders": {},
+    "description": "The detail to show a user that he has cancelled the process",
+    "type": "text"
+  },
+  "@serverError": {
+    "placeholders": {},
+    "description": "Server error",
+    "type": "text"
+  },
+  "@heyloAppBarTittle": {
+    "placeholders": {},
+    "description": "The name of the App",
+    "type": "text"
+  },
+  "@emailAlreadyInUse": {
+    "placeholders": {},
+    "description": "This error details if the email is in use",
+    "type": "text"
+  },
+  "@invalidEmailAndPasswordCombination": {
+    "placeholders": {},
+    "description": "The error details of invalid email and password",
+    "type": "text"
+  },
+  "@ok": {
+    "placeholders": {},
+    "description": "ok meaning everything is right ",
+    "type": "text"
+  },
+  "@createAccont": {
+    "placeholders": {},
+    "description": "creating an acconut detail",
+    "type": "text"
+  },
+  "@name": {
+    "placeholders": {},
+    "description": "The name of the actual user of the app",
+    "type": "text"
+  },
+  "@email": {
+    "placeholders": {},
+    "description": "email adress",
+    "type": "text"
+  },
+  "@password": {
+    "placeholders": {},
+    "description": "The password of the user",
+    "type": "text"
+  },
+  "@invalidEmail": {
+    "placeholders": {},
+    "description": "If the email entered is not correct",
+    "type": "text"
+  },
+  "@shortPassword": {
+    "placeholders": {},
+    "description": "If the password entered is short",
+    "type": "text"
+  },
+  "@keepMeIn": {
+    "placeholders": {},
+    "description": "if  user is to keep him signed all the time",
+    "type": "text"
+  },
+  "@orSignInWith": {
+    "placeholders": {},
+    "description": "An option for user to sign in",
+    "type": "text"
+  },
+  "@google": {
+    "placeholders": {},
+    "description": "google",
+    "type": "text"
+  },
+  "@facebook": {
+    "placeholders": {},
+    "description": "facebook",
+    "type": "text"
+  },
+  "@alreadyHaveAnAccount": {
+    "placeholders": {},
+    "description": "if the user has an account",
+    "type": "text"
+  },
+  "@signIn": {
+    "placeholders": {},
+    "description": "signing in",
+    "type": "text"
+  }
+}

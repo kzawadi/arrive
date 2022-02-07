@@ -23,7 +23,7 @@ class Router extends _i2.RootStackRouter {
   final Map<String, _i2.PageFactory> pagesMap = {
     MyAppRoute.name: (routeData) {
       return _i2.CupertinoPageX<dynamic>(
-          routeData: routeData, child: _i1.MyApp());
+          routeData: routeData, child: const _i1.MyApp());
     }
   };
 
