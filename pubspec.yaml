@@ -32,6 +32,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   auto_route: ^3.2.2
   intl: ^0.17.0
+  flutter_native_splash: ^2.0.2
   flutter_localizations:
     sdk: flutter
 
@@ -44,6 +45,7 @@ dependencies:
   dartz: ^0.10.1
   get_it: ^7.2.0
   injectable: ^1.5.3
+  bloc_concurrency: ^0.2.0
 
 
 
