@@ -1,0 +1,85 @@
+import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
+import 'package:atsign_location_app/application/splash/on_boarding/bloc/on_boarding_bloc.dart';
+import 'package:atsign_location_app/shared/constants.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class OnBoardingForm extends StatelessWidget {
+  const OnBoardingForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<OnBoardingBloc, OnBoardingState>(
+      listener: (context, state) {
+        state.maybeMap(
+          failure: (state) {
+            print(
+              state.onBoardingFailure.map(
+                cancelledByUser: (_) => 'canceld',
+                failedToGetgetApplicationSupportDirectory: (_) =>
+                    'failedToGetgetApplicationSupportDirectory',
+                serverError: (_) => 'server error',
+              ),
+            );
+          },
+          loading: (state) {
+            Onboarding(
+              context: context,
+              onboard: (value, atsign) {},
+              onError: (error) {},
+              atClientPreference: state.atClientPreference,
+              rootEnvironment: RootEnvironment.Production,
+              appAPIKey: Constants.appApiKey,
+              domain: Constants.rootDomain,
+              appColor: const Color.fromARGB(255, 255, 122, 62),
+            );
+          },
+          orElse: () {},
+        );
+      },
+      builder: (context, state) {
+        return state.map(
+          initial: (_) => Center(
+            child: Container(
+              color: Colors.amber[50],
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<OnBoardingBloc>().add(
+                            const OnBoardingEvent.onBoardingAtSign(),
+                          );
+                    },
+                    child: const AutoSizeText('Onboard an @sign'),
+                  ),
+                  const CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          ),
+          loading: (state) {
+            return const Center(
+              child: Text(' @sign on boarding in progress'),
+            );
+          },
+          loadSuccess: (state) {
+            return const Center(child: AutoSizeText('@ sign Loaded'));
+          },
+          failure: (state) {
+            return SizedBox(
+              child: AutoSizeText(
+                state.onBoardingFailure.map(
+                  cancelledByUser: (_) => 'canceld',
+                  failedToGetgetApplicationSupportDirectory: (_) =>
+                      'failedToGetgetApplicationSupportDirectory',
+                  serverError: (_) => 'server error',
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

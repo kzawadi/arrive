@@ -6,11 +6,12 @@ import 'package:atsign_location_app/injections.dart';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 //This is a entry with all the necesary app level initializations
-//things like ensuring initializaion and BloC Observer plus the
-//[AtSignLogger].
+//things like ensuring initializaion and BloC Observer,environment variables and
+// the [AtSignLogger].
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
@@ -32,6 +33,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+
+      /// Load the environment variables from the .env file.
+      /// Directly calls load from the dotenv package.
+      await dotenv.load();
       configureInjection(Environment.prod);
       AtSignLogger.root_level = 'finer';
 

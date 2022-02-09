@@ -33,6 +33,7 @@ dependencies:
   auto_route: ^3.2.2
   intl: ^0.17.0
   flutter_native_splash: ^2.0.2
+  auto_size_text: ^3.0.0
   flutter_localizations:
     sdk: flutter
 
@@ -46,6 +47,8 @@ dependencies:
   get_it: ^7.2.0
   injectable: ^1.5.3
   bloc_concurrency: ^0.2.0
+  json_annotation: ^4.4.0
+
 
 
 
@@ -62,6 +65,7 @@ dependencies:
   at_onboarding_flutter: ^3.1.4
   at_location_flutter: ^3.1.2
   at_events_flutter: ^3.1.2
+  at_app_flutter: ^4.0.1
 
       
 dev_dependencies:
@@ -72,6 +76,8 @@ dev_dependencies:
   build_runner: ^2.1.7
   freezed: ^1.1.1
   injectable_generator: ^1.5.3
+  json_serializable: ^6.1.4
+
   very_good_analysis: ^2.4.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

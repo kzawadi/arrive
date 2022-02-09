@@ -1,4 +1,5 @@
-import 'package:atsign_location_app/app.dart';
+import 'package:atsign_location_app/presentation/on_boarding/on_boarding_page.dart';
+import 'package:atsign_location_app/presentation/splash/splash.dart';
 import 'package:auto_route/annotations.dart';
 
 /*
@@ -13,7 +14,8 @@ other stuff. AutoRoute does all that for you and much more.
 */
 @CupertinoAutoRouter(
   routes: <AutoRoute>[
-    CupertinoRoute<dynamic>(page: MyApp),
+    CupertinoRoute<dynamic>(page: OnBoarding),
+    CupertinoRoute<dynamic>(page: OnBoardingPage, initial: true),
   ],
 )
 class $Router {}
