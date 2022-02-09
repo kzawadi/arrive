@@ -6,7 +6,5 @@ abstract class IAtsignOnBoardingFacade {
   Future<Either<OnBoardingFailure, AtClientPreference>>
       loadAtClientPreference();
 
-  // Future<Option<Directory>> getApplicationSupportsDirectory();
-
-  Future<Option<String>> getSignedInUser();
+  Option<String> getOnBoardedAtSign();
 }

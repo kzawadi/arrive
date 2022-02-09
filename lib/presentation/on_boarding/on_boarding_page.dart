@@ -1,4 +1,4 @@
-import 'package:atsign_location_app/application/splash/on_boarding/bloc/on_boarding_bloc.dart';
+import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
 import 'package:atsign_location_app/injections.dart';
 import 'package:atsign_location_app/presentation/on_boarding/on_boarding_form.dart';
 import 'package:flutter/material.dart';

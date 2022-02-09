@@ -8,7 +8,4 @@ class OnBoardingFailure with _$OnBoardingFailure {
   const factory OnBoardingFailure.failedToGetgetApplicationSupportDirectory() =
       FailedToGetgetApplicationSupportDirectory;
   const factory OnBoardingFailure.serverError() = ServerError;
-  // const factory OnBoardingFailure.emailAlreadyInUse() = EmailAlreadyInUse;
-  // const factory OnBoardingFailure.invalidEmailAndPasswordCombination() =
-  //     InvalidEmailAndPasswordCombination;
 }
