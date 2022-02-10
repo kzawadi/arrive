@@ -7,4 +7,9 @@ abstract class IAtsignOnBoardingFacade {
       loadAtClientPreference();
 
   Option<String> getOnBoardedAtSign();
+
+  void onBoardDataWhenSuccessful(
+    Map<String?, AtClientService> value,
+    String? atSign,
+  );
 }

@@ -29,7 +29,7 @@ class OnBoardingForm extends StatelessWidget {
               context: context,
               onboard: (value, atsign) {
                 context.read<OnBoardingBloc>().add(
-                      const OnBoardingEvent.atSignOnBoardingSucces(),
+                      OnBoardingEvent.atSignOnBoardingSucces(value, atsign),
                     );
               },
               onError: (error) {

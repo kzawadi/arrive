@@ -1,6 +1,6 @@
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
-import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding.dart';
+import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding_facade.dart';
 import 'package:atsign_location_app/domain/on_boarding/onboarding_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';

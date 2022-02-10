@@ -4,8 +4,9 @@ import 'package:at_app_flutter/at_app_flutter.dart' show AtEnv;
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
-import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding.dart';
+import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding_facade.dart';
 import 'package:atsign_location_app/domain/on_boarding/onboarding_failures.dart';
+import 'package:atsign_location_app/shared/constants.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart'
@@ -53,5 +54,30 @@ class OnboardingAtsignFacade implements IAtsignOnBoardingFacade {
   Future<Option<Directory>> getApplicationSupportsDirectory() async {
     final Directory dir = await getApplicationSupportDirectory();
     return optionOf(dir);
+  }
+
+  @override
+  Future onBoardDataWhenSuccessful(
+    Map<String?, AtClientService> value,
+    String? atSign,
+  ) async {
+    // late AtClientPreference preference;
+
+    await loadAtClientPreference().then(
+      (value) {
+        value.fold(
+          (l) => false,
+          (atClientPreference) async {
+            await AtClientManager.getInstance().setCurrentAtSign(
+              atSign!,
+              Constants.appNamespace,
+              atClientPreference,
+            );
+            print('loadAtClientPreference');
+            return true;
+          },
+        );
+      },
+    );
   }
 }

@@ -22,12 +22,14 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   OnBoardingBloc(
     this._loadAtClientPreferenceUseCase,
     this._getOnBoardedAtSignUseCase,
+    this._boardDataWhenSuccessful,
   ) : super(const OnBoardingState.initial()) {
     on<OnBoardingEvent>(_onBoardingEventHandler);
   }
 
   final LoadAtClientPreferenceUseCase _loadAtClientPreferenceUseCase;
   final GetOnBoardedAtSignUseCase _getOnBoardedAtSignUseCase;
+  final OnBoardDataWhenSuccessful _boardDataWhenSuccessful;
 
   Future _onBoardingEventHandler(
     OnBoardingEvent event,
@@ -43,8 +45,9 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
           ),
         );
       },
-      atSignOnBoardingSucces: () {
+      atSignOnBoardingSucces: (value, atSi) async {
         final Option<String> atSign = _getOnBoardedAtSignUseCase();
+        _boardDataWhenSuccessful(value, atSi);
         emit(
           OnBoardingState.loadSuccess(atSign),
         );

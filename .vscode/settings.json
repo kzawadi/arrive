@@ -38,6 +38,10 @@
       "**/*.md": false
    },
    "explorerExclude.backup": null,
-   "dart.flutterSdkPath": "C:\\Users\\kelvi\\Desktop\\atsign\\arrive\\.fvm\\flutter_sdk"
+   "dart.flutterSdkPath": "C:\\Users\\kelvi\\Desktop\\atsign\\arrive\\.fvm\\flutter_sdk",
+   "cSpell.enableFiletypes": [
+      "!yaml"
+   ],
+   "cSpell.language": "en"
    
 }

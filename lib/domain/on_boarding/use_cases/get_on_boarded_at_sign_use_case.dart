@@ -1,4 +1,4 @@
-import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding.dart';
+import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding_facade.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
