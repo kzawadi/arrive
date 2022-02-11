@@ -1,6 +1,8 @@
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
+import 'package:atsign_location_app/presentation/routes/router.gr.dart';
 import 'package:atsign_location_app/shared/constants.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,18 +67,22 @@ class OnBoardingForm extends StatelessWidget {
           //     ),
           //   ),
           // ),
+          loading: (_) => const CircularProgressIndicator(),
           loadSuccess: (atSign) {
             return atSign.fold(
-              () => const CircularProgressIndicator(),
-              (a) => Center(
-                child: Text(' @sign on boarded is ||| $a  |||'),
-              ),
+              () => const CircularProgressIndicator(color: Colors.red),
+              (a) {
+                AutoRouter.of(context).replace(
+                  HomePageRoute(key: key, atSign: a),
+                );
+                return const CircularProgressIndicator();
+              },
             );
           },
           onBoardingError: (e) {
             return AutoSizeText(e.toString());
           },
-          orElse: () => const CircularProgressIndicator(),
+          orElse: () => const CircularProgressIndicator(color: Colors.blue),
         );
       },
     );

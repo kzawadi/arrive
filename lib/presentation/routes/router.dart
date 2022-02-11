@@ -1,3 +1,5 @@
+import 'package:at_contacts_flutter/at_contacts_flutter.dart';
+import 'package:atsign_location_app/presentation/home/home_page.dart';
 import 'package:atsign_location_app/presentation/on_boarding/on_boarding_page.dart';
 import 'package:atsign_location_app/presentation/splash/splash.dart';
 import 'package:auto_route/annotations.dart';
@@ -14,8 +16,10 @@ other stuff. AutoRoute does all that for you and much more.
 */
 @CupertinoAutoRouter(
   routes: <AutoRoute>[
-    CupertinoRoute<dynamic>(page: OnBoarding),
-    CupertinoRoute<dynamic>(page: OnBoardingPage, initial: true),
+    AutoRoute<dynamic>(page: OnBoarding),
+    AutoRoute<dynamic>(page: HomePage),
+    AutoRoute<dynamic>(page: ContactsScreen),
+    AutoRoute<dynamic>(page: OnBoardingPage, initial: true),
   ],
 )
 class $Router {}

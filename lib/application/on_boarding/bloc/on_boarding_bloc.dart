@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:at_client_mobile/at_client_mobile.dart';
+import 'package:atsign_location_app/domain/contacts/use_cases/at_contacts_use_cases.dart';
 import 'package:atsign_location_app/domain/on_boarding/onboarding_failures.dart';
 import 'package:atsign_location_app/domain/on_boarding/use_cases/on_boarding_use_cases.dart';
 import 'package:bloc/bloc.dart';
@@ -23,6 +24,7 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
     this._loadAtClientPreferenceUseCase,
     this._getOnBoardedAtSignUseCase,
     this._boardDataWhenSuccessful,
+    this._atContactInitialization,
   ) : super(const OnBoardingState.initial()) {
     on<OnBoardingEvent>(_onBoardingEventHandler);
   }
@@ -30,6 +32,7 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final LoadAtClientPreferenceUseCase _loadAtClientPreferenceUseCase;
   final GetOnBoardedAtSignUseCase _getOnBoardedAtSignUseCase;
   final OnBoardDataWhenSuccessful _boardDataWhenSuccessful;
+  final AtContactInitialization _atContactInitialization;
 
   Future _onBoardingEventHandler(
     OnBoardingEvent event,
@@ -48,6 +51,7 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
       atSignOnBoardingSucces: (value, atSi) async {
         final Option<String> atSign = _getOnBoardedAtSignUseCase();
         _boardDataWhenSuccessful(value, atSi);
+        _atContactInitialization();
         emit(
           OnBoardingState.loadSuccess(atSign),
         );
