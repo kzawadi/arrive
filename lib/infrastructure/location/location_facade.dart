@@ -16,7 +16,7 @@
 
 //   void initializePlugins() {
 //     String currentAtSign; //todo no need to fetch currentAtSign multiple times
-//     currentAtSign = AtClientManager.getInstance().atClient.getCurrentAtSign()!;
+//   currentAtSign = AtClientManager.getInstance().atClient.getCurrentAtSign()!;
 //     // ignore: await_only_futures
 //     initializeContactsService(rootDomain: Constants.rootDomain);
 //     // setState(() {

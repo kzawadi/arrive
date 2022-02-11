@@ -10,7 +10,10 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<OnBoardingBloc>(),
+      create: (context) => getIt<OnBoardingBloc>()
+        ..add(
+          const OnBoardingEvent.onBoardingAtSign(),
+        ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('onboard data'),

@@ -48,23 +48,23 @@ class OnBoardingForm extends StatelessWidget {
       },
       builder: (context, state) {
         return state.maybeWhen(
-          initial: () => Center(
-            child: Container(
-              color: Colors.amber[50],
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<OnBoardingBloc>().add(
-                            const OnBoardingEvent.onBoardingAtSign(),
-                          );
-                    },
-                    child: const AutoSizeText('Onboard an @sign'),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // initial: () => Center(
+          //   child: Container(
+          //     color: Colors.amber[50],
+          //     child: Column(
+          //       children: [
+          //         ElevatedButton(
+          //           onPressed: () {
+          //             context.read<OnBoardingBloc>().add(
+          //                   const OnBoardingEvent.onBoardingAtSign(),
+          //                 );
+          //           },
+          //           child: const AutoSizeText('Onboard an @sign'),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           loadSuccess: (atSign) {
             return atSign.fold(
               () => const CircularProgressIndicator(),
@@ -76,7 +76,7 @@ class OnBoardingForm extends StatelessWidget {
           onBoardingError: (e) {
             return AutoSizeText(e.toString());
           },
-          orElse: () => const AutoSizeText('Start'),
+          orElse: () => const CircularProgressIndicator(),
         );
       },
     );

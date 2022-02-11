@@ -73,7 +73,7 @@ class OnboardingAtsignFacade implements IAtsignOnBoardingFacade {
               Constants.appNamespace,
               atClientPreference,
             );
-            print('loadAtClientPreference');
+
             return true;
           },
         );
