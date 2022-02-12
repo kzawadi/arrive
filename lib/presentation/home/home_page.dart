@@ -18,12 +18,13 @@ class HomePage extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () {
-                AutoRouter.of(context).replace(
+                AutoRouter.of(context).navigate(
                   ContactsScreenRoute(
                     key: key,
-                    // asSingleSelectionScreen: true,
+                    asSingleSelectionScreen: false,
                     context: context,
                     onSendIconPressed: () {},
+
                     // saveGroup: () {},
                     // selectedList: (f) {},
                   ),
