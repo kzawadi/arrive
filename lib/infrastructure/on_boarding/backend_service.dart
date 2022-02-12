@@ -6,7 +6,6 @@ import 'package:at_client/src/service/sync_service.dart';
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_lookup/at_lookup.dart';
 import 'package:atsign_location_app/shared/constants.dart';
-import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 class BackendService {

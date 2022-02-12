@@ -8,7 +8,7 @@ abstract class IAtsignOnBoardingFacade {
 
   Option<String> getOnBoardedAtSign();
 
-  void onBoardDataWhenSuccessful(
+  Future<Either<OnBoardingFailure, Unit>> onBoardDataWhenSuccessful(
     Map<String?, AtClientService> value,
     String? atSign,
   );

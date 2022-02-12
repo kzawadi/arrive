@@ -6,28 +6,26 @@ void bottomSheet(
   Widget T,
   double height, {
   Function? onSheetCLosed,
-}) async {
-  var future = showModalBottomSheet<void>(
+}) {
+  showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
-    shape: StadiumBorder(),
+    shape: const StadiumBorder(),
     builder: (BuildContext context) {
       return Container(
         height: height,
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(12.0),
-            topRight: Radius.circular(12.0),
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
           ),
         ),
         child: T,
       );
     },
-  );
-
-  // ignore: unawaited_futures
-  future.then((value) {
+  ).then((value) {
+    // ignore: avoid_dynamic_calls
     if (onSheetCLosed != null) onSheetCLosed();
   });
 }

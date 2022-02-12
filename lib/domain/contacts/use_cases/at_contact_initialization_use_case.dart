@@ -1,4 +1,5 @@
 import 'package:atsign_location_app/domain/contacts/i_contacts_facade.dart';
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -7,5 +8,5 @@ class AtContactInitialization {
 
   final IContactsFacade _contactsFacade;
 
-  void call() => _contactsFacade.initializeContactsServices();
+  Future<Unit> call() async => _contactsFacade.initializeContactsServices();
 }

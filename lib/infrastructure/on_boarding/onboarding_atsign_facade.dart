@@ -48,14 +48,13 @@ class OnboardingAtsignFacade implements IAtsignOnBoardingFacade {
   }
 
   @override
-  Future onBoardDataWhenSuccessful(
+  Future<Either<OnBoardingFailure, Unit>> onBoardDataWhenSuccessful(
     Map<String?, AtClientService> v,
     String? atSign,
-  ) async {
-    await loadAtClientPreference().then(
-      (value) {
-        value.fold(
-          (l) => false,
+  ) async =>
+      loadAtClientPreference().then(
+        (value) => value.fold(
+          (l) => left(const OnBoardingFailure.failToSetOnBoardData()),
           (atClientPreference) async {
             await AtClientManager.getInstance().setCurrentAtSign(
               atSign!,
@@ -75,10 +74,8 @@ class OnboardingAtsignFacade implements IAtsignOnBoardingFacade {
             //sync with secondary server
             AtClientManager.getInstance().syncService.sync();
 
-            return true;
+            return right(unit);
           },
-        );
-      },
-    );
-  }
+        ),
+      );
 }

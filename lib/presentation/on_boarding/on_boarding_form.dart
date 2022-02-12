@@ -23,6 +23,8 @@ class OnBoardingForm extends StatelessWidget {
                 failedToGetgetApplicationSupportDirectory: (_) =>
                     'failedToGetgetApplicationSupportDirectory',
                 serverError: (_) => 'server error',
+                failToSetOnBoardData: (_) =>
+                    'failed to setCurrent onBoard Data to',
               ),
             );
           },
