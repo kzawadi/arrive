@@ -15,23 +15,31 @@ class HomePage extends StatelessWidget {
         title: const Text('HOME'),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ElevatedButton(
-              onPressed: () {
-                AutoRouter.of(context).navigate(
-                  ContactsScreenRoute(
-                    key: key,
-                    asSingleSelectionScreen: false,
-                    context: context,
-                    onSendIconPressed: () {},
+            onPressed: () {
+              AutoRouter.of(context).navigate(
+                ContactsScreenRoute(
+                  key: key,
+                  asSingleSelectionScreen: false,
+                  context: context,
+                  onSendIconPressed: () {},
 
-                    // saveGroup: () {},
-                    // selectedList: (f) {},
-                  ),
-                );
-              },
-              child: const Text('CONTACTS')),
+                  // saveGroup: () {},
+                  // selectedList: (f) {},
+                ),
+              );
+            },
+            child: const Text('CONTACTS'),
+          ),
           AutoSizeText(' @sign on boarded is ||| $atSign  |||'),
+          ElevatedButton(
+            onPressed: () {
+              AutoRouter.of(context).navigate(const LocationPageRoute());
+            },
+            child: const AutoSizeText('MAP'),
+          )
         ],
       ),
     );

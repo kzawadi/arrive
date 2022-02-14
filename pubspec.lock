@@ -545,6 +545,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.2"
+  flutter_hooks:
+    dependency: "direct main"
+    description:
+      name: flutter_hooks
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.18.2+1"
   flutter_image:
     dependency: transitive
     description:
@@ -593,7 +600,7 @@ packages:
     source: hosted
     version: "1.0.5"
   flutter_slidable:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_slidable
       url: "https://pub.dartlang.org"

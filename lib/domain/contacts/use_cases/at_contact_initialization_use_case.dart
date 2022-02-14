@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class AtContactInitialization {
-  AtContactInitialization(this._contactsFacade);
+class AtContactInitializationUseCase {
+  AtContactInitializationUseCase(this._contactsFacade);
 
   final IContactsFacade _contactsFacade;
 

@@ -3,8 +3,8 @@ import 'package:atsign_location_app/domain/on_boarding/i_atsign_on_boarding_faca
 import 'package:injectable/injectable.dart';
 
 @injectable
-class OnBoardDataWhenSuccessful {
-  OnBoardDataWhenSuccessful(this._iAtsignOnBoardingFacade);
+class OnBoardDataWhenSuccessfulUseCase {
+  OnBoardDataWhenSuccessfulUseCase(this._iAtsignOnBoardingFacade);
 
   final IAtsignOnBoardingFacade _iAtsignOnBoardingFacade;
 
