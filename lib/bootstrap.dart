@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:at_utils/at_logger.dart';
 import 'package:atsign_location_app/injections.dart';
+import 'package:atsign_location_app/shared/constants.dart';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/widgets.dart';
@@ -36,9 +37,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
       /// Load the environment variables from the .env file.
       /// Directly calls load from the dotenv package.
-      await dotenv.load();
+      await Constants.load();
       configureInjection(Environment.prod);
-      AtSignLogger.root_level = 'finer';
+      AtSignLogger.root_level = 'all';
 
       await BlocOverrides.runZoned(
         () async => runApp(await builder()),

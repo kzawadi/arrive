@@ -1,5 +1,4 @@
 import 'package:atsign_location_app/domain/location/i_location_facade.dart';
-import 'package:atsign_location_app/infrastructure/location/location_facade.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
@@ -8,7 +7,7 @@ import 'package:injectable/injectable.dart';
 class InitLocationServicesUseCase {
   InitLocationServicesUseCase(this._iLocationFacade);
 
-  final LocationFacade _iLocationFacade;
+  final ILocationFacade _iLocationFacade;
 
   Future<Unit> call(
     GlobalKey<NavigatorState> navKey,

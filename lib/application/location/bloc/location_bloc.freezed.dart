@@ -24,8 +24,17 @@ class _$LocationEventTearOff {
     );
   }
 
-  _LocationServicesInitialized locationServicesInitialized() {
-    return const _LocationServicesInitialized();
+  _LocationServicesInitialized locationServicesInitialized(
+      Option<Position> myPosition) {
+    return _LocationServicesInitialized(
+      myPosition,
+    );
+  }
+
+  _LocationDataReceived locationDataReceived(Option<Position> myPosition) {
+    return _LocationDataReceived(
+      myPosition,
+    );
   }
 }
 
@@ -37,19 +46,23 @@ mixin _$LocationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function() locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition)
+        locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +71,7 @@ mixin _$LocationEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_LocationServicesInitialized value)
         locationServicesInitialized,
+    required TResult Function(_LocationDataReceived value) locationDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +79,7 @@ mixin _$LocationEvent {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +87,7 @@ mixin _$LocationEvent {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,7 +173,9 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function() locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition)
+        locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) {
     return started(navKey);
   }
@@ -166,7 +184,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) {
     return started?.call(navKey);
   }
@@ -175,7 +194,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -190,6 +210,7 @@ class _$_Started implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_LocationServicesInitialized value)
         locationServicesInitialized,
+    required TResult Function(_LocationDataReceived value) locationDataReceived,
   }) {
     return started(this);
   }
@@ -200,6 +221,7 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
   }) {
     return started?.call(this);
   }
@@ -210,6 +232,7 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -234,6 +257,7 @@ abstract class _$LocationServicesInitializedCopyWith<$Res> {
           _LocationServicesInitialized value,
           $Res Function(_LocationServicesInitialized) then) =
       __$LocationServicesInitializedCopyWithImpl<$Res>;
+  $Res call({Option<Position> myPosition});
 }
 
 /// @nodoc
@@ -248,55 +272,83 @@ class __$LocationServicesInitializedCopyWithImpl<$Res>
   @override
   _LocationServicesInitialized get _value =>
       super._value as _LocationServicesInitialized;
+
+  @override
+  $Res call({
+    Object? myPosition = freezed,
+  }) {
+    return _then(_LocationServicesInitialized(
+      myPosition == freezed
+          ? _value.myPosition
+          : myPosition // ignore: cast_nullable_to_non_nullable
+              as Option<Position>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LocationServicesInitialized implements _LocationServicesInitialized {
-  const _$_LocationServicesInitialized();
+  const _$_LocationServicesInitialized(this.myPosition);
+
+  @override
+  final Option<Position> myPosition;
 
   @override
   String toString() {
-    return 'LocationEvent.locationServicesInitialized()';
+    return 'LocationEvent.locationServicesInitialized(myPosition: $myPosition)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LocationServicesInitialized);
+            other is _LocationServicesInitialized &&
+            const DeepCollectionEquality()
+                .equals(other.myPosition, myPosition));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(myPosition));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LocationServicesInitializedCopyWith<_LocationServicesInitialized>
+      get copyWith => __$LocationServicesInitializedCopyWithImpl<
+          _LocationServicesInitialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function() locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition)
+        locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) {
-    return locationServicesInitialized();
+    return locationServicesInitialized(myPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) {
-    return locationServicesInitialized?.call();
+    return locationServicesInitialized?.call(myPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function()? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) {
     if (locationServicesInitialized != null) {
-      return locationServicesInitialized();
+      return locationServicesInitialized(myPosition);
     }
     return orElse();
   }
@@ -307,6 +359,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
     required TResult Function(_Started value) started,
     required TResult Function(_LocationServicesInitialized value)
         locationServicesInitialized,
+    required TResult Function(_LocationDataReceived value) locationDataReceived,
   }) {
     return locationServicesInitialized(this);
   }
@@ -317,6 +370,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
   }) {
     return locationServicesInitialized?.call(this);
   }
@@ -327,6 +381,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
     TResult Function(_Started value)? started,
     TResult Function(_LocationServicesInitialized value)?
         locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
     required TResult orElse(),
   }) {
     if (locationServicesInitialized != null) {
@@ -337,7 +392,160 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
 }
 
 abstract class _LocationServicesInitialized implements LocationEvent {
-  const factory _LocationServicesInitialized() = _$_LocationServicesInitialized;
+  const factory _LocationServicesInitialized(Option<Position> myPosition) =
+      _$_LocationServicesInitialized;
+
+  Option<Position> get myPosition;
+  @JsonKey(ignore: true)
+  _$LocationServicesInitializedCopyWith<_LocationServicesInitialized>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LocationDataReceivedCopyWith<$Res> {
+  factory _$LocationDataReceivedCopyWith(_LocationDataReceived value,
+          $Res Function(_LocationDataReceived) then) =
+      __$LocationDataReceivedCopyWithImpl<$Res>;
+  $Res call({Option<Position> myPosition});
+}
+
+/// @nodoc
+class __$LocationDataReceivedCopyWithImpl<$Res>
+    extends _$LocationEventCopyWithImpl<$Res>
+    implements _$LocationDataReceivedCopyWith<$Res> {
+  __$LocationDataReceivedCopyWithImpl(
+      _LocationDataReceived _value, $Res Function(_LocationDataReceived) _then)
+      : super(_value, (v) => _then(v as _LocationDataReceived));
+
+  @override
+  _LocationDataReceived get _value => super._value as _LocationDataReceived;
+
+  @override
+  $Res call({
+    Object? myPosition = freezed,
+  }) {
+    return _then(_LocationDataReceived(
+      myPosition == freezed
+          ? _value.myPosition
+          : myPosition // ignore: cast_nullable_to_non_nullable
+              as Option<Position>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LocationDataReceived implements _LocationDataReceived {
+  const _$_LocationDataReceived(this.myPosition);
+
+  @override
+  final Option<Position> myPosition;
+
+  @override
+  String toString() {
+    return 'LocationEvent.locationDataReceived(myPosition: $myPosition)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LocationDataReceived &&
+            const DeepCollectionEquality()
+                .equals(other.myPosition, myPosition));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(myPosition));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LocationDataReceivedCopyWith<_LocationDataReceived> get copyWith =>
+      __$LocationDataReceivedCopyWithImpl<_LocationDataReceived>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(GlobalKey<NavigatorState> navKey) started,
+    required TResult Function(Option<Position> myPosition)
+        locationServicesInitialized,
+    required TResult Function(Option<Position> myPosition) locationDataReceived,
+  }) {
+    return locationDataReceived(myPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(GlobalKey<NavigatorState> navKey)? started,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
+  }) {
+    return locationDataReceived?.call(myPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(GlobalKey<NavigatorState> navKey)? started,
+    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position> myPosition)? locationDataReceived,
+    required TResult orElse(),
+  }) {
+    if (locationDataReceived != null) {
+      return locationDataReceived(myPosition);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_LocationServicesInitialized value)
+        locationServicesInitialized,
+    required TResult Function(_LocationDataReceived value) locationDataReceived,
+  }) {
+    return locationDataReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LocationServicesInitialized value)?
+        locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
+  }) {
+    return locationDataReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_LocationServicesInitialized value)?
+        locationServicesInitialized,
+    TResult Function(_LocationDataReceived value)? locationDataReceived,
+    required TResult orElse(),
+  }) {
+    if (locationDataReceived != null) {
+      return locationDataReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocationDataReceived implements LocationEvent {
+  const factory _LocationDataReceived(Option<Position> myPosition) =
+      _$_LocationDataReceived;
+
+  Option<Position> get myPosition;
+  @JsonKey(ignore: true)
+  _$LocationDataReceivedCopyWith<_LocationDataReceived> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -354,8 +562,8 @@ class _$LocationStateTearOff {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      MapController? mapController,
-      StreamSubscription<Position>? positionStream,
+      required MapController mapController,
+      required Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
       List<EventAndLocationHybrid>? allEventNotifications,
@@ -367,7 +575,7 @@ class _$LocationStateTearOff {
       moveMap: moveMap,
       mapKey: mapKey,
       mapController: mapController,
-      positionStream: positionStream,
+      myposition: myposition,
       allNotifications: allNotifications,
       allLocationNotifications: allLocationNotifications,
       allEventNotifications: allEventNotifications,
@@ -390,8 +598,8 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -408,8 +616,8 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -426,8 +634,8 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -519,8 +727,8 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -540,8 +748,8 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -561,8 +769,8 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -623,8 +831,8 @@ abstract class _$ShowingMapCopyWith<$Res> {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      MapController? mapController,
-      StreamSubscription<Position>? positionStream,
+      MapController mapController,
+      Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
       List<EventAndLocationHybrid>? allEventNotifications,
@@ -649,7 +857,7 @@ class __$ShowingMapCopyWithImpl<$Res> extends _$LocationStateCopyWithImpl<$Res>
     Object? moveMap = freezed,
     Object? mapKey = freezed,
     Object? mapController = freezed,
-    Object? positionStream = freezed,
+    Object? myposition = freezed,
     Object? allNotifications = freezed,
     Object? allLocationNotifications = freezed,
     Object? allEventNotifications = freezed,
@@ -679,11 +887,11 @@ class __$ShowingMapCopyWithImpl<$Res> extends _$LocationStateCopyWithImpl<$Res>
       mapController: mapController == freezed
           ? _value.mapController
           : mapController // ignore: cast_nullable_to_non_nullable
-              as MapController?,
-      positionStream: positionStream == freezed
-          ? _value.positionStream
-          : positionStream // ignore: cast_nullable_to_non_nullable
-              as StreamSubscription<Position>?,
+              as MapController,
+      myposition: myposition == freezed
+          ? _value.myposition
+          : myposition // ignore: cast_nullable_to_non_nullable
+              as Option<Position>,
       allNotifications: allNotifications == freezed
           ? _value.allNotifications
           : allNotifications // ignore: cast_nullable_to_non_nullable
@@ -713,8 +921,8 @@ class _$_ShowingMap implements _ShowingMap {
       this.contactsLoaded,
       this.moveMap,
       this.mapKey,
-      this.mapController,
-      this.positionStream,
+      required this.mapController,
+      required this.myposition,
       this.allNotifications,
       this.allLocationNotifications,
       this.allEventNotifications,
@@ -731,9 +939,9 @@ class _$_ShowingMap implements _ShowingMap {
   @override
   final Key? mapKey;
   @override // so that map doesnt refresh, when we dont want it to
-  final MapController? mapController;
+  final MapController mapController;
   @override
-  final StreamSubscription<Position>? positionStream;
+  final Option<Position> myposition;
   @override
   final List<EventAndLocationHybrid>? allNotifications;
   @override
@@ -745,7 +953,7 @@ class _$_ShowingMap implements _ShowingMap {
 
   @override
   String toString() {
-    return 'LocationState.showingMap(myLatLng: $myLatLng, previousLatLng: $previousLatLng, contactsLoaded: $contactsLoaded, moveMap: $moveMap, mapKey: $mapKey, mapController: $mapController, positionStream: $positionStream, allNotifications: $allNotifications, allLocationNotifications: $allLocationNotifications, allEventNotifications: $allEventNotifications, animateToIndex: $animateToIndex)';
+    return 'LocationState.showingMap(myLatLng: $myLatLng, previousLatLng: $previousLatLng, contactsLoaded: $contactsLoaded, moveMap: $moveMap, mapKey: $mapKey, mapController: $mapController, myposition: $myposition, allNotifications: $allNotifications, allLocationNotifications: $allLocationNotifications, allEventNotifications: $allEventNotifications, animateToIndex: $animateToIndex)';
   }
 
   @override
@@ -763,7 +971,7 @@ class _$_ShowingMap implements _ShowingMap {
             const DeepCollectionEquality()
                 .equals(other.mapController, mapController) &&
             const DeepCollectionEquality()
-                .equals(other.positionStream, positionStream) &&
+                .equals(other.myposition, myposition) &&
             const DeepCollectionEquality()
                 .equals(other.allNotifications, allNotifications) &&
             const DeepCollectionEquality().equals(
@@ -783,7 +991,7 @@ class _$_ShowingMap implements _ShowingMap {
       const DeepCollectionEquality().hash(moveMap),
       const DeepCollectionEquality().hash(mapKey),
       const DeepCollectionEquality().hash(mapController),
-      const DeepCollectionEquality().hash(positionStream),
+      const DeepCollectionEquality().hash(myposition),
       const DeepCollectionEquality().hash(allNotifications),
       const DeepCollectionEquality().hash(allLocationNotifications),
       const DeepCollectionEquality().hash(allEventNotifications),
@@ -804,8 +1012,8 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -819,7 +1027,7 @@ class _$_ShowingMap implements _ShowingMap {
         moveMap,
         mapKey,
         mapController,
-        positionStream,
+        myposition,
         allNotifications,
         allLocationNotifications,
         allEventNotifications,
@@ -836,8 +1044,8 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -851,7 +1059,7 @@ class _$_ShowingMap implements _ShowingMap {
         moveMap,
         mapKey,
         mapController,
-        positionStream,
+        myposition,
         allNotifications,
         allLocationNotifications,
         allEventNotifications,
@@ -868,8 +1076,8 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController? mapController,
-            StreamSubscription<Position>? positionStream,
+            MapController mapController,
+            Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
             List<EventAndLocationHybrid>? allEventNotifications,
@@ -885,7 +1093,7 @@ class _$_ShowingMap implements _ShowingMap {
           moveMap,
           mapKey,
           mapController,
-          positionStream,
+          myposition,
           allNotifications,
           allLocationNotifications,
           allEventNotifications,
@@ -933,8 +1141,8 @@ abstract class _ShowingMap implements LocationState {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      MapController? mapController,
-      StreamSubscription<Position>? positionStream,
+      required MapController mapController,
+      required Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
       List<EventAndLocationHybrid>? allEventNotifications,
@@ -945,8 +1153,8 @@ abstract class _ShowingMap implements LocationState {
   bool? get contactsLoaded;
   bool? get moveMap;
   Key? get mapKey; // so that map doesnt refresh, when we dont want it to
-  MapController? get mapController;
-  StreamSubscription<Position>? get positionStream;
+  MapController get mapController;
+  Option<Position> get myposition;
   List<EventAndLocationHybrid>? get allNotifications;
   List<EventAndLocationHybrid>? get allLocationNotifications;
   List<EventAndLocationHybrid>? get allEventNotifications;

@@ -31,4 +31,7 @@ class Constants {
 
   // Onboarding API key - requires different key for production
   static String onboardApiKey = '477b-876u-bcez-c42z-6a3d';
+
+    static Future<void> load() => dotenv.load();
+
 }

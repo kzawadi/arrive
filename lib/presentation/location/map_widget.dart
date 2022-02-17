@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_common_flutter/services/size_config.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
@@ -5,6 +7,9 @@ import 'package:at_events_flutter/models/event_notification.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_location_flutter/common_components/floating_icon.dart';
 import 'package:at_location_flutter/common_components/tasks.dart';
+import 'package:at_location_flutter/map_content/flutter_map/flutter_map.dart'
+    as flutter_map;
+import 'package:at_location_flutter/map_content/flutter_map/src/map/map.dart';
 import 'package:at_location_flutter/service/home_screen_service.dart';
 import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:at_location_flutter/utils/constants/constants.dart'
@@ -12,9 +17,13 @@ import 'package:at_location_flutter/utils/constants/constants.dart'
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/infrastructure/location/location_facade.dart';
-
+import 'package:atsign_location_app/injections.dart';
+import 'package:atsign_location_app/presentation/location/flutter_map_wrapper.dart';
+import 'package:atsign_location_app/presentation/routes/router.gr.dart'
+    as app_router;
 import 'package:atsign_location_app/shared/common_components/bottom_sheet.dart';
 import 'package:atsign_location_app/shared/common_components/dialog_box/delete_dialog_confirmation.dart';
+import 'package:atsign_location_app/shared/constants.dart';
 import 'package:atsign_location_app/shared/images.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:atsign_location_app/shared/text_styles.dart';
@@ -22,14 +31,20 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get_it/get_it.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_map/flutter_map.dart' as fm;
+import 'package:atsign_location_app/presentation/location/widgets/show_location.dart'
+    as show_location;
 
 enum FilterScreenType { event, location }
 enum EventFilters { Sent, Received, None }
 enum LocationFilters { Pending, Sent, Received, None }
 
 class LocationViewer extends StatefulWidget {
-  const LocationViewer({Key? key}) : super(key: key);
+  const LocationViewer({Key? key, this.mapController}) : super(key: key);
+  final MapController? mapController;
 
   @override
   State<LocationViewer> createState() => _LocationViewerState();
@@ -42,190 +57,339 @@ class _LocationViewerState extends State<LocationViewer>
   LocationFilters _locationFilter = LocationFilters.None;
 
   PanelController pc = PanelController();
-  late TabController _controller;
+  late fm.MapController fmc;
+  // late MapController _mapController;
+  // flutter_map.MapController _mapController = flutter_map.MapController();
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
+  late TabController _controller;
+  bool? contactsLoaded, moveMap;
+  // final _appRouter = app_router.Router();
+  // final Completer<Null> _readyCompleter = Completer<Null>();
+  MapController? mapc;
+  Function? setFilterIconState;
+  Function? setFloatingActionState;
+  int eventsRenderedWithFilter = 0, locationsRenderedWithFilter = 0;
+
+  late Completer<MapController> controllerCompleter = Completer();
+
+  void _onMapCreated(MapController controller) async {
+    controllerCompleter.complete(controller);
   }
 
-  Function? setFilterIconState, setFloatingActionState;
+  @override
+  // ignore: avoid_void_async
+  void initState() {
+    super.initState();
+    _controller = TabController(
+      length: 2,
+      vsync: this,
+      // initialIndex: 0,
+    );
+
+    fmc = fm.MapController();
+
+    setState(() {
+      mapc = MapController();
+      // globals.mapController = mapController;
+    });
+    // _mapController = flutter_map.MapController();
+
+    // mapc = MapController();
+
+    _controller.addListener(() {
+      if (mounted) {
+        if (setFilterIconState != null) {
+          try {
+            // ignore: avoid_dynamic_calls
+            setFilterIconState!(
+              () {},
+            ); // to re-render this when tab bar's index change
+          } catch (e) {
+            print('Error in setFilterIconState $e');
+          }
+        }
+
+        if (setFloatingActionState != null) {
+          try {
+            // ignore: avoid_dynamic_calls
+            setFloatingActionState!(
+              () {},
+            ); // to re-render this when tab bar's index change
+          } catch (e) {
+            print('Error in setFloatingActionState $e');
+          }
+        }
+      }
+    });
+
+    // var mapc = MapController();
+    // var y = mapc.runtimeType as MapController;
+    // await mapc.then((value) => null)
+    // context.read<LocationBloc>().add(
+    //       LocationEvent.started(_appRouter.navigatorKey),
+    //     );
+  }
+
   // to re-render this when tab bar's index change
-  int eventsRenderedWithFilter = 0, locationsRenderedWithFilter = 0;
-  // count used to show no data found after applying filter
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return BlocConsumer<LocationBloc, LocationState>(
-      listener: (context, state) {
-        state.mapOrNull(
-          initial: (_) async {
-            await Future<void>.delayed(const Duration(seconds: 7))
-                .then((value) {
-              context.read<LocationBloc>().add(
-                    const LocationEvent.locationServicesInitialized(),
-                  );
-            });
-          },
-        );
-      },
+    return BlocBuilder<LocationBloc, LocationState>(
+      // listener: (context, state) {
+      // state.mapOrNull(
+      //   initial: (_) async {
+      //     await Future<void>.delayed(const Duration(seconds: 7))
+      //         .then((value) {
+      //       context.read<LocationBloc>().add(
+      //             const LocationEvent.locationServicesInitialized(),
+      //           );
+      //     });
+      //   },
+      // );
+      // },
       builder: (context, state) {
         return state.maybeWhen(
           initial: () => const Center(
-            child: AutoSizeText('INITIALIZING'),
+            child: Scaffold(
+              body: Center(
+                child: AutoSizeText('INITIALIZING'),
+              ),
+            ),
           ),
           orElse: () => const Center(
             child: AutoSizeText('no map data yeet'),
           ),
           showingMap: (
-            myLatLng,
+            myLatLn,
             previusLatLng,
             contactsLoaded,
             moveMap,
             mapKey,
-            mapController,
+            mapContrer,
             positionStream,
             allNotifications,
             allLocationNotifications,
             allEventNotifications,
             animateToIndex,
-          ) =>
-              // {
-              // return
-              Scaffold(
-            // endDrawer: Container(
-            //   width: 250.toWidth,
-            // child: SideBar(),
-            // ),
-            floatingActionButton: StatefulBuilder(
-              builder: (_context, _setFloatingActionState) {
-                setFloatingActionState =
-                    _setFloatingActionState; // to re-render this when tab bar's index change
-                return isFilterApplied(_controller)
-                    ? InkWell(
-                        onTap: () {
-                          removeFilter(_controller);
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                            shape: BoxShape.circle,
+          ) {
+            if (positionStream.isSome()) {
+              if (moveMap == null) {
+                moveMap = true;
+              } else {
+                moveMap = false;
+              }
+              // setState(() {});
+            }
+            final mc = getIt<MapControllerImpl>();
+            print(Constants.mapKey);
+            return Scaffold(
+              // endDrawer: Container(
+              //   width: 250.toWidth,
+              // child: SideBar(),
+              // ),
+              floatingActionButton: StatefulBuilder(
+                builder: (_context, _setFloatingActionState) {
+                  setFloatingActionState =
+                      _setFloatingActionState; // to re-render this when tab bar's index change
+                  return isFilterApplied(_controller)
+                      ? InkWell(
+                          onTap: () {
+                            removeFilter(_controller);
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: EdgeInsets.all(4.toHeight),
+                            child: Image.asset(
+                              AllImages().FILTER_ALT_OFF,
+                              height: 25.toFont,
+                              color: AllColors().ORANGE,
+                            ),
                           ),
-                          padding: EdgeInsets.all(4.toHeight),
-                          child: Image.asset(
-                            AllImages().FILTER_ALT_OFF,
-                            height: 25.toFont,
-                            color: AllColors().ORANGE,
-                          ),
+                        )
+                      : const SizedBox();
+                },
+              ),
+              body: SafeArea(
+                child: Stack(
+                  children: [
+                    if (positionStream.isSome())
+                      // FlutterMapWrapper(
+                      //   mapKey: mapKey,
+                      //   moveMap: moveMap!,
+                      //   location: positionStream.fold(
+                      //     () => LatLng(45, 45),
+                      //     (a) {
+                      //       return LatLng(a.latitude, a.longitude);
+                      //     },
+                      //   ),
+                      // )
+                      // showLocation(
+                      //   mapKey,
+                      //   mapContrer,
+                      //   location:
+                      // positionStream.fold(() => null, (a) {
+                      //     return LatLng(a.latitude, a.longitude);
+                      //   }),
+                      //   moveMap: moveMap ?? false,
+                      // )
+                      show_location.showLocation(
+                        mapKey,
+                        fmc,
+                        location: positionStream.fold(
+                          () => null,
+                          (a) {
+                            return LatLng(a.latitude, a.longitude);
+                          },
                         ),
                       )
-                    : const SizedBox();
-              },
-            ),
-            body: SafeArea(
-              child: Stack(
-                children: [
-                  // ignore: prefer_if_elements_to_conditional_expressions
-                  (myLatLng != null)
-                      ? showLocation(
-                          mapKey,
-                          mapController,
-                          location: myLatLng,
-                          moveMap: moveMap! ?? false,
-                        )
-                      : showLocation(
-                          mapKey,
-                          mapController,
-                          moveMap: moveMap ?? false,
-                        ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: SizedBox(
-                      height: 55.toHeight,
-                      child: FloatingIcon(
+                    // fm.FlutterMap(
+                    //   options: fm.MapOptions(
+                    //     center:
+                    // positionStream.fold(
+                    //       () => null,
+                    //       (a) {
+                    //         return LatLng(a.latitude, a.longitude);
+                    //       },
+                    //     ),
+                    //   ),
+                    //   mapController: fmc,
+                    //   layers: [
+                    //     fm.TileLayerOptions(
+                    //       urlTemplate:
+                    //           'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    //       subdomains: ['a', 'b', 'c'],
+                    //       attributionBuilder: (_) {
+                    //         return const Text('© OpenStreetMap contributors');
+                    //       },
+                    //     ),
+                    //     fm.MarkerLayerOptions(
+                    //       markers: [
+                    //         fm.Marker(
+                    //           width: 80.0,
+                    //           height: 80.0,
+                    //           point: LatLng(51.5, -0.09),
+                    //           builder: (ctx) => Container(
+                    //             child: FlutterLogo(),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ],
+                    // )
+                    else
+                      showLocation(
+                        mapKey,
+                        mapContrer,
+                        moveMap: moveMap ?? false,
+                      ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: SizedBox(
+                        height: 55.toHeight,
+                        child: FloatingIcon(
                           bgColor: Theme.of(context).primaryColor,
                           icon: Icons.table_rows,
-                          iconColor: Theme.of(context).scaffoldBackgroundColor),
+                          iconColor: Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 264.toHeight,
-                    child: header(
-                      context,
-                      _controller,
-                    ),
-                  ),
-                  if (myLatLng != null)
                     Positioned(
-                      top: 100,
-                      right: 0,
-                      child: FloatingIcon(
+                      bottom: 264.toHeight,
+                      child: header(
+                        context,
+                        _controller,
+                      ),
+                    ),
+                    if (positionStream.isSome())
+                      Positioned(
+                        top: 100,
+                        right: 0,
+                        child: FloatingIcon(
                           icon: Icons.zoom_out_map,
                           onPressed: () {
-                            //todo zoomOutFn event
-                          }),
-                    )
-                  else
-                    const SizedBox(),
-                  if (contactsLoaded!)
-                    SlidingUpPanel(
-                      controller: pc,
-                      minHeight: 267.toHeight,
-                      maxHeight: 530.toHeight,
-                      panelBuilder: (scrollController) {
-                        print('builder called uppanel');
-                        if (animateToIndex != -1) {
-                          // setFilterIconState will help to avoid position changing when tabbar is not built
-                          _controller.animateTo(animateToIndex!);
-                        }
+                            // if (widget.mapController!.ready) {
 
-                        if (allEventNotifications!.isNotEmpty ||
-                            allLocationNotifications!.isNotEmpty) {
-                          return collapsedContent(
-                            context,
-                            false,
-                            scrollController,
-                            renderEventsAndLocation(
+                            fmc.move(
+                              positionStream.fold(
+                                () => LatLng(45, 45),
+                                (a) =>
+                                    //  {
+                                    LatLng(a.latitude, a.longitude),
+                                // },
+                              ),
+                              8,
+                            );
+                            // }
+                            //todo zoomOutFn event
+                          },
+                        ),
+                      )
+                    else
+                      const SizedBox(),
+                    if (contactsLoaded!)
+                      SlidingUpPanel(
+                        controller: pc,
+                        minHeight: 267.toHeight,
+                        maxHeight: 530.toHeight,
+                        panelBuilder: (scrollController) {
+                          print('builder called uppanel');
+                          if (animateToIndex != -1) {
+                            // setFilterIconState will help to avoid position changing when tabbar is not built
+                            _controller.animateTo(animateToIndex!);
+                          }
+
+                          if (allEventNotifications!.isNotEmpty ||
+                              allLocationNotifications!.isNotEmpty) {
+                            return collapsedContent(
+                              context,
+                              false,
+                              scrollController,
+                              renderEventsAndLocation(
                                 context,
                                 allEventNotifications,
                                 allLocationNotifications!,
                                 scrollController,
                                 _controller,
-                                setFilterIconState!),
-                          );
-                        } else {
-                          return collapsedContent(
+                                setFilterIconState!,
+                              ),
+                            );
+                          } else {
+                            return collapsedContent(
+                              context,
+                              false,
+                              scrollController,
+                              emptyWidget(TextStrings.noDataFound),
+                            );
+                          }
+                        },
+                      )
+                    else
+                      Container(
+                        child: SlidingUpPanel(
+                          controller: pc,
+                          minHeight: 267.toHeight,
+                          maxHeight: 530.toHeight,
+                          panelBuilder: (scrollController) => collapsedContent(
                             context,
                             false,
                             scrollController,
-                            emptyWidget(TextStrings.noDataFound),
-                          );
-                        }
-                      },
-                    )
-                  else
-                    Container(
-                      child: SlidingUpPanel(
-                        controller: pc,
-                        minHeight: 267.toHeight,
-                        maxHeight: 530.toHeight,
-                        panelBuilder: (scrollController) => collapsedContent(
-                          context,
-                          false,
-                          scrollController,
-                          const Center(
-                            child: CircularProgressIndicator(),
+                            const Center(
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
           // },
         );
       },
