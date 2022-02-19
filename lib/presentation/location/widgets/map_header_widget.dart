@@ -2,9 +2,12 @@ import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_events_flutter/common_components/bottom_sheet.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
-import 'package:at_location_flutter/common_components/tasks.dart';
+// import 'package:at_location_flutter/common_components/tasks.dart';
 import 'package:at_onboarding_flutter/services/size_config.dart';
+import 'package:atsign_location_app/presentation/location/widgets/tasks_launcher_widget.dart';
 import 'package:atsign_location_app/shared/colors.dart';
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -37,31 +40,40 @@ class MapHeaderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Tasks(
-              task: TextStrings.createEvent,
-              icon: Icons.event,
-              onTap: () {
-                Navigator.push<dynamic>(
-                  context,
-                  MaterialPageRoute<dynamic>(
-                    builder: (context) => CreateEvent(
-                      AtClientManager.getInstance(),
-                    ),
+            path: IconlyCurved.Calendar,
+            task: TextStrings.createEvent,
+            color: Theme.of(context).primaryColor,
+            onTap: () {
+              Navigator.push<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (context) => CreateEvent(
+                    AtClientManager.getInstance(),
                   ),
-                );
-              }),
+                ),
+              );
+            },
+          ),
           Tasks(
-              task: TextStrings.requestLocation,
-              icon: Icons.sync,
-              angle: -3.14 / 2,
-              onTap: () async {
-                bottomSheet(context, const RequestLocationSheet(), 500.toHeight,
-                    onSheetCLosed: () {
+            path: IconlyCurved.Send,
+            task: TextStrings.requestLocation,
+            color: Theme.of(context).primaryColor,
+            angle: -3.14 / 10,
+            onTap: () async {
+              bottomSheet(
+                context,
+                const RequestLocationSheet(),
+                500.toHeight,
+                onSheetCLosed: () {
                   controller.animateTo(1);
-                });
-              }),
+                },
+              );
+            },
+          ),
           Tasks(
+            path: IconlyCurved.AddUser,
             task: TextStrings.shareLocation,
-            icon: Icons.person_add,
+            color: Theme.of(context).primaryColor,
             onTap: () {
               bottomSheet(
                 context,
@@ -72,7 +84,7 @@ class MapHeaderWidget extends StatelessWidget {
                 },
               );
             },
-          )
+          ),
         ],
       ),
     );

@@ -6,6 +6,7 @@ import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/presentation/location/compass/compas_view.dart';
+import 'package:atsign_location_app/presentation/location/widgets/action_button.dart';
 import 'package:atsign_location_app/presentation/location/widgets/collapsed_content_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/empty_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/event_render_widget.dart';
@@ -177,10 +178,15 @@ class _LocationViewerState extends State<LocationViewer>
                       right: 0,
                       child: SizedBox(
                         height: 55.toHeight,
-                        child: FloatingIcon(
-                          bgColor: Theme.of(context).primaryColor,
-                          icon: Icons.menu,
-                          iconColor: Theme.of(context).scaffoldBackgroundColor,
+                        child: ArriveActionButton(
+                          icon: IconlyIcon(
+                            path: IconlyCurved.Category,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            //todo drawer launcher
+                          },
                         ),
                       ),
                     ),
@@ -194,12 +200,13 @@ class _LocationViewerState extends State<LocationViewer>
                       Positioned(
                         top: 100,
                         right: 0,
-                        child: GestureDetector(
-                          child: const IconlyIcon(
-                            path: IconlyCurved.Category,
-                            color: Colors.orange,
+                        child: ArriveActionButton(
+                          icon: IconlyIcon(
+                            path: IconlyCurved.Discovery,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
                           ),
-                          onTap: () {
+                          onPressed: () {
                             _mapController.move(
                               positionStream.fold(
                                 () => LatLng(45, 45),
@@ -209,18 +216,6 @@ class _LocationViewerState extends State<LocationViewer>
                             );
                           },
                         ),
-                        // FloatingIcon(
-                        //   icon: Icons.zoom_out_map,
-                        //   onPressed: () {
-                        //     _mapController.move(
-                        //       positionStream.fold(
-                        //         () => LatLng(45, 45),
-                        //         (a) => LatLng(a.latitude, a.longitude),
-                        //       ),
-                        //       8,
-                        //     );
-                        //   },
-                        // ),
                       )
                     else
                       const SizedBox(),

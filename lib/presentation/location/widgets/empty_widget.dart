@@ -1,5 +1,6 @@
 import 'package:at_onboarding_flutter/services/size_config.dart';
-import 'package:atsign_location_app/shared/images.dart';
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +14,16 @@ class EmptyWidget extends StatelessWidget {
     SizeConfig().init(context);
 
     return Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Image.asset(
-          AllImages().EMPTY_GROUP,
-          width: 181.toWidth,
-          height: 181.toWidth,
-          fit: BoxFit.cover,
+        IconlyIcon(
+          path: IconlyCurved.DangerSquare,
+          size: 35,
+          color: Theme.of(context).primaryColor,
         ),
-        SizedBox(
-          height: 15.toHeight,
-        ),
+        // SizedBox(
+        //   height: 15.toHeight,
+        // ),
         Text(title, style: CustomTextStyles().grey16),
         SizedBox(
           height: 5.toHeight,

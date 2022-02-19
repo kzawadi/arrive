@@ -270,34 +270,4 @@ class ListViewWidget extends StatelessWidget {
                 AtClientManager.getInstance().atClient.getCurrentAtSign()!);
     }
   }
-
-  // Widget renderEvents(
-  //   List<EventAndLocationHybrid> eventNotifications,
-  //   ScrollController scrollController,
-  //   FilterScreenType filterScreenType,
-  // ) {
-  //   if (eventNotifications.isNotEmpty) {
-  //     final _list = ListViewWidget(
-  //       allHybridNotifications: eventNotifications,
-  //       slidingScrollController: scrollController,
-  //       filterScreenType: FilterScreenType.event,
-
-  //       // eventNotifications,
-  //       // scrollController,
-  //       // FilterScreenType.event,
-  //     );
-
-  //     /// after rendering events, we will have [eventsRenderedWithFilter] count
-  //     if ((eventFilter != EventFilters.None) &&
-  //         (eventsRenderedWithFilter == 0)) {
-  //       return EmptyWidget(
-  //           title:
-  //               '${TextStrings.noWithoutSpecialcharacters} ${eventFilter!.name} ${TextStrings.eventData}');
-  //     }
-
-  //     return _list;
-  //   } else {
-  //     return const EmptyWidget(title: TextStrings.noDataFound);
-  //   }
-  // }
 }

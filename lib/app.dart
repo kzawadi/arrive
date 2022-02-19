@@ -2,6 +2,7 @@ import 'package:atsign_location_app/l10n/l10n.dart';
 import 'package:atsign_location_app/presentation/routes/router.gr.dart'
     as app_router;
 import 'package:atsign_location_app/presentation/routes/routes_observer.dart';
+import 'package:atsign_location_app/presentation/themes/themes.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +27,7 @@ class ArriveApp extends StatelessWidget {
       ),
       routeInformationParser: _appRouter.defaultRouteParser(),
       builder: (context, router) => router!,
-      // key: _appRouter.navigatorKey,
+      theme: Themes.lightTheme,
     );
   }
 }
