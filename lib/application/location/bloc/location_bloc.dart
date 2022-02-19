@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:atsign_location_app/domain/location/i_location_facade.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/domain/location/use_cases/init_location_services_use_case.dart';
@@ -34,19 +33,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   ) async {
     await event.when(
       started: (navKey) async {
-        // emit(
-        await _initLocationServicesUseCase(navKey)
-            //   (value) async {
-            //     await _myPositionStreamSubscription?.cancel();
-            //     _myPositionStreamSubscription =
-            //         _iLocationFacade.getMyLocationStatus().listen(
-            //               (myPosition) => add(
-            //                 LocationEvent.locationServicesInitialized(myPosition),
-            //               ),
-            //             );
-            //   },
-            // );
-            .then(
+        await _initLocationServicesUseCase(navKey).then(
           (value) async {
             await _myPositionStreamSubscription?.cancel();
             _myPositionStreamSubscription =
@@ -55,24 +42,15 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
                         LocationEvent.locationServicesInitialized(myPosition),
                       ),
                     );
-            // return unit;
-            // add(
-            //   const LocationEvent.locationServicesInitialized(),
-            // );
           },
-          // ),
         );
       },
       locationServicesInitialized: (myPosition) async {
-        //_myPositionStreamSubscription= iLocationFacade.getMyLocationStatus().;
         emit(
           LocationState.showingMap(
-            // myLatLng: _iLocationFacade.myLatLng,
             contactsLoaded: _iLocationFacade.contactsLoaded,
-            mapController: _iLocationFacade.mapController,
             moveMap: _iLocationFacade.moveMap,
             previousLatLng: _iLocationFacade.previousLatLng,
-            // positionStream: _iLocationFacade.positionStream,
             myposition: myPosition,
             mapKey: _iLocationFacade.mapKey,
             allEventNotifications: _iLocationFacade.allEventNotifications,

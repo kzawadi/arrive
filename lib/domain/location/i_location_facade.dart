@@ -6,9 +6,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:rxdart/rxdart.dart';
 
 abstract class ILocationFacade {
-  MapController get mapController;
   bool? get contactsLoaded;
   bool? get moveMap;
   LatLng? get previousLatLng;
@@ -18,13 +18,12 @@ abstract class ILocationFacade {
   List<EventAndLocationHybrid>? get allNotifications;
   int? get animateToIndex;
 
-  void getLocationStatus();
-  Future<Unit> initLocationServices();
-  Future<void> getMyLocations();
-
   Future<Unit> init(
     GlobalKey<NavigatorState> navKey,
   );
+
+  late BehaviorSubject<List<EventAndLocationHybrid>> allEventNotificationStream;
+  late BehaviorSubject<List<EventAndLocationHybrid>> allLocalNotificationStream;
 
   Stream<Option<Position>> getMyLocationStatus();
 }

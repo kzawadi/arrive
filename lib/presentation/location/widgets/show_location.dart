@@ -80,23 +80,16 @@ Widget showLocation(
             urlTemplate:
                 'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MixedConstants.MAP_KEY}',
           ),
-
-          // fm.MarkerLayerOptions(markers: ),
-          // MarkerClusterLayerOptions(
-          //   maxClusterRadius: 190,
-          //   disableClusteringAtZoom: 16,
-          //   size: const Size(5, 5),
-          //   anchor: AnchorPos.align(AnchorAlign.center),
-          //   fitBoundsOptions: const FitBoundsOptions(
-          //     padding: EdgeInsets.all(50),
-          //   ),
-          //   markers:
-          //       // ignore: prefer_if_null_operators
-          //       markerList != null ? markerList : (showMarker ? [marker] : []),
-          //   builder: (context, markers) {
-          //     return buildMarkerCluster(markers);
-          //   },
-          // ),
+          fm.MarkerLayerOptions(
+            markers: [
+              fm.Marker(
+                width: 25,
+                height: 25,
+                point: LatLng(location!.latitude, location.longitude),
+                builder: (ctx) => const FlutterLogo(),
+              ),
+            ],
+          ),
         ],
       ),
     ),

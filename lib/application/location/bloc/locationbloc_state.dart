@@ -10,7 +10,6 @@ class LocationState with _$LocationState {
     bool? contactsLoaded,
     bool? moveMap,
     Key? mapKey, // so that map doesnt refresh, when we dont want it to
-    required MapController mapController,
     required Option<Position> myposition,
     List<EventAndLocationHybrid>? allNotifications,
     List<EventAndLocationHybrid>? allLocationNotifications,

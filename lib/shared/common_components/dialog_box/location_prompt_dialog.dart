@@ -1,11 +1,10 @@
 import 'package:at_events_flutter/common_components/custom_button.dart';
+import 'package:at_location_flutter/location_modal/location_notification.dart';
 import 'package:at_location_flutter/utils/constants/text_styles.dart';
 import 'package:at_onboarding_flutter/services/size_config.dart';
-import 'package:at_location_flutter/location_modal/location_notification.dart';
-import 'package:atsign_location_app/infrastructure/location/location_facade.dart';
+import 'package:atsign_location_app/presentation/routes/global_navigation-keys.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 Future<void> locationPromptDialog({
   String? text,
@@ -16,36 +15,37 @@ Future<void> locationPromptDialog({
   bool onlyText = false,
   required LocationNotificationModel locationNotificationModel,
 }) {
-  var value = showDialog<void>(
-    context: NavService.navKey.currentContext!,
+  final value = showDialog<void>(
+    context: NavService.navkey.currentContext!,
     barrierDismissible: false,
     builder: (BuildContext context) {
       return LocationPrompt(
-          text: text!,
-          yesText: yesText!,
-          noText: noText!,
-          onlyText: onlyText,
-          isShareLocationData: isShareLocationData,
-          isRequestLocationData: isRequestLocationData,
-          locationNotificationModel: locationNotificationModel);
+        text: text,
+        yesText: yesText,
+        noText: noText,
+        onlyText: onlyText,
+        isShareLocationData: isShareLocationData,
+        isRequestLocationData: isRequestLocationData,
+        locationNotificationModel: locationNotificationModel,
+      );
     },
   );
   return value;
 }
 
 class LocationPrompt extends StatefulWidget {
+  LocationPrompt({
+    this.text,
+    this.yesText,
+    this.noText,
+    this.onlyText = false,
+    @required this.isShareLocationData,
+    @required this.isRequestLocationData,
+    this.locationNotificationModel,
+  });
   final String? text, yesText, noText;
   final bool? isShareLocationData, isRequestLocationData, onlyText;
   final LocationNotificationModel? locationNotificationModel;
-
-  LocationPrompt(
-      {this.text,
-      this.yesText,
-      this.noText,
-      this.onlyText = false,
-      @required this.isShareLocationData,
-      @required this.isRequestLocationData,
-      this.locationNotificationModel});
 
   @override
   _LocationPromptState createState() => _LocationPromptState();

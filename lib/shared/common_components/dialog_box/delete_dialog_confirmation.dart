@@ -5,13 +5,14 @@ import 'package:at_events_flutter/services/event_key_stream_service.dart';
 import 'package:at_location_flutter/service/key_stream_service.dart';
 import 'package:at_location_flutter/utils/constants/text_styles.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
-import 'package:atsign_location_app/infrastructure/location/location_facade.dart';
+import 'package:atsign_location_app/presentation/routes/global_navigation-keys.dart';
 import 'package:flutter/material.dart';
 
 Future<void> deleteDialogConfirmation(
-    EventAndLocationHybrid hybridElement) async {
+  EventAndLocationHybrid hybridElement,
+) async {
   return showDialog<void>(
-    context: NavService.navKey.currentContext!,
+    context: NavService.navkey.currentContext!,
     barrierDismissible: false,
     builder: (BuildContext context) {
       return StatefulBuilder(builder: (_context, _setDialogState) {

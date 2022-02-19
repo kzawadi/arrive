@@ -1,5 +1,6 @@
-import 'dart:async';
+// import 'dart:async';
 
+import 'package:at_contacts_group_flutter/utils/init_group_service.dart';
 import 'package:at_location_flutter/map_content/flutter_map/src/map/map.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:at_client_mobile/at_client_mobile.dart';
@@ -19,13 +20,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart';
-// import 'package:at_location_flutter/map_content/flutter_map/flutter_map.dart';
 
-// @LazySingleton(as: ILocationFacade)
 @LazySingleton(as: ILocationFacade)
 class LocationFacade implements ILocationFacade {
-  // LocationFacade({this.mapController = MapController()});
-
   final atContactInitializationUseCase =
       getIt<AtContactInitializationUseCase>();
 
@@ -53,41 +50,19 @@ class LocationFacade implements ILocationFacade {
   bool contactsLoaded = true;
   @override
   bool? moveMap;
-  @override
-  MapController mapController = MapController();
-  late Completer<MapController> controllerCompleter = Completer();
-
-  MapController? maap;
 
   BehaviorSubject<Position?>? myPosition;
-  // final GlobalKey<NavigatorState> navKey = GlobalKey();
+  @override
+  late BehaviorSubject<List<EventAndLocationHybrid>>
+      allEventNotificationStream =
+      BehaviorSubject<List<EventAndLocationHybrid>>();
+  @override
+  late BehaviorSubject<List<EventAndLocationHybrid>>
+      allLocalNotificationStream =
+      BehaviorSubject<List<EventAndLocationHybrid>>();
 
   String locationSharingKey =
       'issharing-${AtClientManager.getInstance().atClient.getCurrentAtSign()!.replaceAll('@', '')}';
-
-  // @override
-  // void getLocationStatus() {
-  //   // TODO: implement getLocationStatus
-  // }
-
-  @override
-  Future<void> getMyLocations() {
-    // TODO: implement getMyLocation
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Unit> initLocationServices() async {
-    // await initializeLocationService(
-    //   navKey,
-    //   mapKey: 'xxxx',
-    //   apiKey: 'xxxx',
-    //   showDialogBox: true,
-    //   streamAlternative: (__) {},
-    //   isEventInUse: true,
-    // );
-    return unit;
-  }
 
   Future<void> initializePlugins() async {
     await atContactInitializationUseCase.call();
@@ -95,8 +70,6 @@ class LocationFacade implements ILocationFacade {
 
   @override
   Future<Unit> init(
-    // AtClientManager atClientManager,
-    // String activeAtSign,
     GlobalKey<NavigatorState> navKey,
   ) async {
     // if (isGettingLoadedFirstTime) {
@@ -104,29 +77,10 @@ class LocationFacade implements ILocationFacade {
     //   isGettingLoadedFirstTime = false;
     // }
     // allNotifications = [];
+
     allLocationNotifications = [];
     allEventNotifications = [];
 
-    // await initialiseLocationSharing(navKey);
-
-    // final mc = getIt<MapControllerImpl>().onReady.then(
-    //   (_) async {
-    print('ITS REEEADY');
-    // print(Constants.mapKey);
-    // await initializePlugins().then(
-    //   (_) async {
-
-    // void _onMapCreated(MapController controller) async {
-    //   controllerCompleter.complete(controller);
-    // }
-    // await _onMapCreated(mapController).then(
-    //   (_) async {
-    //     await controllerCompleter.future.then((value) => mapController = value);
-    //   },
-    // );
-
-    // await _onMapCreated().then(
-    //   (_) async {
     await initializeLocationService(
       navKey,
       mapKey: Constants.mapKey,
@@ -145,105 +99,15 @@ class LocationFacade implements ILocationFacade {
           initLocation: false,
         ).then(
           (_) async {
-            await initialiseLocationSharing(navKey);
+            await initialiseLocationSharing(
+              navKey,
+            ).then((_) async {
+              initializeGroupService(rootDomain: Constants.rootDomain);
+            });
           },
         );
       },
     );
-    //   },
-    // );
-    // (mapController).then((value) {
-    //   var ty = value;
-    //   return mapController = value;
-    // });
-    // await controllerCompleter.future.then((value) => mapController = value);
-
-    // await initializeLocationService(
-    //   navKey,
-    //   mapKey: Constants.mapKey,
-    //   apiKey: Constants.appApiKey,
-    //   showDialogBox: true,
-    //   streamAlternative: updateLocation,
-    //   isEventInUse: true,
-    // ).then(
-    //   (_) async {
-    //     await initialiseEventService(
-    //       navKey,
-    //       mapKey: Constants.mapKey,
-    //       apiKey: Constants.appApiKey,
-    //       rootDomain: Constants.rootDomain,
-    //       streamAlternative: updateEvents,
-    //       initLocation: false,
-    //     ).then(
-    //       (_) async {
-    //         await initialiseLocationSharing(navKey);
-    //       },
-    //     );
-    //   },
-    // );
-    //   },
-    // );
-    //   },
-    // );
-    // await initializePlugins().then(
-    //   (_) async {
-    //     await initializeLocationService(
-    //       navKey,
-    //       mapKey: Constants.mapKey,
-    //       apiKey: Constants.appApiKey,
-    //       showDialogBox: true,
-    //       streamAlternative: updateLocation,
-    //       isEventInUse: true,
-    //     ).then(
-    //       (_) async {
-    //         await initialiseEventService(
-    //           navKey,
-    //           mapKey: Constants.mapKey,
-    //           apiKey: Constants.appApiKey,
-    //           rootDomain: Constants.rootDomain,
-    //           streamAlternative: updateEvents,
-    //           initLocation: false,
-    //         ).then(
-    //           (_) async {
-    //             await initialiseLocationSharing(navKey);
-    //           },
-    //         );
-    //       },
-    //     );
-    //   },
-    // );
-
-// mapController.onReady
-
-    // await initializeLocationService(
-    //   navKey,
-    //   mapKey: Constants.mapKey,
-    //   apiKey: Constants.appApiKey,
-    //   showDialogBox: true,
-    //   streamAlternative: updateLocation,
-    //   isEventInUse: true,
-    // ).then((value) async{
-    //     await initialiseEventService(
-    //   navKey,
-    //   mapKey: Constants.mapKey,
-    //   apiKey: Constants.appApiKey,
-    //   rootDomain: Constants.rootDomain,
-    //   streamAlternative: updateEvents,
-    //   initLocation: false,
-    // ).then((value) {
-
-    // });
-
-    // });
-
-    // await initialiseEventService(
-    //   navKey,
-    //   mapKey: Constants.mapKey,
-    //   apiKey: Constants.appApiKey,
-    //   rootDomain: Constants.rootDomain,
-    //   streamAlternative: updateEvents,
-    //   initLocation: false,
-    // );
 
     SendLocationNotification().setLocationPrompt(() async {
       await locationPromptDialog(
@@ -252,20 +116,11 @@ class LocationFacade implements ILocationFacade {
       );
     });
 
-    // await _getLocationStatus();
-
     return unit;
   }
 
-  Future<Null> _onMapCreated() async {
-    // Completer<MapController> cCompleter = Completer();
-
-    mapController = MapController();
-
-    return mapController.onReady;
-  }
-
-  Future<void> updateLocation(List<KeyLocationModel> list) async {
+  Stream<List<EventAndLocationHybrid>> updateLocation(
+      List<KeyLocationModel> list) async* {
     if (allLocationNotifications.length < list.length) {
       animateToIndex = 1; // Locations is index 1 in home screen
     } else {
@@ -280,10 +135,15 @@ class LocationFacade implements ILocationFacade {
           ),
         )
         .toList();
+    allLocalNotificationStream.add(allLocationNotifications);
+    yield* allLocalNotificationStream.stream;
+
     // setStatus(GET_ALL_NOTIFICATIONS, Status.Done);
   }
 
-  Future<void> updateEvents(List<EventKeyLocationModel> list) async {
+  Future<void> updateEvents(
+    List<EventKeyLocationModel> list,
+  ) async {
     if (allEventNotifications.length < list.length) {
       animateToIndex = 0; // Events is index 0 in home screen
     } else {
@@ -298,7 +158,8 @@ class LocationFacade implements ILocationFacade {
           ),
         )
         .toList();
-    // setStatus(GET_ALL_NOTIFICATIONS, Status.Done);
+    allEventNotificationStream.add(allEventNotifications);
+    allEventNotificationStream.stream;
   }
 
   Future<void> initialiseLocationSharing(
@@ -360,8 +221,6 @@ class LocationFacade implements ILocationFacade {
         SendLocationNotification().setMasterSwitchState(value);
       }
 
-      // notifyListeners();
-
       return result;
     } catch (e) {
       CustomToast().show(
@@ -375,28 +234,12 @@ class LocationFacade implements ILocationFacade {
   @override
   Stream<Option<Position>> getMyLocationStatus() async* {
     yield* _getMyLocation();
-
-    // Geolocator.getServiceStatusStream().listen(
-    //   (event) async {
-    //     mapKey = UniqueKey();
-    //     if (event == ServiceStatus.disabled) {
-    //       // setState(() {
-    //       myLatLng = null;
-    //       // });
-    //     } else if (event == ServiceStatus.enabled) {
-    //       await _getMyLocation();
-    //     }
-    //   },
-    // );
   }
 
   Stream<Option<Position>> _getMyLocation() async* {
     final newMyLatLng = await getMyLocation();
-    //todo no need to excute again that function up there
     if (newMyLatLng != null) {
-      // setState(() {
       myLatLng = newMyLatLng;
-      // });
     }
 
     final permission = await Geolocator.checkPermission();
@@ -410,46 +253,8 @@ class LocationFacade implements ILocationFacade {
         locationSettings: const LocationSettings(distanceFilter: 2),
       );
 
-      // final d = c.expand<Option<Position>>((element) => optionOf(element));
       final v = c.asyncMap(optionOf);
       yield* v;
-      // .listen(
-      //   (locationStream) async {
-      //     // if (mounted) {
-      //     //   setState(() {
-      //     myLatLng = LatLng(locationStream.latitude, locationStream.longitude);
-      //   },
-      // );
-      // }
-
     }
   }
-
-  void shouldMoveMap() {
-    if (myLatLng != null) {
-      if (moveMap == null) {
-        moveMap = true;
-      } else {
-        moveMap = false;
-      }
-    }
-
-    previousLatLng = myLatLng;
-  }
-
-  void zoomOutFn() {
-    mapController.move(myLatLng, 8);
-  }
-
-  @override
-  void getLocationStatus() {
-    // TODO: implement getLocationStatus
-  }
-
-  // @override
-  // Key? mapKey;
-}
-
-class NavService {
-  static GlobalKey<NavigatorState> navKey = GlobalKey();
 }

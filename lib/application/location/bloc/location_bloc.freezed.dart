@@ -562,7 +562,6 @@ class _$LocationStateTearOff {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      required MapController mapController,
       required Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
@@ -574,7 +573,6 @@ class _$LocationStateTearOff {
       contactsLoaded: contactsLoaded,
       moveMap: moveMap,
       mapKey: mapKey,
-      mapController: mapController,
       myposition: myposition,
       allNotifications: allNotifications,
       allLocationNotifications: allLocationNotifications,
@@ -598,7 +596,6 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -616,7 +613,6 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -634,7 +630,6 @@ mixin _$LocationState {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -727,7 +722,6 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -748,7 +742,6 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -769,7 +762,6 @@ class _$_Initial implements _Initial {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -831,7 +823,6 @@ abstract class _$ShowingMapCopyWith<$Res> {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      MapController mapController,
       Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
@@ -856,7 +847,6 @@ class __$ShowingMapCopyWithImpl<$Res> extends _$LocationStateCopyWithImpl<$Res>
     Object? contactsLoaded = freezed,
     Object? moveMap = freezed,
     Object? mapKey = freezed,
-    Object? mapController = freezed,
     Object? myposition = freezed,
     Object? allNotifications = freezed,
     Object? allLocationNotifications = freezed,
@@ -884,10 +874,6 @@ class __$ShowingMapCopyWithImpl<$Res> extends _$LocationStateCopyWithImpl<$Res>
           ? _value.mapKey
           : mapKey // ignore: cast_nullable_to_non_nullable
               as Key?,
-      mapController: mapController == freezed
-          ? _value.mapController
-          : mapController // ignore: cast_nullable_to_non_nullable
-              as MapController,
       myposition: myposition == freezed
           ? _value.myposition
           : myposition // ignore: cast_nullable_to_non_nullable
@@ -921,7 +907,6 @@ class _$_ShowingMap implements _ShowingMap {
       this.contactsLoaded,
       this.moveMap,
       this.mapKey,
-      required this.mapController,
       required this.myposition,
       this.allNotifications,
       this.allLocationNotifications,
@@ -939,8 +924,6 @@ class _$_ShowingMap implements _ShowingMap {
   @override
   final Key? mapKey;
   @override // so that map doesnt refresh, when we dont want it to
-  final MapController mapController;
-  @override
   final Option<Position> myposition;
   @override
   final List<EventAndLocationHybrid>? allNotifications;
@@ -953,7 +936,7 @@ class _$_ShowingMap implements _ShowingMap {
 
   @override
   String toString() {
-    return 'LocationState.showingMap(myLatLng: $myLatLng, previousLatLng: $previousLatLng, contactsLoaded: $contactsLoaded, moveMap: $moveMap, mapKey: $mapKey, mapController: $mapController, myposition: $myposition, allNotifications: $allNotifications, allLocationNotifications: $allLocationNotifications, allEventNotifications: $allEventNotifications, animateToIndex: $animateToIndex)';
+    return 'LocationState.showingMap(myLatLng: $myLatLng, previousLatLng: $previousLatLng, contactsLoaded: $contactsLoaded, moveMap: $moveMap, mapKey: $mapKey, myposition: $myposition, allNotifications: $allNotifications, allLocationNotifications: $allLocationNotifications, allEventNotifications: $allEventNotifications, animateToIndex: $animateToIndex)';
   }
 
   @override
@@ -968,8 +951,6 @@ class _$_ShowingMap implements _ShowingMap {
                 .equals(other.contactsLoaded, contactsLoaded) &&
             const DeepCollectionEquality().equals(other.moveMap, moveMap) &&
             const DeepCollectionEquality().equals(other.mapKey, mapKey) &&
-            const DeepCollectionEquality()
-                .equals(other.mapController, mapController) &&
             const DeepCollectionEquality()
                 .equals(other.myposition, myposition) &&
             const DeepCollectionEquality()
@@ -990,7 +971,6 @@ class _$_ShowingMap implements _ShowingMap {
       const DeepCollectionEquality().hash(contactsLoaded),
       const DeepCollectionEquality().hash(moveMap),
       const DeepCollectionEquality().hash(mapKey),
-      const DeepCollectionEquality().hash(mapController),
       const DeepCollectionEquality().hash(myposition),
       const DeepCollectionEquality().hash(allNotifications),
       const DeepCollectionEquality().hash(allLocationNotifications),
@@ -1012,7 +992,6 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -1026,7 +1005,6 @@ class _$_ShowingMap implements _ShowingMap {
         contactsLoaded,
         moveMap,
         mapKey,
-        mapController,
         myposition,
         allNotifications,
         allLocationNotifications,
@@ -1044,7 +1022,6 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -1058,7 +1035,6 @@ class _$_ShowingMap implements _ShowingMap {
         contactsLoaded,
         moveMap,
         mapKey,
-        mapController,
         myposition,
         allNotifications,
         allLocationNotifications,
@@ -1076,7 +1052,6 @@ class _$_ShowingMap implements _ShowingMap {
             bool? contactsLoaded,
             bool? moveMap,
             Key? mapKey,
-            MapController mapController,
             Option<Position> myposition,
             List<EventAndLocationHybrid>? allNotifications,
             List<EventAndLocationHybrid>? allLocationNotifications,
@@ -1092,7 +1067,6 @@ class _$_ShowingMap implements _ShowingMap {
           contactsLoaded,
           moveMap,
           mapKey,
-          mapController,
           myposition,
           allNotifications,
           allLocationNotifications,
@@ -1141,7 +1115,6 @@ abstract class _ShowingMap implements LocationState {
       bool? contactsLoaded,
       bool? moveMap,
       Key? mapKey,
-      required MapController mapController,
       required Option<Position> myposition,
       List<EventAndLocationHybrid>? allNotifications,
       List<EventAndLocationHybrid>? allLocationNotifications,
@@ -1153,7 +1126,6 @@ abstract class _ShowingMap implements LocationState {
   bool? get contactsLoaded;
   bool? get moveMap;
   Key? get mapKey; // so that map doesnt refresh, when we dont want it to
-  MapController get mapController;
   Option<Position> get myposition;
   List<EventAndLocationHybrid>? get allNotifications;
   List<EventAndLocationHybrid>? get allLocationNotifications;
