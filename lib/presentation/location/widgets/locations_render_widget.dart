@@ -29,10 +29,6 @@ class LocationRenderWidget extends StatelessWidget {
         slidingScrollController: scrollController,
         filterScreenType: filterScreenType,
         locationFilters: locationtFilter,
-
-        // eventNotifications,
-        // scrollController,
-        // FilterScreenType.event,
       );
 
       /// after rendering events, we will have [eventsRenderedWithFilter] count

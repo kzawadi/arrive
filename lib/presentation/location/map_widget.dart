@@ -1,39 +1,28 @@
 import 'dart:async';
 
-import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_common_flutter/services/size_config.dart';
-import 'package:at_events_flutter/at_events_flutter.dart';
-import 'package:at_events_flutter/models/event_notification.dart';
-import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_location_flutter/common_components/floating_icon.dart';
-import 'package:at_location_flutter/common_components/tasks.dart';
-import 'package:at_location_flutter/service/home_screen_service.dart';
 import 'package:at_location_flutter/utils/constants/colors.dart';
-import 'package:at_location_flutter/utils/constants/constants.dart'
-    as location_package_constants;
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/presentation/location/compass/compas_view.dart';
 import 'package:atsign_location_app/presentation/location/widgets/collapsed_content_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/empty_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/event_render_widget.dart';
-import 'package:atsign_location_app/presentation/location/widgets/list_view_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/locations_render_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/map_header_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/show_location.dart'
     as show_location;
-import 'package:atsign_location_app/shared/common_components/bottom_sheet.dart';
-import 'package:atsign_location_app/shared/common_components/dialog_box/delete_dialog_confirmation.dart';
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/enums.dart';
 import 'package:atsign_location_app/shared/images.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
-import 'package:atsign_location_app/shared/text_styles.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart' as fm;
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -140,7 +129,8 @@ class _LocationViewerState extends State<LocationViewer>
               floatingActionButton: StatefulBuilder(
                 builder: (_context, _setFloatingActionState) {
                   setFloatingActionState =
-                      _setFloatingActionState; // to re-render this when tab bar's index change
+                      _setFloatingActionState; // to re-render this when
+                  //tab bar's index change
                   return isFilterApplied(_controller)
                       ? InkWell(
                           onTap: () {
@@ -197,7 +187,6 @@ class _LocationViewerState extends State<LocationViewer>
                     Positioned(
                       bottom: 264.toHeight,
                       child: MapHeaderWidget(
-                        // context,
                         controller: _controller,
                       ),
                     ),
@@ -205,25 +194,33 @@ class _LocationViewerState extends State<LocationViewer>
                       Positioned(
                         top: 100,
                         right: 0,
-                        child: FloatingIcon(
-                          icon: Icons.zoom_out_map,
-                          onPressed: () {
-                            // if (widget.mapController!.ready) {
-
+                        child: GestureDetector(
+                          child: const IconlyIcon(
+                            path: IconlyCurved.Category,
+                            color: Colors.orange,
+                          ),
+                          onTap: () {
                             _mapController.move(
                               positionStream.fold(
                                 () => LatLng(45, 45),
-                                (a) =>
-                                    //  {
-                                    LatLng(a.latitude, a.longitude),
-                                // },
+                                (a) => LatLng(a.latitude, a.longitude),
                               ),
                               8,
                             );
-                            // }
-                            //todo zoomOutFn event
                           },
                         ),
+                        // FloatingIcon(
+                        //   icon: Icons.zoom_out_map,
+                        //   onPressed: () {
+                        //     _mapController.move(
+                        //       positionStream.fold(
+                        //         () => LatLng(45, 45),
+                        //         (a) => LatLng(a.latitude, a.longitude),
+                        //       ),
+                        //       8,
+                        //     );
+                        //   },
+                        // ),
                       )
                     else
                       const SizedBox(),
@@ -235,7 +232,8 @@ class _LocationViewerState extends State<LocationViewer>
                         panelBuilder: (scrollController) {
                           print('builder called uppanel');
                           if (animateToIndex != -1 && mounted) {
-                            // setFilterIconState will help to avoid position changing when tabbar is not built
+                            // setFilterIconState will help to avoid
+                            // position changing when tabbar is not built
                             _controller.animateTo(animateToIndex!);
                           }
 
@@ -315,9 +313,10 @@ class _LocationViewerState extends State<LocationViewer>
                       ),
                     ),
                     Tab(
-                      child: Text(TextStrings.locations,
-                          style:
-                              TextStyle(fontSize: 16.toFont, letterSpacing: 1)),
+                      child: Text(
+                        TextStrings.locations,
+                        style: TextStyle(fontSize: 16.toFont, letterSpacing: 1),
+                      ),
                     )
                   ],
                 ),
@@ -325,20 +324,24 @@ class _LocationViewerState extends State<LocationViewer>
             ),
             InkWell(
               onTap: () {
-                _openFilterDialog(_controller.index == 0
-                    ? FilterScreenType.event
-                    : FilterScreenType.location);
+                _openFilterDialog(
+                  _controller.index == 0
+                      ? FilterScreenType.event
+                      : FilterScreenType.location,
+                );
               },
               child: StatefulBuilder(
                 builder: (_context, _setFilterIconState) {
-                  setFilterIconState =
-                      _setFilterIconState; // to re-render this when tab bar's index change
+                  setFilterIconState = _setFilterIconState; // to re-render this
+                  //when tab bar's index change
 
-                  return Icon(Icons.filter_alt,
-                      size: 25.toFont,
-                      color: isFilterApplied(_controller)
-                          ? AllColors().ORANGE
-                          : Colors.black);
+                  return Icon(
+                    Icons.filter_alt,
+                    size: 25.toFont,
+                    color: isFilterApplied(_controller)
+                        ? AllColors().ORANGE
+                        : Colors.black,
+                  );
                 },
               ),
             )
@@ -356,7 +359,6 @@ class _LocationViewerState extends State<LocationViewer>
                   eventFilter: _eventFilter,
                   filterScreenType: FilterScreenType.event,
                 ),
-                // renderEvents(eventNotifications, scrollController),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8),
@@ -365,10 +367,7 @@ class _LocationViewerState extends State<LocationViewer>
                   filterScreenType: FilterScreenType.location,
                   locationtFilter: _locationFilter,
                   locationNotifications: locationNotifications,
-                  // eventsRenderedWithFilter: eventsRenderedWithFilter,
-                  // locationsRenderedWithFilter: locationsRenderedWithFilter,
                 ),
-                // renderLocations(locationNotifications, scrollController),
               )
             ],
           ),
@@ -377,8 +376,10 @@ class _LocationViewerState extends State<LocationViewer>
     );
   }
 
-  /// We will filter data while rendering it, using [shouldCurrentHybridBeRendered]
-  /// and use [eventsRenderedWithFilter]/[locationsRenderedWithFilter] to keep count of elements rendered
+  /// We will filter data while
+  /// rendering it, using =>shouldCurrentHybridBeRendered
+  /// and use [eventsRenderedWithFilter]/[locationsRenderedWithFilter]
+  /// to keep count of elements rendered
 
   void removeFilter(TabController controller) {
     if (controller.index == 0) {

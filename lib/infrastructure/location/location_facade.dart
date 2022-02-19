@@ -1,10 +1,6 @@
-// import 'dart:async';
-
-import 'package:at_contacts_group_flutter/utils/init_group_service.dart';
-import 'package:at_location_flutter/map_content/flutter_map/src/map/map.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_commons/at_commons.dart';
+import 'package:at_contacts_group_flutter/utils/init_group_service.dart';
 import 'package:at_contacts_group_flutter/widgets/custom_toast.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
@@ -20,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: ILocationFacade)
 class LocationFacade implements ILocationFacade {
@@ -29,6 +26,7 @@ class LocationFacade implements ILocationFacade {
   bool isSharing = false;
   bool isGettingLoadedFirstTime = true;
   bool locationSharingSwitchProcessing = false;
+  // ignore: non_constant_identifier_names
   String GET_ALL_NOTIFICATIONS = 'get_all_notifications';
   @override
   int animateToIndex = -1;

@@ -1,18 +1,8 @@
 name: atsign_location_app
 description: A new Flutter project.
-# The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
+
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+
 version: 1.0.3+30
 environment:
   sdk: ">=2.14.0 <3.0.0"
@@ -40,6 +30,7 @@ dependencies:
   rxdart: ^0.27.3
   flutter_map: ^0.14.0
   flutter_compass: ^0.7.0
+  flutter_svg:
 
   flutter_localizations:
     sdk: flutter
@@ -103,15 +94,108 @@ flutter:
     - assets/images/splash_bg.png
     - assets/images/empty_group.png
     - assets/images/group_photo.png
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+        #### Curved
+    - assets/icons/svgs/curved/Activity.svg
+    - assets/icons/svgs/curved/AddUser.svg
+    - assets/icons/svgs/curved/ArrowDown.svg
+    - assets/icons/svgs/curved/ArrowDown2.svg
+    - assets/icons/svgs/curved/ArrowDown3.svg
+    - assets/icons/svgs/curved/ArrowDownCircle.svg
+    - assets/icons/svgs/curved/ArrowDownSquare.svg
+    - assets/icons/svgs/curved/ArrowLeft.svg
+    - assets/icons/svgs/curved/ArrowLeft2.svg
+    - assets/icons/svgs/curved/ArrowLeft3.svg
+    - assets/icons/svgs/curved/ArrowLeftCircle.svg
+    - assets/icons/svgs/curved/ArrowLeftSquare.svg
+    - assets/icons/svgs/curved/ArrowRight.svg
+    - assets/icons/svgs/curved/ArrowRight2.svg
+    - assets/icons/svgs/curved/ArrowRight3.svg
+    - assets/icons/svgs/curved/ArrowRightCircle.svg
+    - assets/icons/svgs/curved/ArrowRightSquare.svg
+    - assets/icons/svgs/curved/ArrowUp.svg
+    - assets/icons/svgs/curved/ArrowUp2.svg
+    - assets/icons/svgs/curved/ArrowUp3.svg
+    - assets/icons/svgs/curved/ArrowUpCircle.svg
+    - assets/icons/svgs/curved/ArrowUpSquare.svg
+    - assets/icons/svgs/curved/Bag.svg
+    - assets/icons/svgs/curved/Bag2.svg
+    - assets/icons/svgs/curved/Bookmark.svg
+    - assets/icons/svgs/curved/Buy.svg
+    - assets/icons/svgs/curved/Calendar.svg
+    - assets/icons/svgs/curved/Call.svg
+    - assets/icons/svgs/curved/CallMissed.svg
+    - assets/icons/svgs/curved/CallSilent.svg
+    - assets/icons/svgs/curved/Calling.svg
+    - assets/icons/svgs/curved/Camera.svg
+    - assets/icons/svgs/curved/Category.svg
+    - assets/icons/svgs/curved/Chart.svg
+    - assets/icons/svgs/curved/Chat.svg
+    - assets/icons/svgs/curved/CloseSquare.svg
+    - assets/icons/svgs/curved/DangerSquare.svg
+    - assets/icons/svgs/curved/DangerTriangle.svg
+    - assets/icons/svgs/curved/Delete.svg
+    - assets/icons/svgs/curved/Discount.svg
+    - assets/icons/svgs/curved/Discovery.svg
+    - assets/icons/svgs/curved/Document.svg
+    - assets/icons/svgs/curved/Download.svg
+    - assets/icons/svgs/curved/Edit.svg
+    - assets/icons/svgs/curved/EditSquare.svg
+    - assets/icons/svgs/curved/Filter.svg
+    - assets/icons/svgs/curved/Filter2.svg
+    - assets/icons/svgs/curved/Folder.svg
+    - assets/icons/svgs/curved/Game.svg
+    - assets/icons/svgs/curved/Graph.svg
+    - assets/icons/svgs/curved/Heart.svg
+    - assets/icons/svgs/curved/Hide.svg
+    - assets/icons/svgs/curved/Home.svg
+    - assets/icons/svgs/curved/Image.svg
+    - assets/icons/svgs/curved/Image2.svg
+    - assets/icons/svgs/curved/InfoSquare.svg
+    - assets/icons/svgs/curved/Location.svg
+    - assets/icons/svgs/curved/Lock.svg
+    - assets/icons/svgs/curved/Login.svg
+    - assets/icons/svgs/curved/Logout.svg
+    - assets/icons/svgs/curved/Message.svg
+    - assets/icons/svgs/curved/MoreCircle.svg
+    - assets/icons/svgs/curved/MoreSquare.svg
+    - assets/icons/svgs/curved/Notification.svg
+    - assets/icons/svgs/curved/Paper.svg
+    - assets/icons/svgs/curved/PaperDownload.svg
+    - assets/icons/svgs/curved/PaperFail.svg
+    - assets/icons/svgs/curved/PaperNegative.svg
+    - assets/icons/svgs/curved/PaperPlus.svg
+    - assets/icons/svgs/curved/PaperUpload.svg
+    - assets/icons/svgs/curved/Password.svg
+    - assets/icons/svgs/curved/Play.svg
+    - assets/icons/svgs/curved/Plus.svg
+    - assets/icons/svgs/curved/Profile.svg
+    - assets/icons/svgs/curved/Scan.svg
+    - assets/icons/svgs/curved/Search.svg
+    - assets/icons/svgs/curved/Send.svg
+    - assets/icons/svgs/curved/Setting.svg
+    - assets/icons/svgs/curved/ShieldDone.svg
+    - assets/icons/svgs/curved/ShieldFail.svg
+    - assets/icons/svgs/curved/Show.svg
+    - assets/icons/svgs/curved/Star.svg
+    - assets/icons/svgs/curved/Swap.svg
+    - assets/icons/svgs/curved/TickSquare.svg
+    - assets/icons/svgs/curved/Ticket.svg
+    - assets/icons/svgs/curved/TicketStar.svg
+    - assets/icons/svgs/curved/TimeCircle.svg
+    - assets/icons/svgs/curved/TimeSquare.svg
+    - assets/icons/svgs/curved/Unlock.svg
+    - assets/icons/svgs/curved/Upload.svg
+    - assets/icons/svgs/curved/User2.svg
+    - assets/icons/svgs/curved/User3.svg
+    - assets/icons/svgs/curved/Video.svg
+    - assets/icons/svgs/curved/Voice.svg
+    - assets/icons/svgs/curved/Voice2.svg
+    - assets/icons/svgs/curved/VolumeDown.svg
+    - assets/icons/svgs/curved/VolumeOff.svg
+    - assets/icons/svgs/curved/VolumeUp.svg
+    - assets/icons/svgs/curved/Wallet.svg
+    - assets/icons/svgs/curved/Work.svg
+
   fonts:
     - family: HelveticaNeu
       fonts:
@@ -128,19 +212,4 @@ flutter:
     - family: PlayfairDisplay
       fonts:
         - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
 
-  # The following section is specific to Flutter.

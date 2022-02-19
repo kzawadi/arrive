@@ -5,12 +5,6 @@ import 'package:atsign_location_app/shared/enums.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:flutter/material.dart';
 
-// enum FilterScreenType { event, location }
-// // ignore: constant_identifier_names
-// enum EventFilters { Sent, Received, None }
-// // ignore: constant_identifier_names
-// enum LocationFilters { Pending, Sent, Received, None }
-
 class EventRenderWidget extends StatelessWidget {
   const EventRenderWidget({
     Key? key,
