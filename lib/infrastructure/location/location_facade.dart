@@ -53,13 +53,9 @@ class LocationFacade implements ILocationFacade {
 
   BehaviorSubject<Position?>? myPosition;
   @override
-  late BehaviorSubject<List<EventAndLocationHybrid>>
-      allEventNotificationStream =
-      BehaviorSubject<List<EventAndLocationHybrid>>();
+  late BehaviorSubject<List<EventAndLocationHybrid>> allEventNotificationStream;
   @override
-  late BehaviorSubject<List<EventAndLocationHybrid>>
-      allLocalNotificationStream =
-      BehaviorSubject<List<EventAndLocationHybrid>>();
+  late BehaviorSubject<List<EventAndLocationHybrid>> allLocalNotificationStream;
 
   String locationSharingKey =
       'issharing-${AtClientManager.getInstance().atClient.getCurrentAtSign()!.replaceAll('@', '')}';
@@ -86,7 +82,7 @@ class LocationFacade implements ILocationFacade {
       mapKey: Constants.mapKey,
       apiKey: Constants.appApiKey,
       showDialogBox: true,
-      streamAlternative: updateLocation,
+      streamAlternative: updateLocations,
       isEventInUse: true,
     ).then(
       (_) async {
@@ -119,10 +115,10 @@ class LocationFacade implements ILocationFacade {
     return unit;
   }
 
-  Stream<List<EventAndLocationHybrid>> updateLocation(
-    List<KeyLocationModel> list,
+  Stream<List<EventAndLocationHybrid>> updateLocations(
+    List<KeyLocationModel>? list,
   ) async* {
-    if (allLocationNotifications.length < list.length) {
+    if (allLocationNotifications.length < list!.length) {
       animateToIndex = 1; // Locations is index 1 in home screen
     } else {
       animateToIndex = -1; // don't animate
@@ -137,14 +133,14 @@ class LocationFacade implements ILocationFacade {
         )
         .toList();
     allLocalNotificationStream.add(allLocationNotifications);
-    yield* allLocalNotificationStream.stream;
+    yield* allLocalNotificationStream;
 
     // setStatus(GET_ALL_NOTIFICATIONS, Status.Done);
   }
 
-  Future<void> updateEvents(
+  Stream<List<EventAndLocationHybrid>> updateEvents(
     List<EventKeyLocationModel> list,
-  ) async {
+  ) async* {
     if (allEventNotifications.length < list.length) {
       animateToIndex = 0; // Events is index 0 in home screen
     } else {
@@ -161,7 +157,7 @@ class LocationFacade implements ILocationFacade {
         .toList();
     allEventNotificationStream.add(allEventNotifications);
     // ignore: cascade_invocations
-    allEventNotificationStream.stream;
+    yield* allEventNotificationStream;
   }
 
   Future<void> initialiseLocationSharing(
@@ -199,17 +195,6 @@ class LocationFacade implements ILocationFacade {
         return AtClientManager.getInstance().atClient.get(atKey);
       },
     );
-    //     .catchError(
-    //   // ignore: invalid_return_type_for_catch_error
-    //   (dynamic e) async {
-    //     print('error in get getShareLocation $e');
-
-    //     /// create
-    //     /// if key already exists, then make false for safer side
-    //     /// else make it true, as a default value
-    //     await updateLocationSharingKey(!alreadyExists, navKey);
-    //   },
-    // );
 
     // ignore: avoid_bool_literals_in_conditional_expressions
     return (value.value == 'true') ? true : false;

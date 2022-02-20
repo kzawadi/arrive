@@ -25,7 +25,7 @@ class _$LocationEventTearOff {
   }
 
   _LocationServicesInitialized locationServicesInitialized(
-      Option<Position> myPosition) {
+      Option<Position>? myPosition) {
     return _LocationServicesInitialized(
       myPosition,
     );
@@ -46,7 +46,7 @@ mixin _$LocationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function(Option<Position> myPosition)
+    required TResult Function(Option<Position>? myPosition)
         locationServicesInitialized,
     required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) =>
@@ -54,14 +54,14 @@ mixin _$LocationEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) =>
@@ -173,7 +173,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function(Option<Position> myPosition)
+    required TResult Function(Option<Position>? myPosition)
         locationServicesInitialized,
     required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) {
@@ -184,7 +184,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) {
     return started?.call(navKey);
@@ -194,7 +194,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) {
@@ -257,7 +257,7 @@ abstract class _$LocationServicesInitializedCopyWith<$Res> {
           _LocationServicesInitialized value,
           $Res Function(_LocationServicesInitialized) then) =
       __$LocationServicesInitializedCopyWithImpl<$Res>;
-  $Res call({Option<Position> myPosition});
+  $Res call({Option<Position>? myPosition});
 }
 
 /// @nodoc
@@ -281,7 +281,7 @@ class __$LocationServicesInitializedCopyWithImpl<$Res>
       myPosition == freezed
           ? _value.myPosition
           : myPosition // ignore: cast_nullable_to_non_nullable
-              as Option<Position>,
+              as Option<Position>?,
     ));
   }
 }
@@ -292,7 +292,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
   const _$_LocationServicesInitialized(this.myPosition);
 
   @override
-  final Option<Position> myPosition;
+  final Option<Position>? myPosition;
 
   @override
   String toString() {
@@ -322,7 +322,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function(Option<Position> myPosition)
+    required TResult Function(Option<Position>? myPosition)
         locationServicesInitialized,
     required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) {
@@ -333,7 +333,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) {
     return locationServicesInitialized?.call(myPosition);
@@ -343,7 +343,7 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) {
@@ -392,10 +392,10 @@ class _$_LocationServicesInitialized implements _LocationServicesInitialized {
 }
 
 abstract class _LocationServicesInitialized implements LocationEvent {
-  const factory _LocationServicesInitialized(Option<Position> myPosition) =
+  const factory _LocationServicesInitialized(Option<Position>? myPosition) =
       _$_LocationServicesInitialized;
 
-  Option<Position> get myPosition;
+  Option<Position>? get myPosition;
   @JsonKey(ignore: true)
   _$LocationServicesInitializedCopyWith<_LocationServicesInitialized>
       get copyWith => throw _privateConstructorUsedError;
@@ -469,7 +469,7 @@ class _$_LocationDataReceived implements _LocationDataReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(GlobalKey<NavigatorState> navKey) started,
-    required TResult Function(Option<Position> myPosition)
+    required TResult Function(Option<Position>? myPosition)
         locationServicesInitialized,
     required TResult Function(Option<Position> myPosition) locationDataReceived,
   }) {
@@ -480,7 +480,7 @@ class _$_LocationDataReceived implements _LocationDataReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
   }) {
     return locationDataReceived?.call(myPosition);
@@ -490,7 +490,7 @@ class _$_LocationDataReceived implements _LocationDataReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(GlobalKey<NavigatorState> navKey)? started,
-    TResult Function(Option<Position> myPosition)? locationServicesInitialized,
+    TResult Function(Option<Position>? myPosition)? locationServicesInitialized,
     TResult Function(Option<Position> myPosition)? locationDataReceived,
     required TResult orElse(),
   }) {

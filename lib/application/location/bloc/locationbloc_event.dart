@@ -6,7 +6,7 @@ class LocationEvent with _$LocationEvent {
     GlobalKey<NavigatorState> navKey,
   ) = _Started;
   const factory LocationEvent.locationServicesInitialized(
-    Option<Position> myPosition,
+    Option<Position>? myPosition,
   ) = _LocationServicesInitialized;
   const factory LocationEvent.locationDataReceived(
     Option<Position> myPosition,

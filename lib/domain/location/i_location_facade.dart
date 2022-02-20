@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:rxdart/rxdart.dart';
 
 abstract class ILocationFacade {
   bool? get contactsLoaded;
@@ -21,8 +20,8 @@ abstract class ILocationFacade {
     GlobalKey<NavigatorState> navKey,
   );
 
-  late BehaviorSubject<List<EventAndLocationHybrid>> allEventNotificationStream;
-  late BehaviorSubject<List<EventAndLocationHybrid>> allLocalNotificationStream;
+  Stream<List<EventAndLocationHybrid>> get allEventNotificationStream;
+  Stream<List<EventAndLocationHybrid>> get allLocalNotificationStream;
 
   Stream<Option<Position>> getMyLocationStatus();
 }

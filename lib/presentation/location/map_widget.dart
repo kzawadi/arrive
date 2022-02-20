@@ -182,10 +182,11 @@ class _LocationViewerState extends State<LocationViewer>
                     //drawer icon
                     Positioned(
                       top: 0,
-                      right: 0,
+                      right: 10,
                       child: SizedBox(
                         height: 55.toHeight,
                         child: ArriveActionButton(
+                          iconColor: Colors.blueGrey,
                           icon: IconlyIcon(
                             path: IconlyCurved.Category,
                             color: Theme.of(context).primaryColor,
@@ -207,8 +208,9 @@ class _LocationViewerState extends State<LocationViewer>
                     if (positionStream.isSome())
                       Positioned(
                         top: 100,
-                        right: 0,
+                        right: 10,
                         child: ArriveActionButton(
+                          iconColor: Colors.blueGrey,
                           icon: IconlyIcon(
                             path: IconlyCurved.Discovery,
                             color: Theme.of(context).primaryColor,

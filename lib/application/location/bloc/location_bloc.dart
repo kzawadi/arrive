@@ -18,8 +18,10 @@ part 'location_bloc.freezed.dart';
 
 @injectable
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
-  LocationBloc(this._initLocationServicesUseCase, this._iLocationFacade)
-      : super(const LocationState.initial()) {
+  LocationBloc(
+    this._initLocationServicesUseCase,
+    this._iLocationFacade,
+  ) : super(const LocationState.initial()) {
     on<LocationEvent>(_locationHandler, transformer: sequential());
   }
 
@@ -39,7 +41,9 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
             _myPositionStreamSubscription =
                 _iLocationFacade.getMyLocationStatus().listen(
                       (myPosition) => add(
-                        LocationEvent.locationServicesInitialized(myPosition),
+                        LocationEvent.locationServicesInitialized(
+                          myPosition,
+                        ),
                       ),
                     );
           },
@@ -51,7 +55,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
             contactsLoaded: _iLocationFacade.contactsLoaded,
             moveMap: _iLocationFacade.moveMap,
             previousLatLng: _iLocationFacade.previousLatLng,
-            myposition: myPosition,
+            myposition: myPosition!,
             mapKey: _iLocationFacade.mapKey,
             allEventNotifications: _iLocationFacade.allEventNotifications,
             allLocationNotifications: _iLocationFacade.allLocationNotifications,
