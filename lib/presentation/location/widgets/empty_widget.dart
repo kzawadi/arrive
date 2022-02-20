@@ -1,6 +1,4 @@
 import 'package:at_onboarding_flutter/services/size_config.dart';
-import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
-import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/images.dart';
 import 'package:atsign_location_app/shared/text_styles.dart';
 import 'package:flutter/material.dart';
