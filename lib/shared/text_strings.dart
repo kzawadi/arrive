@@ -1,9 +1,11 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 class TextStrings {
   // TextStrings._();
   // static TextStrings _instance = TextStrings._();
   // factory TextStrings() => _instance;
 
-  static final String resetButton = 'Reset';
+  static const String resetButton = 'Reset';
   static const String resetDescription =
       'This will remove the selected @sign and its details from this app only.';
   static const String noAtsignToReset = 'No @signs are paired to reset. ';

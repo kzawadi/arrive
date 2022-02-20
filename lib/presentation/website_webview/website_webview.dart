@@ -5,7 +5,6 @@ import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:at_common_flutter/services/size_config.dart';
 
 class WebsiteScreen extends StatefulWidget {
   const WebsiteScreen({Key? key, required this.title, required this.url})
@@ -44,27 +43,29 @@ class _WebsiteScreenState extends State<WebsiteScreen> {
         ),
         title: Text(widget.title, style: CustomTextStyles().black18),
       ),
-      body: Stack(children: [
-        WebView(
-          initialUrl: widget.url,
-          javascriptMode: JavascriptMode.unrestricted,
-          onPageFinished: (test1) {
-            setState(() {
-              loading = false;
-            });
-          },
-        ),
-        if (loading)
-          Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                AllColors().ORANGE,
+      body: Stack(
+        children: [
+          WebView(
+            initialUrl: widget.url,
+            javascriptMode: JavascriptMode.unrestricted,
+            onPageFinished: (test1) {
+              setState(() {
+                loading = false;
+              });
+            },
+          ),
+          if (loading)
+            Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  AllColors().ORANGE,
+                ),
               ),
-            ),
-          )
-        else
-          const SizedBox()
-      ]),
+            )
+          else
+            const SizedBox()
+        ],
+      ),
     );
   }
 }

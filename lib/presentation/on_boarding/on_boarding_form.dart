@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:at_events_flutter/common_components/triple_dot_loading.dart';
 import 'package:at_onboarding_flutter/at_onboarding_flutter.dart';
 import 'package:at_onboarding_flutter/services/size_config.dart';
@@ -76,7 +78,8 @@ class OnBoardingForm extends StatelessWidget {
             width: 30,
             child: Center(
               child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor),
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
         );

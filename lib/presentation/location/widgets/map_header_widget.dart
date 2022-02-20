@@ -6,7 +6,6 @@ import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_onboarding_flutter/services/size_config.dart';
 import 'package:atsign_location_app/presentation/location/widgets/tasks_launcher_widget.dart';
 import 'package:atsign_location_app/shared/colors.dart';
-import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
 import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:flutter/material.dart';

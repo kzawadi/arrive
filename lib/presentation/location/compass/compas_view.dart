@@ -47,7 +47,7 @@ class _CompassViewState extends State<CompassView> {
           // Bearing Indicator
           if (widget.bearing != null)
             Padding(
-              padding: const EdgeInsets.all(35.0),
+              padding: const EdgeInsets.all(35),
               child: Transform.rotate(
                 angle: (widget.bearing! - widget.heading).toRadians(),
                 child: Align(

@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/presentation/location/widgets/empty_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/list_view_widget.dart';
@@ -35,8 +37,9 @@ class EventRenderWidget extends StatelessWidget {
       if ((eventFilter != EventFilters.None) &&
           (eventsRenderedWithFilter == 0)) {
         return EmptyWidget(
-            title:
-                '${TextStrings.noWithoutSpecialcharacters} ${eventFilter.name} ${TextStrings.eventData}');
+          title:
+              '${TextStrings.noWithoutSpecialcharacters} ${eventFilter.name} ${TextStrings.eventData}',
+        );
       }
 
       return _list;

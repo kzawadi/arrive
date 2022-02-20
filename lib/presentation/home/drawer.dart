@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:typed_data';
 
 import 'package:at_client_mobile/at_client_mobile.dart';
@@ -64,7 +66,9 @@ class SideDrawer extends StatelessWidget {
                 child: Container(
                   color: Theme.of(context).scaffoldBackgroundColor,
                   padding: EdgeInsets.symmetric(
-                      horizontal: 22, vertical: 0.toHeight),
+                    horizontal: 22,
+                    vertical: 0.toHeight,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,7 +82,8 @@ class SideDrawer extends StatelessWidget {
                             if (image != null)
                               ClipRRect(
                                 borderRadius: BorderRadius.all(
-                                    Radius.circular(30.toFont)),
+                                  Radius.circular(30.toFont),
+                                ),
                                 child: Image.memory(
                                   image,
                                   width: 50.toFont,

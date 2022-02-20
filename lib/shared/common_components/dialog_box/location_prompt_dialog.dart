@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:at_events_flutter/common_components/custom_button.dart';
 import 'package:at_location_flutter/location_modal/location_notification.dart';
 import 'package:at_location_flutter/utils/constants/text_styles.dart';
@@ -16,7 +18,7 @@ Future<void> locationPromptDialog({
   required LocationNotificationModel locationNotificationModel,
 }) {
   final value = showDialog<void>(
-    context: NavService.navkey.currentContext!,
+    context: NavService.navKey.currentContext!,
     barrierDismissible: false,
     builder: (BuildContext context) {
       return LocationPrompt(
@@ -34,7 +36,8 @@ Future<void> locationPromptDialog({
 }
 
 class LocationPrompt extends StatefulWidget {
-  LocationPrompt({
+  const LocationPrompt({
+    Key? key,
     this.text,
     this.yesText,
     this.noText,
@@ -42,7 +45,7 @@ class LocationPrompt extends StatefulWidget {
     @required this.isShareLocationData,
     @required this.isRequestLocationData,
     this.locationNotificationModel,
-  });
+  }) : super(key: key);
   final String? text, yesText, noText;
   final bool? isShareLocationData, isRequestLocationData, onlyText;
   final LocationNotificationModel? locationNotificationModel;
@@ -62,10 +65,10 @@ class _LocationPromptState extends State<LocationPrompt> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: SizeConfig().screenWidth! * 0.8,
       child: AlertDialog(
-        contentPadding: EdgeInsets.fromLTRB(15, 30, 15, 20),
+        contentPadding: const EdgeInsets.fromLTRB(15, 30, 15, 20),
         content: SingleChildScrollView(
           child: Container(
             child: widget.onlyText!
@@ -76,7 +79,7 @@ class _LocationPromptState extends State<LocationPrompt> {
                         style: CustomTextStyles().grey16,
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       CustomButton(
                         onTap: () => Navigator.of(context).pop(),
                         bgColor: Theme.of(context).primaryColor,
@@ -85,8 +88,9 @@ class _LocationPromptState extends State<LocationPrompt> {
                         child: Text(
                           TextStrings.okay,
                           style: TextStyle(
-                              fontSize: 15.toFont,
-                              color: Theme.of(context).scaffoldBackgroundColor),
+                            fontSize: 15.toFont,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
                         ),
                       )
                     ],
@@ -134,12 +138,12 @@ class _LocationPromptState extends State<LocationPrompt> {
                           child: Text(
                             widget.yesText ?? TextStrings.yesTurnItOn,
                             style: TextStyle(
-                                fontSize: 15.toFont,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
+                              fontSize: 15.toFont,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
                           ),
                         ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       InkWell(
                         onTap: () async {
                           if (widget.isShareLocationData!) {

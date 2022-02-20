@@ -9,5 +9,6 @@ class LocationEvent with _$LocationEvent {
     Option<Position> myPosition,
   ) = _LocationServicesInitialized;
   const factory LocationEvent.locationDataReceived(
-      Option<Position> myPosition) = _LocationDataReceived;
+    Option<Position> myPosition,
+  ) = _LocationDataReceived;
 }

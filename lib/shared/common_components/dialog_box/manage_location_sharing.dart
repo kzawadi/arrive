@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas, avoid_positional_boolean_parameters, use_build_context_synchronously, lines_longer_than_80_chars, prefer_final_locals
+
 import 'package:at_common_flutter/at_common_flutter.dart';
 import 'package:at_events_flutter/common_components/loading_widget.dart';
 import 'package:at_events_flutter/models/event_notification.dart';
@@ -107,12 +109,13 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
             if (allNotificationsSharingLocationFor.isNotEmpty)
               Expanded(
                 child: ListView.builder(
-                    itemCount: allNotificationsSharingLocationFor.length,
-                    itemBuilder: (_context, _int) {
-                      return locationSharingSwitch(
-                        allNotificationsSharingLocationFor[_int],
-                      );
-                    }),
+                  itemCount: allNotificationsSharingLocationFor.length,
+                  itemBuilder: (_context, _int) {
+                    return locationSharingSwitch(
+                      allNotificationsSharingLocationFor[_int],
+                    );
+                  },
+                ),
               )
             else
               const SizedBox()
@@ -141,7 +144,8 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
   }
 
   String textForLocationSharingSwitch(
-      LocationSharingData _locationSharingData) {
+    LocationSharingData _locationSharingData,
+  ) {
     if (_locationSharingData.eventAndLocationHybrid.type ==
         NotificationModelType.eventModel) {
       return _locationSharingData
@@ -153,7 +157,8 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
   }
 
   bool booleanForLocationSharingSwitch(
-      LocationSharingData _locationSharingData) {
+    LocationSharingData _locationSharingData,
+  ) {
     if (_locationSharingData.eventAndLocationHybrid.type ==
         NotificationModelType.eventModel) {
       return _locationSharingData.eventInfo.isSharing;
@@ -177,7 +182,7 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
       LocationSharingData _locationSharingData, bool _value) async {
     LoadingDialog().show(text: TextStrings.updating);
 
-    var result = await EventKeyStreamService().actionOnEvent(
+    final result = await EventKeyStreamService().actionOnEvent(
       _locationSharingData
           .eventAndLocationHybrid.eventKeyModel!.eventNotificationModel!,
       ATKEY_TYPE_ENUM.CREATEEVENT, // doesn't effect now
@@ -189,8 +194,9 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
     LoadingDialog().hide();
     if (result == true) {
       _locationSharingData.eventInfo = HomeEventService().getMyEventInfo(
-          _locationSharingData
-              .eventAndLocationHybrid.eventKeyModel!.eventNotificationModel!)!;
+        _locationSharingData
+            .eventAndLocationHybrid.eventKeyModel!.eventNotificationModel!,
+      )!;
 
       setState(() {});
     } else {
@@ -215,14 +221,18 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
 
     LoadingDialog().show(text: TextStrings.updating);
     if (locationNotificationModel!.key!.contains(TextStrings.shareLocation)) {
-      result = await SharingLocationService()
-          .updateWithShareLocationAcknowledge(locationNotificationModel,
-              isSharing: _value);
+      result =
+          await SharingLocationService().updateWithShareLocationAcknowledge(
+        locationNotificationModel,
+        isSharing: _value,
+      );
     } else if (locationNotificationModel.key!
         .contains(TextStrings.requestLocation)) {
       result = await RequestLocationService().requestLocationAcknowledgment(
-          locationNotificationModel, true,
-          isSharing: _value);
+        locationNotificationModel,
+        true,
+        isSharing: _value,
+      );
     }
     LoadingDialog().hide();
 
@@ -244,61 +254,65 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return StatefulBuilder(builder: (_context, _setDialogState) {
-          var _dialogLoading = false;
+        return StatefulBuilder(
+          builder: (_context, _setDialogState) {
+            var _dialogLoading = false;
 
-          return AlertDialog(
-            contentPadding: EdgeInsets.fromLTRB(15, 30, 15, 20),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    TextStrings.areYouSureYouWantToRemove,
-                    style: CustomTextStyles().grey16,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 30),
-                  if (_dialogLoading)
-                    CircularProgressIndicator()
-                  else
-                    customButton.CustomButton(
-                      onTap: () async {
-                        await _dialogYesPressed(_locationSharingData);
-                      },
-                      bgColor: Theme.of(context).primaryColor,
-                      width: 164.toWidth,
-                      height: 48.toHeight,
-                      child: Text(
-                        TextStrings.yes,
-                        style: TextStyle(
+            return AlertDialog(
+              contentPadding: const EdgeInsets.fromLTRB(15, 30, 15, 20),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      TextStrings.areYouSureYouWantToRemove,
+                      style: CustomTextStyles().grey16,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 30),
+                    if (_dialogLoading)
+                      const CircularProgressIndicator()
+                    else
+                      customButton.CustomButton(
+                        onTap: () async {
+                          await _dialogYesPressed(_locationSharingData);
+                        },
+                        bgColor: Theme.of(context).primaryColor,
+                        width: 164.toWidth,
+                        height: 48.toHeight,
+                        child: Text(
+                          TextStrings.yes,
+                          style: TextStyle(
                             fontSize: 15.toFont,
-                            color: Theme.of(context).scaffoldBackgroundColor),
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                        ),
                       ),
-                    ),
-                  const SizedBox(height: 5),
-                  if (_dialogLoading)
-                    const SizedBox()
-                  else
-                    customButton.CustomButton(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      bgColor: Theme.of(context).scaffoldBackgroundColor,
-                      width: 140.toWidth,
-                      height: 36.toHeight,
-                      child: Text(
-                        TextStrings.noCancelThis,
-                        style: TextStyle(
+                    const SizedBox(height: 5),
+                    if (_dialogLoading)
+                      const SizedBox()
+                    else
+                      customButton.CustomButton(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        bgColor: Theme.of(context).scaffoldBackgroundColor,
+                        width: 140.toWidth,
+                        height: 36.toHeight,
+                        child: Text(
+                          TextStrings.noCancelThis,
+                          style: TextStyle(
                             fontSize: 14.toFont,
-                            color: Theme.of(context).primaryColor),
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
       },
     );
   }
@@ -324,8 +338,11 @@ class __ManageLocationSharingState extends State<_ManageLocationSharing> {
       setState(() {});
       Navigator.of(context).pop();
     } else {
-      CustomToast().show(TextStrings.somethingWentWrongPleaseTryAgain, context,
-          isError: true);
+      CustomToast().show(
+        TextStrings.somethingWentWrongPleaseTryAgain,
+        context,
+        isError: true,
+      );
     }
   }
 }

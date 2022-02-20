@@ -1,4 +1,6 @@
 // import 'package:at_location_flutter/map_content/flutter_map/src/plugins/plugin.dart' as plugin;
+// ignore_for_file: unused_import, unused_local_variable, lines_longer_than_80_chars
+
 import 'package:at_location_flutter/utils/constants/constants.dart';
 import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
 import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
@@ -6,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart' as fm;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart' as plugin;
+// import 'package:flutter_map/src/layer/marker_layer.dart' as layer;
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/src/layer/marker_layer.dart' as layer;
 
 /// A widget defined to show zero or one or a list of geo co-ordinates with custom marker.
 ///

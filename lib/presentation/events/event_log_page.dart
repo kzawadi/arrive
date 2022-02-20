@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:at_common_flutter/services/size_config.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_events_flutter/common_components/bottom_sheet.dart';
@@ -141,7 +143,7 @@ class _EventLogState extends State<EventLog>
   }
 
   Widget getPastEvents() {
-    var pastEvents = EventKeyStreamService()
+    final pastEvents = EventKeyStreamService()
         .allPastEventNotifications
         .map((e) => e.eventNotificationModel)
         .toList();

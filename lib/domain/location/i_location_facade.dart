@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';

@@ -1,11 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:at_common_flutter/services/size_config.dart';
-import 'package:at_location_flutter/common_components/floating_icon.dart';
 import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
-import 'package:atsign_location_app/injections.dart';
 import 'package:atsign_location_app/presentation/home/drawer.dart';
 import 'package:atsign_location_app/presentation/location/compass/compas_view.dart';
 import 'package:atsign_location_app/presentation/location/widgets/action_button.dart';
@@ -456,7 +456,7 @@ class _LocationViewerState extends State<LocationViewer>
                         TextButton(
                           onPressed: () {
                             // Navigator.pop(context);
-                            // Provider.of<LocationProvider>(context, listen: false)
+                            // Providertext, listen: false)
                             //     .animateToIndex = -1; // reset animateToIndex
                             // setState(() {}); //todo another logic in UI have get fixed
                           },

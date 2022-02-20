@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, avoid_print
+
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_events_flutter/models/event_notification.dart';
@@ -187,7 +189,8 @@ class ListViewWidget extends StatelessWidget {
   }
 
   bool shouldCurrentHybridBeRendered(
-      EventAndLocationHybrid eventAndLocationHybrid) {
+    EventAndLocationHybrid eventAndLocationHybrid,
+  ) {
     if (eventAndLocationHybrid.type == NotificationModelType.eventModel) {
       final _shouldCurrentEventBeRendered = shouldCurrentEventBeRendered(
         eventAndLocationHybrid.eventKeyModel!.eventNotificationModel!,
@@ -229,7 +232,8 @@ class ListViewWidget extends StatelessWidget {
   }
 
   bool shouldCurrentLocationBeRendered(
-      LocationNotificationModel locationNotificationModel) {
+    LocationNotificationModel locationNotificationModel,
+  ) {
     switch (locationFilters!) {
       case LocationFilters.None:
         return true;
@@ -237,7 +241,8 @@ class ListViewWidget extends StatelessWidget {
       case LocationFilters.Pending:
         {
           if (locationNotificationModel.key!.contains(
-              location_package_constants.MixedConstants.SHARE_LOCATION)) {
+            location_package_constants.MixedConstants.SHARE_LOCATION,
+          )) {
             return false;
           } else {
             if ((locationNotificationModel.isAccepted == false) &&
@@ -250,7 +255,8 @@ class ListViewWidget extends StatelessWidget {
         }
       case LocationFilters.Sent:
         return locationNotificationModel.key!.contains(
-                location_package_constants.MixedConstants.SHARE_LOCATION)
+          location_package_constants.MixedConstants.SHARE_LOCATION,
+        )
             ? compareAtSign(
                 locationNotificationModel.atsignCreator!,
                 AtClientManager.getInstance().atClient.getCurrentAtSign()!,
@@ -261,13 +267,16 @@ class ListViewWidget extends StatelessWidget {
               );
       case LocationFilters.Received:
         return locationNotificationModel.key!.contains(
-                location_package_constants.MixedConstants.SHARE_LOCATION)
+          location_package_constants.MixedConstants.SHARE_LOCATION,
+        )
             ? compareAtSign(
                 locationNotificationModel.receiver!,
                 AtClientManager.getInstance().atClient.getCurrentAtSign()!,
               )
-            : compareAtSign(locationNotificationModel.atsignCreator!,
-                AtClientManager.getInstance().atClient.getCurrentAtSign()!);
+            : compareAtSign(
+                locationNotificationModel.atsignCreator!,
+                AtClientManager.getInstance().atClient.getCurrentAtSign()!,
+              );
     }
   }
 }

@@ -7,7 +7,6 @@ import 'package:at_location_flutter/map_content/flutter_map/src/layer/marker_lay
 import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:atsign_location_app/presentation/location/widgets/hybridModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart' as fm;
 
 Marker buildMarker(
   HybridModel user, {
@@ -33,8 +32,9 @@ Marker buildMarker(
                       height: 40,
                       child: CustomPaint(
                         painter: CircleMarkerPainter(
-                            color: AllColors().WHITE,
-                            paintingStyle: PaintingStyle.fill),
+                          color: AllColors().WHITE,
+                          paintingStyle: PaintingStyle.fill,
+                        ),
                       ),
                     ),
                   ),
@@ -54,7 +54,7 @@ Marker buildMarker(
                   Positioned(
                     bottom: 25,
                     child: CustomPaint(
-                      size: Size(40, (40 * 1.137455469677715).toDouble()),
+                      size: const Size(40, 40 * 1.137455469677715),
                       painter: RPSCustomPainter(),
                     ),
                   ),
@@ -70,7 +70,7 @@ Marker buildMarker(
                               size: 30,
                             )
                           : ContactInitial(
-                              initials: user.displayName!,
+                              initials: user.displayName,
                               size: 30,
                               backgroundColor: AllColors().ORANGE,
                             ),

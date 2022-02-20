@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, avoid_print
+
 import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:at_commons/at_commons.dart';
 import 'package:at_contacts_group_flutter/utils/init_group_service.dart';
@@ -6,7 +8,6 @@ import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_location_flutter/common_components/location_prompt_dialog.dart';
 import 'package:at_location_flutter/location_modal/key_location_model.dart';
-import 'package:at_onboarding_flutter/utils/app_constants.dart';
 import 'package:atsign_location_app/domain/contacts/use_cases/at_contacts_use_cases.dart';
 import 'package:atsign_location_app/domain/location/i_location_facade.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
@@ -119,7 +120,8 @@ class LocationFacade implements ILocationFacade {
   }
 
   Stream<List<EventAndLocationHybrid>> updateLocation(
-      List<KeyLocationModel> list) async* {
+    List<KeyLocationModel> list,
+  ) async* {
     if (allLocationNotifications.length < list.length) {
       animateToIndex = 1; // Locations is index 1 in home screen
     } else {
@@ -158,6 +160,7 @@ class LocationFacade implements ILocationFacade {
         )
         .toList();
     allEventNotificationStream.add(allEventNotifications);
+    // ignore: cascade_invocations
     allEventNotificationStream.stream;
   }
 
@@ -213,6 +216,7 @@ class LocationFacade implements ILocationFacade {
   }
 
   Future<bool> updateLocationSharingKey(
+    // ignore: avoid_positional_boolean_parameters
     bool value,
     GlobalKey<NavigatorState> navKey,
   ) async {

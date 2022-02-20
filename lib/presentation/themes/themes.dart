@@ -23,13 +23,15 @@ class Themes {
         bodyText1: TextStyle(color: AllColors().DARK_GREY, fontSize: 16),
         bodyText2: TextStyle(color: AllColors().DARK_GREY, fontSize: 14),
         headline1: TextStyle(
-            color: AllColors().Black,
-            fontSize: 18,
-            fontWeight: FontWeight.w700),
+          color: AllColors().Black,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
         headline2: TextStyle(
-            color: AllColors().ORANGE,
-            fontSize: 18,
-            fontWeight: FontWeight.w700),
+          color: AllColors().ORANGE,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
         headline3: TextStyle(color: AllColors().GREY, fontSize: 16),
         headline4: TextStyle(color: AllColors().GREY, fontSize: 14),
         headline5: TextStyle(color: AllColors().GREY, fontSize: 12),
@@ -63,9 +65,10 @@ class Themes {
         ).bodyText2,
         titleTextStyle: TextTheme(
           headline1: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: AllColors().Black),
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: AllColors().Black,
+          ),
           headline2: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,
@@ -92,22 +95,25 @@ class Themes {
         bodyText1: TextStyle(color: AllColors().DARK_GREY, fontSize: 16),
         bodyText2: TextStyle(color: AllColors().DARK_GREY, fontSize: 14),
         headline1: TextStyle(
-            color: AllColors().LIGHT_GREY,
-            fontSize: 18,
-            fontWeight: FontWeight.w700),
+          color: AllColors().LIGHT_GREY,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
         headline2: TextStyle(
-            color: AllColors().ORANGE,
-            fontSize: 18,
-            fontWeight: FontWeight.w700),
+          color: AllColors().ORANGE,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
         headline3: TextStyle(color: AllColors().GREY, fontSize: 16),
         headline4: TextStyle(color: AllColors().GREY, fontSize: 14),
         headline5: TextStyle(color: AllColors().GREY, fontSize: 12),
       ),
       primaryTextTheme: TextTheme(
         headline1: TextStyle(
-            color: AllColors().WHITE,
-            fontSize: 18,
-            fontWeight: FontWeight.w700),
+          color: AllColors().WHITE,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
         headline2: TextStyle(color: AllColors().WHITE, fontSize: 16),
         headline3: TextStyle(color: AllColors().WHITE, fontSize: 14),
         headline4: TextStyle(color: AllColors().WHITE, fontSize: 12),
@@ -115,32 +121,33 @@ class Themes {
       ),
       iconTheme: IconThemeData(color: AllColors().WHITE),
       appBarTheme: AppBarTheme(
-          color: AllColors().Black,
-          iconTheme: IconThemeData(color: AllColors().WHITE),
-          toolbarTextStyle: TextTheme(
-            headline1: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: AllColors().WHITE,
-            ),
-            headline2: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: AllColors().WHITE,
-            ),
-          ).bodyText2,
-          titleTextStyle: TextTheme(
-            headline1: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: AllColors().WHITE,
-            ),
-            headline2: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: AllColors().WHITE,
-            ),
-          ).headline6),
+        color: AllColors().Black,
+        iconTheme: IconThemeData(color: AllColors().WHITE),
+        toolbarTextStyle: TextTheme(
+          headline1: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: AllColors().WHITE,
+          ),
+          headline2: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: AllColors().WHITE,
+          ),
+        ).bodyText2,
+        titleTextStyle: TextTheme(
+          headline1: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: AllColors().WHITE,
+          ),
+          headline2: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: AllColors().WHITE,
+          ),
+        ).headline6,
+      ),
       scaffoldBackgroundColor: AllColors().Black,
       fontFamily: 'HelveticaNeu',
       visualDensity: VisualDensity.adaptivePlatformDensity,

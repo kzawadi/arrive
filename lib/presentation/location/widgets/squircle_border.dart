@@ -117,8 +117,10 @@ class SquircleBorder extends ShapeBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        var path = getOuterPath(rect.deflate(side.width / 2.0),
-            textDirection: textDirection);
+        var path = getOuterPath(
+          rect.deflate(side.width / 2.0),
+          textDirection: textDirection,
+        );
         canvas.drawPath(path, side.toPaint());
     }
   }

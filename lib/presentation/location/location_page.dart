@@ -1,5 +1,4 @@
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
-import 'package:atsign_location_app/application/side_drawer/cubit/drawer_cubit.dart';
 import 'package:atsign_location_app/injections.dart';
 import 'package:atsign_location_app/presentation/location/map_widget.dart';
 
