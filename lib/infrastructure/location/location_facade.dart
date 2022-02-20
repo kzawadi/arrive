@@ -95,15 +95,13 @@ class LocationFacade implements ILocationFacade {
           initLocation: false,
         ).then(
           (_) async {
-            await initialiseLocationSharing(
-              navKey,
-            ).then((_) async {
-              initializeGroupService(rootDomain: Constants.rootDomain);
-            });
+            initializeGroupService(rootDomain: Constants.rootDomain);
           },
         );
       },
     );
+
+    initialiseLocationSharing(navKey);
 
     SendLocationNotification().setLocationPrompt(() async {
       await locationPromptDialog(
@@ -184,15 +182,16 @@ class LocationFacade implements ILocationFacade {
       ..metadata!.ccd = true
       ..key = locationSharingKey;
     final value =
-        await AtClientManager.getInstance().atClient.get(atKey).onError(
-      (e, s) async {
+        await AtClientManager.getInstance().atClient.get(atKey).catchError(
+      // ignore: invalid_return_type_for_catch_error
+      (dynamic e) async {
         print('error in get getShareLocation $e');
 
         /// create
         /// if key already exists, then make false for safer side
         /// else make it true, as a default value
         await updateLocationSharingKey(!alreadyExists, navKey);
-        return AtClientManager.getInstance().atClient.get(atKey);
+        // return null
       },
     );
 

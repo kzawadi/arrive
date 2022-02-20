@@ -47,7 +47,8 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
                       ),
                     );
           },
-        );
+          // ignore: invalid_return_type_for_catch_error
+        ).catchError(onError);
       },
       locationServicesInitialized: (myPosition) async {
         emit(
