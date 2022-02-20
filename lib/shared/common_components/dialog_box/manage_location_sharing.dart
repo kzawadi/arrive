@@ -9,16 +9,15 @@ import 'package:at_location_flutter/service/request_location_service.dart';
 import 'package:at_location_flutter/service/sharing_location_service.dart';
 import 'package:at_location_flutter/utils/constants/text_styles.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
-import 'package:atsign_location_app/presentation/routes/global_navigation-keys.dart';
 import 'package:atsign_location_app/shared/common_components/custom_button.dart'
     // ignore: library_prefixes
     as customButton;
 import 'package:atsign_location_app/shared/text_strings.dart';
 import 'package:flutter/material.dart';
 
-Future<void> manageLocationSharing() {
+Future<void> manageLocationSharing(GlobalKey<NavigatorState> navKey) {
   final value = showDialog<void>(
-    context: NavService.navkey.currentContext!,
+    context: navKey.currentContext!,
     barrierDismissible: true,
     builder: (BuildContext context) {
       return const _ManageLocationSharing();

@@ -114,4 +114,6 @@ class IconlyCurved {
   static const String VolumeUp = 'assets/icons/svgs/curved/VolumeUp.svg';
   static const String Wallet = 'assets/icons/svgs/curved/Wallet.svg';
   static const String Work = 'assets/icons/svgs/curved/Work.svg';
+  static const String Location_bold =
+      'assets/icons/svgs/curved/Location_bold.svg';
 }

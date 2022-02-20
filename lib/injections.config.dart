@@ -9,15 +9,17 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/location/bloc/location_bloc.dart' as _i12;
 import 'application/on_boarding/bloc/on_boarding_bloc.dart' as _i14;
+import 'application/side_drawer/cubit/drawer_cubit.dart' as _i20;
 import 'domain/contacts/i_contacts_facade.dart' as _i6;
 import 'domain/contacts/use_cases/at_contact_initialization_use_case.dart'
     as _i17;
 import 'domain/contacts/use_cases/at_contacts_use_cases.dart' as _i16;
+import 'domain/contacts/use_cases/get_active_atsign_use_case.dart' as _i18;
 import 'domain/location/i_location_facade.dart' as _i8;
 import 'domain/location/use_cases/init_location_services_use_case.dart' as _i10;
 import 'domain/on_boarding/i_atsign_on_boarding_facade.dart' as _i4;
 import 'domain/on_boarding/use_cases/get_on_boarded_at_sign_use_case.dart'
-    as _i18;
+    as _i19;
 import 'domain/on_boarding/use_cases/load_client_prefs_use_case.dart' as _i11;
 import 'domain/on_boarding/use_cases/on_board_data_when_succesful_use_case.dart'
     as _i13;
@@ -54,7 +56,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i16.AtContactInitializationUseCase>()));
   gh.factory<_i17.AtContactInitializationUseCase>(
       () => _i17.AtContactInitializationUseCase(get<_i6.IContactsFacade>()));
-  gh.factory<_i18.GetOnBoardedAtSignUseCase>(
-      () => _i18.GetOnBoardedAtSignUseCase(get<_i4.IAtsignOnBoardingFacade>()));
+  gh.factory<_i18.GetActiveAtsignUseCase>(
+      () => _i18.GetActiveAtsignUseCase(get<_i6.IContactsFacade>()));
+  gh.factory<_i19.GetOnBoardedAtSignUseCase>(
+      () => _i19.GetOnBoardedAtSignUseCase(get<_i4.IAtsignOnBoardingFacade>()));
+  gh.factory<_i20.DrawerCubit>(
+      () => _i20.DrawerCubit(get<_i18.GetActiveAtsignUseCase>()));
   return get;
 }

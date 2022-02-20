@@ -1,11 +1,9 @@
-// import 'package:at_contacts_group_flutter/services/navigation_service.dart';
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
+import 'package:atsign_location_app/application/side_drawer/cubit/drawer_cubit.dart';
 import 'package:atsign_location_app/injections.dart';
 import 'package:atsign_location_app/presentation/location/map_widget.dart';
-import 'package:atsign_location_app/presentation/routes/router.gr.dart'
-    as app_router;
+
 import 'package:auto_route/auto_route.dart';
-// import 'package:atsign_location_app/presentation/routes/global_navigation_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,12 +12,12 @@ class LocationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _appRouter = app_router.Router();
-    final uwata = AutoRouter.of(context).navigatorKey;
+    final navKey = AutoRouter.of(context).navigatorKey;
     return BlocProvider<LocationBloc>(
-      create: (context) => getIt<LocationBloc>()
+      lazy: false,
+      create: (BuildContext context) => getIt<LocationBloc>()
         ..add(
-          LocationEvent.started(uwata),
+          LocationEvent.started(navKey),
         ),
       child: const LocationViewer(),
     );

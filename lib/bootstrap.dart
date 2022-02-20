@@ -6,6 +6,7 @@ import 'package:atsign_location_app/injections.dart';
 import 'package:atsign_location_app/shared/constants.dart';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
@@ -42,7 +43,19 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       AtSignLogger.root_level = 'all';
 
       await BlocOverrides.runZoned(
-        () async => runApp(await builder()),
+        () async {
+          await SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+          ]).then(
+            (value) async {
+              await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+                  .then((value) {});
+              runApp(await builder());
+            },
+          );
+
+          // runApp(await builder());
+        },
         blocObserver: AppBlocObserver(),
         eventTransformer: sequential<dynamic>(),
       );

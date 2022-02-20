@@ -6,6 +6,7 @@ import 'package:at_events_flutter/at_events_flutter.dart';
 import 'package:at_location_flutter/at_location_flutter.dart';
 import 'package:at_location_flutter/common_components/location_prompt_dialog.dart';
 import 'package:at_location_flutter/location_modal/key_location_model.dart';
+import 'package:at_onboarding_flutter/utils/app_constants.dart';
 import 'package:atsign_location_app/domain/contacts/use_cases/at_contacts_use_cases.dart';
 import 'package:atsign_location_app/domain/location/i_location_facade.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
@@ -184,16 +185,28 @@ class LocationFacade implements ILocationFacade {
       ..metadata!.ccd = true
       ..key = locationSharingKey;
     final value =
-        await AtClientManager.getInstance().atClient.get(atKey).catchError(
-            // ignore: invalid_return_type_for_catch_error
-            (dynamic e) async {
-      print('error in get getShareLocation $e');
+        await AtClientManager.getInstance().atClient.get(atKey).onError(
+      (e, s) async {
+        print('error in get getShareLocation $e');
 
-      /// create
-      /// if key already exists, then make false for safer side
-      /// else make it true, as a default value
-      await updateLocationSharingKey(!alreadyExists, navKey);
-    });
+        /// create
+        /// if key already exists, then make false for safer side
+        /// else make it true, as a default value
+        await updateLocationSharingKey(!alreadyExists, navKey);
+        return AtClientManager.getInstance().atClient.get(atKey);
+      },
+    );
+    //     .catchError(
+    //   // ignore: invalid_return_type_for_catch_error
+    //   (dynamic e) async {
+    //     print('error in get getShareLocation $e');
+
+    //     /// create
+    //     /// if key already exists, then make false for safer side
+    //     /// else make it true, as a default value
+    //     await updateLocationSharingKey(!alreadyExists, navKey);
+    //   },
+    // );
 
     // ignore: avoid_bool_literals_in_conditional_expressions
     return (value.value == 'true') ? true : false;

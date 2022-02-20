@@ -1,6 +1,6 @@
 import 'package:at_contacts_group_flutter/utils/colors.dart';
+import 'package:at_onboarding_flutter/services/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:at_common_flutter/services/size_config.dart';
 
 class CustomTextStyles {
   // CustomTextStyles._();
@@ -8,9 +8,10 @@ class CustomTextStyles {
   // factory CustomTextStyles() => _instance;
 
   TextStyle blackPlayfairDisplay38 = TextStyle(
-      fontFamily: 'PlayfairDisplay',
-      fontSize: 38.toFont,
-      color: AllColors().Black);
+    fontFamily: 'PlayfairDisplay',
+    fontSize: 38.toFont,
+    color: AllColors().Black,
+  );
 
   // TextStyle primaryBold14 = TextStyle(
   //   color: AllColors().FONT_PRIMARY,

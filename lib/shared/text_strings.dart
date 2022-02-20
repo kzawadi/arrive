@@ -12,7 +12,7 @@ class TextStrings {
   static const String resetWarningText =
       'Warning: This action cannot be undone';
   static const String appName = '@rrive';
-  static const String copyRight = '© 2021 The @ Company';
+  static const String copyRight = '© 2022 The @ Company';
   // Display Title
   static const String retry = 'Retry';
   static const String actionRequired = 'Action required';
@@ -122,9 +122,15 @@ class TextStrings {
   static const selectAll = 'Select All';
   static const remove = 'Remove';
   static const decideLater = 'Decide Later';
+  static const sideBarTitle = 'Quick Settings';
   // Contact BottomSheet
   static const shareLocationDurationDescription =
       'How long do you want to share your location for ?';
   // Share Location Sheet
   static const share = 'Share';
+  //onboarding errors
+  static const cancelledByUser = 'cancelledByUser';
+  static const failuireSupportDirectory = 'error getting Support Directory';
+  static const serverError = 'server error';
+  static const failureSettingData = 'failed to setCurrent onBoard Data to';
 }

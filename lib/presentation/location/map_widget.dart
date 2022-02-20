@@ -5,6 +5,8 @@ import 'package:at_location_flutter/common_components/floating_icon.dart';
 import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:atsign_location_app/application/location/bloc/location_bloc.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
+import 'package:atsign_location_app/injections.dart';
+import 'package:atsign_location_app/presentation/home/drawer.dart';
 import 'package:atsign_location_app/presentation/location/compass/compas_view.dart';
 import 'package:atsign_location_app/presentation/location/widgets/action_button.dart';
 import 'package:atsign_location_app/presentation/location/widgets/collapsed_content_widget.dart';
@@ -14,6 +16,7 @@ import 'package:atsign_location_app/presentation/location/widgets/locations_rend
 import 'package:atsign_location_app/presentation/location/widgets/map_header_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/show_location.dart'
     as show_location;
+import 'package:atsign_location_app/presentation/routes/router.gr.dart';
 import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
 import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/enums.dart';
@@ -99,7 +102,6 @@ class _LocationViewerState extends State<LocationViewer>
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
         return state.maybeWhen(
@@ -127,6 +129,10 @@ class _LocationViewerState extends State<LocationViewer>
               }
             }
             return Scaffold(
+              endDrawer: SizedBox(
+                width: 250.toWidth,
+                child: const SideDrawer(),
+              ),
               floatingActionButton: StatefulBuilder(
                 builder: (_context, _setFloatingActionState) {
                   setFloatingActionState =
@@ -173,6 +179,7 @@ class _LocationViewerState extends State<LocationViewer>
                         _mapController,
                         moveMap: moveMap ?? false,
                       ),
+                    //drawer icon
                     Positioned(
                       top: 0,
                       right: 0,
@@ -184,9 +191,9 @@ class _LocationViewerState extends State<LocationViewer>
                             color: Theme.of(context).primaryColor,
                             size: 30,
                           ),
-                          onPressed: () {
-                            //todo drawer launcher
-                          },
+                          onPressed: () => AutoRouter.of(context).push(
+                            const SideDrawerRoute(),
+                          ),
                         ),
                       ),
                     ),
@@ -196,6 +203,7 @@ class _LocationViewerState extends State<LocationViewer>
                         controller: _controller,
                       ),
                     ),
+                    //zooming to current location icon
                     if (positionStream.isSome())
                       Positioned(
                         top: 100,

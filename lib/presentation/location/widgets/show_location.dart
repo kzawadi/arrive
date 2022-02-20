@@ -1,5 +1,7 @@
 // import 'package:at_location_flutter/map_content/flutter_map/src/plugins/plugin.dart' as plugin;
 import 'package:at_location_flutter/utils/constants/constants.dart';
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart' as fm;
 import 'package:flutter_map/flutter_map.dart';
@@ -26,30 +28,6 @@ Widget showLocation(
   fm.Marker marker;
   List<fm.Marker>? markerList;
 
-  /// init
-  // showMarker = true;
-  // if (location != null) {
-  //   marker = buildMarker(HybridModel(latLng: location), singleMarker: true);
-  //   if ((mapController != null) && (moveMap)) {
-  //     mapController.move(location, 8);
-  //   }
-  // } else {
-  //   marker =
-  //       buildMarker(HybridModel(latLng: LatLng(45, 45)), singleMarker: true);
-  //   showMarker = false;
-  // }
-
-  // if (locationList != null) {
-  //   markerList = [];
-  //   for (var location in locationList) {
-  // var marker = buildMarker(HybridModel(latLng: location),
-  //     singleMarker: true, marker: locationListMarker);
-  //     markerList.add(marker);
-  //   }
-  // }
-
-  ///
-
   return Scaffold(
     body: SafeArea(
       child: fm.FlutterMap(
@@ -57,20 +35,8 @@ Widget showLocation(
         mapController: mapController ?? fm.MapController(),
         options: fm.MapOptions(
           center: location,
-          //  markerList != null
-          //     ? markerList[0].point
-          //     : (location != null)
-          //         ? location
-          //         : LatLng(45, 45),
           zoom: 15,
           controller: mapController,
-
-          // markerList != null
-          //     ? 5
-          //     : (location != null)
-          //         ? 15
-          //         : 4,
-          // plugins: [MapPlugin(UniqueKey())],
         ),
         layers: [
           fm.TileLayerOptions(
@@ -86,7 +52,11 @@ Widget showLocation(
                 width: 25,
                 height: 25,
                 point: LatLng(location!.latitude, location.longitude),
-                builder: (ctx) => const FlutterLogo(),
+                builder: (ctx) => const IconlyIcon(
+                  path: IconlyCurved.Location_bold,
+                  color: Colors.black,
+                  size: 70,
+                ),
               ),
             ],
           ),
@@ -95,20 +65,3 @@ Widget showLocation(
     ),
   );
 }
-
-
-// class MarkerClusterPlugin extends MapPlugin {
-//   final Key key;
-//   MarkerClusterPlugin(this.key);
-//   @override
-//   Widget createLayer(
-//       LayerOptions options,plugin. MapState? mapState, Stream<void> stream) {
-//     return layer.MarkerClusterLayer(
-//         options as MarkerClusterLayerOptions, mapState, stream, key);
-//   }
-
-//   @override
-//   bool supportsLayer(LayerOptions options) {
-//     return options is MarkerClusterLayerOptions;
-//   }
-// }

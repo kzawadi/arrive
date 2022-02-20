@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 
 class CompassView extends StatefulWidget {
@@ -248,23 +251,6 @@ extension on num {
   double toRadians() => this * pi / 180;
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'flutter_compass_view',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         brightness: Brightness.dark,
-//       ),
-//       home: const CompasView(),
-//     );
-//   }
-// }
-
 class CompasView extends StatefulWidget {
   const CompasView({Key? key}) : super(key: key);
 
@@ -288,24 +274,39 @@ class _MyHomePageState extends State<CompasView> {
       builder: (context, snapshot) {
         final heading = snapshot.data?.heading ?? 0;
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.dark,
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Colors.black,
+            systemNavigationBarIconBrightness: Brightness.light,
+            // systemNavigationBarContrastEnforced: false,
+            systemNavigationBarDividerColor: Colors.black,
           ),
-          home: Scaffold(
-            backgroundColor: Colors.black,
-            body: Align(
-              alignment: const Alignment(0, -0.2),
-              child: CompassView(
-                bearing: _bearing,
-                heading: heading,
-              ),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              brightness: Brightness.dark,
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () => _setBearing(heading),
-              tooltip: 'Set Bearing',
-              child: const Icon(Icons.arrow_upward),
+            home: Scaffold(
+              backgroundColor: Colors.black,
+              body: Align(
+                alignment: const Alignment(0, -0.2),
+                child: CompassView(
+                  bearing: _bearing,
+                  heading: heading,
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () => _setBearing(heading),
+                tooltip: 'Set Bearing',
+                child: IconlyIcon(
+                  path: IconlyCurved.ArrowUp2,
+                  color: Theme.of(context).primaryColor,
+                  size: 30,
+                ),
+              ),
             ),
           ),
         );

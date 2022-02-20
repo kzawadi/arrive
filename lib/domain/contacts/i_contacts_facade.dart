@@ -7,5 +7,5 @@ abstract class IContactsFacade {
   ///functions eg. no contact will be displayed in UI if this is not initialized
   Future<Unit> initializeContactsServices();
 
-  // Stream<List<BaseContact?>> getContacts();
+  Option<String> getOnBoardedAtSign();
 }

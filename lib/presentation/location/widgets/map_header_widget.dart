@@ -59,6 +59,7 @@ class MapHeaderWidget extends StatelessWidget {
             task: TextStrings.requestLocation,
             color: Theme.of(context).primaryColor,
             angle: -3.14 / 10,
+            size: 22,
             onTap: () async {
               bottomSheet(
                 context,

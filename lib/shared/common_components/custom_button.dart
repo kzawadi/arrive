@@ -1,8 +1,9 @@
+import 'package:at_onboarding_flutter/services/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:at_common_flutter/services/size_config.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
+    Key? key,
     required this.child,
     this.height = 50,
     required this.onTap,
@@ -11,7 +12,7 @@ class CustomButton extends StatelessWidget {
     required this.bgColor,
     this.radius,
     this.border,
-  });
+  }) : super(key: key);
 
   final double? width, height, radius;
   final EdgeInsets? padding;
@@ -28,11 +29,13 @@ class CustomButton extends StatelessWidget {
         alignment: Alignment.center,
         width: width!.toWidth,
         height: height!.toHeight,
+        // ignore: use_named_constants
         padding: padding ?? const EdgeInsets.all(0),
         decoration: BoxDecoration(
-            color: bgColor,
-            border: border ?? const Border(),
-            borderRadius: BorderRadius.circular(radius ?? 30)),
+          color: bgColor,
+          border: border ?? const Border(),
+          borderRadius: BorderRadius.circular(radius ?? 30),
+        ),
         child: child,
       ),
     );
