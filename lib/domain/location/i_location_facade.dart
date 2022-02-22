@@ -20,8 +20,5 @@ abstract class ILocationFacade {
     GlobalKey<NavigatorState> navKey,
   );
 
-  Stream<List<EventAndLocationHybrid>> get allEventNotificationStream;
-  Stream<List<EventAndLocationHybrid>> get allLocalNotificationStream;
-
   Stream<Option<Position>> getMyLocationStatus();
 }

@@ -68,4 +68,10 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       locationDataReceived: (myPosition) {},
     );
   }
+
+  @override
+  Future<void> close() {
+    _myPositionStreamSubscription!.cancel();
+    return super.close();
+  }
 }

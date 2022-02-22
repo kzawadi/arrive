@@ -34,13 +34,13 @@ class EventRenderWidget extends StatelessWidget {
       );
 
       /// after rendering events, we will have [eventsRenderedWithFilter] count
-      if ((eventFilter != EventFilters.None) &&
-          (eventsRenderedWithFilter == 0)) {
-        return EmptyWidget(
-          title:
-              '${TextStrings.noWithoutSpecialcharacters} ${eventFilter.name} ${TextStrings.eventData}',
-        );
-      }
+      // if ((eventFilter != EventFilters.None) &&
+      //     (eventsRenderedWithFilter == 0)) {
+      //   return EmptyWidget(
+      //     title:
+      //         '${TextStrings.noWithoutSpecialcharacters} ${eventFilter.name} ${TextStrings.eventData}',
+      //   );
+      // }
 
       return _list;
     } else {

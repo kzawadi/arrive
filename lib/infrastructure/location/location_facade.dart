@@ -52,10 +52,6 @@ class LocationFacade implements ILocationFacade {
   bool? moveMap;
 
   BehaviorSubject<Position?>? myPosition;
-  @override
-  late BehaviorSubject<List<EventAndLocationHybrid>> allEventNotificationStream;
-  @override
-  late BehaviorSubject<List<EventAndLocationHybrid>> allLocalNotificationStream;
 
   String locationSharingKey =
       'issharing-${AtClientManager.getInstance().atClient.getCurrentAtSign()!.replaceAll('@', '')}';
@@ -68,12 +64,6 @@ class LocationFacade implements ILocationFacade {
   Future<Unit> init(
     GlobalKey<NavigatorState> navKey,
   ) async {
-    // if (isGettingLoadedFirstTime) {
-    //   setStatus(GET_ALL_NOTIFICATIONS, Status.Loading);
-    //   isGettingLoadedFirstTime = false;
-    // }
-    // allNotifications = [];
-
     allLocationNotifications = [];
     allEventNotifications = [];
 
@@ -113,9 +103,9 @@ class LocationFacade implements ILocationFacade {
     return unit;
   }
 
-  Stream<List<EventAndLocationHybrid>> updateLocations(
+  void updateLocations(
     List<KeyLocationModel>? list,
-  ) async* {
+  ) {
     if (allLocationNotifications.length < list!.length) {
       animateToIndex = 1; // Locations is index 1 in home screen
     } else {
@@ -130,15 +120,15 @@ class LocationFacade implements ILocationFacade {
           ),
         )
         .toList();
-    allLocalNotificationStream.add(allLocationNotifications);
-    yield* allLocalNotificationStream;
+    // allLocalNotificationStream.add(allLocationNotifications);
+    // yield* allLocalNotificationStream;
 
     // setStatus(GET_ALL_NOTIFICATIONS, Status.Done);
   }
 
-  Stream<List<EventAndLocationHybrid>> updateEvents(
+  void updateEvents(
     List<EventKeyLocationModel> list,
-  ) async* {
+  ) {
     if (allEventNotifications.length < list.length) {
       animateToIndex = 0; // Events is index 0 in home screen
     } else {
@@ -153,9 +143,9 @@ class LocationFacade implements ILocationFacade {
           ),
         )
         .toList();
-    allEventNotificationStream.add(allEventNotifications);
+    // allEventNotificationStream.add(allEventNotifications);
     // ignore: cascade_invocations
-    yield* allEventNotificationStream;
+    // yield* allEventNotificationStream;
   }
 
   Future<void> initialiseLocationSharing(
