@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:atsign_location_app/domain/location/i_location_facade.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
+import 'package:atsign_location_app/domain/location/use_cases/get_device_location_use_case.dart';
 import 'package:atsign_location_app/domain/location/use_cases/init_location_services_use_case.dart';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -21,6 +22,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc(
     this._initLocationServicesUseCase,
     this._iLocationFacade,
+    this._getLocationStatusUseCas,
   ) : super(const LocationState.initial()) {
     on<LocationEvent>(_locationHandler, transformer: sequential());
   }
@@ -28,6 +30,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   final InitLocationServicesUseCase _initLocationServicesUseCase;
   final ILocationFacade _iLocationFacade;
   StreamSubscription<Option<Position>>? _myPositionStreamSubscription;
+  final GetLocationStatusUseCase _getLocationStatusUseCas;
 
   Future _locationHandler(
     LocationEvent event,
@@ -39,7 +42,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
           (value) async {
             await _myPositionStreamSubscription?.cancel();
             _myPositionStreamSubscription =
-                _iLocationFacade.getMyLocationStatus().listen(
+                _getLocationStatusUseCas.call().listen(
                       (myPosition) => add(
                         LocationEvent.locationServicesInitialized(
                           myPosition,
