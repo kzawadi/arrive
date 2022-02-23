@@ -181,7 +181,7 @@ class LocationFacade implements ILocationFacade {
         /// if key already exists, then make false for safer side
         /// else make it true, as a default value
         await updateLocationSharingKey(!alreadyExists, navKey);
-        // return null
+        return AtClientManager.getInstance().atClient.get(atKey);
       },
     );
 
