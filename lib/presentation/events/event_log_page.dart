@@ -11,7 +11,11 @@ import 'package:at_onboarding_flutter/widgets/custom_appbar.dart';
 import 'package:atsign_location_app/domain/location/models/event_and_location.dart';
 import 'package:atsign_location_app/shared/colors.dart';
 import 'package:atsign_location_app/shared/common_components/dialog_box/delete_dialog_confirmation.dart';
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+import 'package:atsign_location_app/shared/common_components/icons_curved.dart';
 import 'package:atsign_location_app/shared/text_strings.dart';
+import 'package:atsign_location_app/shared/text_styles.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 // import 'package:provider/provider.dart';
@@ -36,11 +40,21 @@ class _EventLogState extends State<EventLog>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: TextStrings.events,
-        actionItems: const [
-          PopButton(label: TextStrings.close),
-        ],
+      appBar: AppBar(
+        leadingWidth: 30,
+        title: Text(
+          TextStrings.events,
+          style: CustomTextStyles().darkGrey16,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        leading: GestureDetector(
+          onTap: () => AutoRouter.of(context).pop(),
+          child: const IconlyIcon(
+            path: IconlyCurved.ArrowLeft2,
+            size: 10,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

@@ -14,7 +14,7 @@ import 'package:atsign_location_app/presentation/location/widgets/empty_widget.d
 import 'package:atsign_location_app/presentation/location/widgets/event_render_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/locations_render_widget.dart';
 import 'package:atsign_location_app/presentation/location/widgets/map_header_widget.dart';
-import 'package:atsign_location_app/presentation/location/widgets/show_location.dart'
+import 'package:atsign_location_app/presentation/location/widgets/map.dart'
     as show_location;
 import 'package:atsign_location_app/presentation/routes/router.gr.dart';
 import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';

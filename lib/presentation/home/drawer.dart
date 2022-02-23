@@ -196,8 +196,6 @@ class SideDrawer extends StatelessWidget {
                         ),
                         () async {
                           BackupKeyWidget(
-                            atClientService:
-                                AtClientManager.getInstance().atClient,
                             atsign: AtClientManager.getInstance()
                                 .atClient
                                 .getCurrentAtSign()!,

@@ -37,15 +37,6 @@ class ArriveMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final circleMarkers = <CircleMarker>[
-      CircleMarker(
-        point: location!,
-        color: Colors.deepOrange,
-        borderStrokeWidth: 2,
-        useRadiusInMeter: true,
-        radius: 60, // 2000 meters | 2 km
-      ),
-    ];
     return fm.FlutterMap(
       key: key,
       mapController: mapController ?? fm.MapController(),
@@ -62,21 +53,20 @@ class ArriveMap extends StatelessWidget {
           urlTemplate:
               'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MixedConstants.MAP_KEY}',
         ),
-        // fm.MarkerLayerOptions(
-        //   markers: [
-        //     fm.Marker(
-        //       width: 25,
-        //       height: 25,
-        //       point: LatLng(location!.latitude, location!.longitude),
-        //       builder: (ctx) => const IconlyIcon(
-        //         path: IconlyCurved.Location_bold,
-        //         color: Colors.black,
-        //         size: 70,
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        fm.CircleLayerOptions(circles: circleMarkers)
+        fm.MarkerLayerOptions(
+          markers: [
+            fm.Marker(
+              width: 25,
+              height: 25,
+              point: LatLng(location!.latitude, location!.longitude),
+              builder: (ctx) => const IconlyIcon(
+                path: IconlyCurved.Location_bold,
+                color: Colors.black,
+                size: 70,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
