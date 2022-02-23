@@ -105,7 +105,17 @@ class _LocationViewerState extends State<LocationViewer>
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
         return state.maybeWhen(
-          initial: () => const CompasView(),
+          initial: () => const Scaffold(
+            body: Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(
+                  color: Colors.amber,
+                ),
+              ),
+            ),
+          ),
           orElse: () => const Center(
             child: AutoSizeText('no map data yeet'),
           ),
@@ -163,9 +173,9 @@ class _LocationViewerState extends State<LocationViewer>
                 child: Stack(
                   children: [
                     if (positionStream.isSome())
-                      show_location.showLocation(
-                        mapKey,
-                        _mapController,
+                      show_location.ArriveMap(
+                        // mapKey,
+                        mapController: _mapController,
                         location: positionStream.fold(
                           () => null,
                           (a) {
@@ -174,10 +184,10 @@ class _LocationViewerState extends State<LocationViewer>
                         ),
                       )
                     else
-                      show_location.showLocation(
-                        mapKey,
-                        _mapController,
-                        moveMap: moveMap ?? false,
+                      show_location.ArriveMap(
+                        // mapKey,
+                        mapController: _mapController,
+                        // moveMap: moveMap ?? false,
                       ),
                     //drawer icon
                     Positioned(
@@ -222,7 +232,7 @@ class _LocationViewerState extends State<LocationViewer>
                                 () => LatLng(45, 45),
                                 (a) => LatLng(a.latitude, a.longitude),
                               ),
-                              8,
+                              20,
                             );
                           },
                         ),
@@ -279,6 +289,16 @@ class _LocationViewerState extends State<LocationViewer>
                           ),
                         ),
                       ),
+
+                    const Positioned(
+                      top: 0,
+                      left: 0,
+                      child: SizedBox(
+                        height: 90,
+                        width: 90,
+                        child: Compass(),
+                      ),
+                    ),
                   ],
                 ),
               ),

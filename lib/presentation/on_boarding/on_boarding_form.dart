@@ -73,12 +73,16 @@ class OnBoardingForm extends StatelessWidget {
           onBoardingError: (e) {
             return AutoSizeText(e.toString());
           },
-          orElse: () => SizedBox(
-            height: 30,
-            width: 30,
-            child: Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
+          orElse: () => const Scaffold(
+            body: Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.amber,
+                  ),
+                ),
               ),
             ),
           ),

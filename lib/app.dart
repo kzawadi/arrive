@@ -22,7 +22,7 @@ class ArriveApp extends StatelessWidget {
         systemNavigationBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark,
         // systemNavigationBarContrastEnforced: false,
-        systemNavigationBarDividerColor: Colors.black,
+        systemNavigationBarDividerColor: Colors.transparent,
       ),
       child: MaterialApp.router(
         title: '@rrive',

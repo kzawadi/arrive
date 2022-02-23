@@ -73,9 +73,9 @@ class Router extends _i10.RootStackRouter {
       return _i10.CupertinoPageX<dynamic>(
           routeData: routeData, child: const _i6.LocationViewer());
     },
-    CompasViewRoute.name: (routeData) {
+    CompassRoute.name: (routeData) {
       return _i10.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i7.CompasView());
+          routeData: routeData, child: const _i7.Compass());
     },
     SideDrawerRoute.name: (routeData) {
       return _i10.CupertinoPageX<dynamic>(
@@ -96,7 +96,7 @@ class Router extends _i10.RootStackRouter {
         _i10.RouteConfig(GroupListRoute.name, path: '/group-list'),
         _i10.RouteConfig(WebsiteScreenRoute.name, path: '/website-screen'),
         _i10.RouteConfig(LocationViewerRoute.name, path: '/location-viewer'),
-        _i10.RouteConfig(CompasViewRoute.name, path: '/compas-view'),
+        _i10.RouteConfig(CompassRoute.name, path: '/Compass'),
         _i10.RouteConfig(SideDrawerRoute.name, path: '/side-drawer'),
         _i10.RouteConfig(OnBoardingRoute.name, path: '/')
       ];
@@ -229,11 +229,11 @@ class LocationViewerRoute extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.CompasView]
-class CompasViewRoute extends _i10.PageRouteInfo<void> {
-  const CompasViewRoute() : super(CompasViewRoute.name, path: '/compas-view');
+/// [_i7.Compass]
+class CompassRoute extends _i10.PageRouteInfo<void> {
+  const CompassRoute() : super(CompassRoute.name, path: '/Compass');
 
-  static const String name = 'CompasViewRoute';
+  static const String name = 'CompassRoute';
 }
 
 /// generated route for

@@ -18,52 +18,116 @@ import 'package:latlong2/latlong.dart';
 /// [locationList] List of Co-ordinates on which markers needs to be shown.
 ///
 /// [locationListMarker] Custom widget displayed as the marker.
-Widget showLocation(
-  Key? key,
-  fm.MapController? mapController, {
-  LatLng? location,
-  List<LatLng>? locationList,
-  Widget? locationListMarker,
-  bool moveMap = true,
-}) {
-  bool showMarker;
-  fm.Marker marker;
-  List<fm.Marker>? markerList;
+///
+///
+class ArriveMap extends StatelessWidget {
+  const ArriveMap({
+    Key? key,
+    this.location,
+    this.locationList,
+    this.locationListMarker,
+    this.mapController,
+  }) : super(key: key);
 
-  return Scaffold(
-    body: SafeArea(
-      child: fm.FlutterMap(
-        key: key,
-        mapController: mapController ?? fm.MapController(),
-        options: fm.MapOptions(
-          center: location,
-          zoom: 15,
-          controller: mapController,
-        ),
-        layers: [
-          fm.TileLayerOptions(
-            minNativeZoom: 2,
-            maxNativeZoom: 18,
-            minZoom: 1,
-            urlTemplate:
-                'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MixedConstants.MAP_KEY}',
-          ),
-          fm.MarkerLayerOptions(
-            markers: [
-              fm.Marker(
-                width: 25,
-                height: 25,
-                point: LatLng(location!.latitude, location.longitude),
-                builder: (ctx) => const IconlyIcon(
-                  path: IconlyCurved.Location_bold,
-                  color: Colors.black,
-                  size: 70,
-                ),
-              ),
-            ],
-          ),
-        ],
+  final fm.MapController? mapController;
+  final LatLng? location;
+  final List<LatLng>? locationList;
+  final Widget? locationListMarker;
+  //bool moveMap = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final circleMarkers = <CircleMarker>[
+      CircleMarker(
+        point: location!,
+        color: Colors.deepOrange,
+        borderStrokeWidth: 2,
+        useRadiusInMeter: true,
+        radius: 60, // 2000 meters | 2 km
       ),
-    ),
-  );
+    ];
+    return fm.FlutterMap(
+      key: key,
+      mapController: mapController ?? fm.MapController(),
+      options: fm.MapOptions(
+        center: location,
+        zoom: 15,
+        controller: mapController,
+      ),
+      layers: [
+        fm.TileLayerOptions(
+          minNativeZoom: 2,
+          maxNativeZoom: 18,
+          minZoom: 1,
+          urlTemplate:
+              'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MixedConstants.MAP_KEY}',
+        ),
+        // fm.MarkerLayerOptions(
+        //   markers: [
+        //     fm.Marker(
+        //       width: 25,
+        //       height: 25,
+        //       point: LatLng(location!.latitude, location!.longitude),
+        //       builder: (ctx) => const IconlyIcon(
+        //         path: IconlyCurved.Location_bold,
+        //         color: Colors.black,
+        //         size: 70,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        fm.CircleLayerOptions(circles: circleMarkers)
+      ],
+    );
+  }
 }
+
+// Widget showLocation(
+//   Key? key,
+//   fm.MapController? mapController, {
+//   LatLng? location,
+//   List<LatLng>? locationList,
+//   Widget? locationListMarker,
+//   // bool moveMap = true,
+// }) {
+//   // bool showMarker;
+//   // fm.Marker marker;
+//   // List<fm.Marker>? markerList;
+
+//   return Scaffold(
+//     body: SafeArea(
+//       child: fm.FlutterMap(
+//         key: key,
+//         mapController: mapController ?? fm.MapController(),
+//         options: fm.MapOptions(
+//           center: location,
+//           zoom: 15,
+//           controller: mapController,
+//         ),
+//         layers: [
+//           fm.TileLayerOptions(
+//             minNativeZoom: 2,
+//             maxNativeZoom: 18,
+//             minZoom: 1,
+//             urlTemplate:
+//                 'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MixedConstants.MAP_KEY}',
+//           ),
+//           fm.MarkerLayerOptions(
+//             markers: [
+//               fm.Marker(
+//                 width: 25,
+//                 height: 25,
+//                 point: LatLng(location!.latitude, location.longitude),
+//                 builder: (ctx) => const IconlyIcon(
+//                   path: IconlyCurved.Location_bold,
+//                   color: Colors.black,
+//                   size: 70,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
