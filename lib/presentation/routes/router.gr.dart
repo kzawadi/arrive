@@ -10,12 +10,11 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:at_contact/at_contact.dart' as _i13;
+import 'package:at_contact/at_contact.dart' as _i12;
 import 'package:at_contacts_flutter/at_contacts_flutter.dart' as _i2;
 import 'package:at_contacts_group_flutter/at_contacts_group_flutter.dart'
     as _i4;
 import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:flutter/cupertino.dart' as _i12;
 import 'package:flutter/material.dart' as _i11;
 
 import '../events/event_log_page.dart' as _i3;
@@ -73,9 +72,15 @@ class Router extends _i10.RootStackRouter {
       return _i10.CupertinoPageX<dynamic>(
           routeData: routeData, child: const _i6.LocationViewer());
     },
-    CompassRoute.name: (routeData) {
+    CompassViewRoute.name: (routeData) {
+      final args = routeData.argsAs<CompassViewRouteArgs>();
       return _i10.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i7.Compass());
+          routeData: routeData,
+          child: _i7.CompassView(
+              key: args.key,
+              heading: args.heading,
+              foregroundColor: args.foregroundColor,
+              bearingColor: args.bearingColor));
     },
     SideDrawerRoute.name: (routeData) {
       return _i10.CupertinoPageX<dynamic>(
@@ -96,7 +101,7 @@ class Router extends _i10.RootStackRouter {
         _i10.RouteConfig(GroupListRoute.name, path: '/group-list'),
         _i10.RouteConfig(WebsiteScreenRoute.name, path: '/website-screen'),
         _i10.RouteConfig(LocationViewerRoute.name, path: '/location-viewer'),
-        _i10.RouteConfig(CompassRoute.name, path: '/Compass'),
+        _i10.RouteConfig(CompassViewRoute.name, path: '/compass-view'),
         _i10.RouteConfig(SideDrawerRoute.name, path: '/side-drawer'),
         _i10.RouteConfig(OnBoardingRoute.name, path: '/')
       ];
@@ -115,9 +120,9 @@ class LocationPageRoute extends _i10.PageRouteInfo<void> {
 /// [_i2.ContactsScreen]
 class ContactsScreenRoute extends _i10.PageRouteInfo<ContactsScreenRouteArgs> {
   ContactsScreenRoute(
-      {_i12.Key? key,
-      void Function(List<_i13.AtContact?>)? selectedList,
-      _i12.BuildContext? context,
+      {_i11.Key? key,
+      void Function(List<_i12.AtContact?>)? selectedList,
+      _i11.BuildContext? context,
       bool asSelectionScreen = false,
       bool asSingleSelectionScreen = false,
       Function? saveGroup,
@@ -146,11 +151,11 @@ class ContactsScreenRouteArgs {
       this.saveGroup,
       this.onSendIconPressed});
 
-  final _i12.Key? key;
+  final _i11.Key? key;
 
-  final void Function(List<_i13.AtContact?>)? selectedList;
+  final void Function(List<_i12.AtContact?>)? selectedList;
 
-  final _i12.BuildContext? context;
+  final _i11.BuildContext? context;
 
   final bool asSelectionScreen;
 
@@ -195,7 +200,7 @@ class GroupListRoute extends _i10.PageRouteInfo<void> {
 /// [_i5.WebsiteScreen]
 class WebsiteScreenRoute extends _i10.PageRouteInfo<WebsiteScreenRouteArgs> {
   WebsiteScreenRoute(
-      {_i12.Key? key, required String title, required String url})
+      {_i11.Key? key, required String title, required String url})
       : super(WebsiteScreenRoute.name,
             path: '/website-screen',
             args: WebsiteScreenRouteArgs(key: key, title: title, url: url));
@@ -207,7 +212,7 @@ class WebsiteScreenRouteArgs {
   const WebsiteScreenRouteArgs(
       {this.key, required this.title, required this.url});
 
-  final _i12.Key? key;
+  final _i11.Key? key;
 
   final String title;
 
@@ -229,11 +234,43 @@ class LocationViewerRoute extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.Compass]
-class CompassRoute extends _i10.PageRouteInfo<void> {
-  const CompassRoute() : super(CompassRoute.name, path: '/Compass');
+/// [_i7.CompassView]
+class CompassViewRoute extends _i10.PageRouteInfo<CompassViewRouteArgs> {
+  CompassViewRoute(
+      {_i11.Key? key,
+      required double heading,
+      _i11.Color foregroundColor = _i11.Colors.black,
+      _i11.Color bearingColor = _i11.Colors.red})
+      : super(CompassViewRoute.name,
+            path: '/compass-view',
+            args: CompassViewRouteArgs(
+                key: key,
+                heading: heading,
+                foregroundColor: foregroundColor,
+                bearingColor: bearingColor));
 
-  static const String name = 'CompassRoute';
+  static const String name = 'CompassViewRoute';
+}
+
+class CompassViewRouteArgs {
+  const CompassViewRouteArgs(
+      {this.key,
+      required this.heading,
+      this.foregroundColor = _i11.Colors.black,
+      this.bearingColor = _i11.Colors.red});
+
+  final _i11.Key? key;
+
+  final double heading;
+
+  final _i11.Color foregroundColor;
+
+  final _i11.Color bearingColor;
+
+  @override
+  String toString() {
+    return 'CompassViewRouteArgs{key: $key, heading: $heading, foregroundColor: $foregroundColor, bearingColor: $bearingColor}';
+  }
 }
 
 /// generated route for

@@ -31,7 +31,7 @@ other stuff. AutoRoute does all that for you and much more.
     AutoRoute<dynamic>(page: GroupList),
     AutoRoute<dynamic>(page: WebsiteScreen),
     AutoRoute<dynamic>(page: LocationViewer),
-    AutoRoute<dynamic>(page: Compass),
+    AutoRoute<dynamic>(page: CompassView),
     AutoRoute<dynamic>(page: SideDrawer),
     AutoRoute<dynamic>(page: OnBoarding, initial: true),
   ],

@@ -56,8 +56,8 @@ class ArriveMap extends StatelessWidget {
         fm.MarkerLayerOptions(
           markers: [
             fm.Marker(
-              width: 25,
-              height: 25,
+              // width: 30,
+              // height: 30,
               point: LatLng(location!.latitude, location!.longitude),
               builder: (ctx) => const IconlyIcon(
                 path: IconlyCurved.Location_bold,

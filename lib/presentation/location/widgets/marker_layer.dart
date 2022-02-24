@@ -1,168 +1,109 @@
-// // ignore_for_file: prefer_void_to_null, avoid_unnecessary_containers
+import 'package:at_location_flutter/common_components/pointed_bottom.dart';
+// import 'package:at_location_flutter/map_content/flutter_map/src/layer/marker_layer.dart';
+// import 'package:at_location_flutter/location_modal/hybrid_model.dart';
+import 'package:at_location_flutter/utils/constants/text_strings.dart';
+import 'package:atsign_location_app/presentation/location/widgets/hybridModel.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart' as fm;
 
-// import 'package:flutter/widgets.dart';
-// // import 'package:at_location_flutter/map_content/flutter_map/flutter_map.dart';
-// // import 'package:at_location_flutter/map_content/flutter_map/src/core/bounds.dart';
-// import 'package:flutter_map/src/map/map.dart' as mp;
-// import 'package:flutter_map/plugin_api.dart';
-// // ignore: import_of_legacy_library_into_null_safe
-// import 'package:latlong2/latlong.dart';
-// import 'package:flutter_map/flutter_map.dart' as fm;
+// import 'circle_marker_painter.dart';
 
-// class MarkerLayerOptions extends fm.LayerOptions {
-//   final List<fm.Marker> markers;
-//   MarkerLayerOptions({
-//     Key? key,
-//     this.markers = const [],
-//     Stream<Null>? rebuild,
-//   }) : super(key: key, rebuild: rebuild);
-// }
+Widget buildMarkerCluster(List<fm.Marker?> markers, {HybridModel? eventData}) {
+  return Stack(
+    alignment: Alignment.center,
+    children: [
+      Positioned(
+          top: 0,
+          child: Container(
+            height: markers.contains(eventData?.marker) ? 50 : 30,
+            width: 200,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 10)]),
+            child: markers.contains(eventData?.marker)
+                ? Column(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          eventData!.displayName ?? '...',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        ((markers.length - 1) == 1)
+                            ? '${markers.length - 1} ${AllText().PERSON_NEAR_BY}'
+                            : '${markers.length - 1} ${AllText().PEOPLE_NEAR_BY}',
+                        style: const TextStyle(color: Colors.deepOrange),
+                      ),
+                    ],
+                  )
+                : Text(
+                    '${markers.length} ${AllText().PEOPLE_NEAR_BY}',
+                    style: const TextStyle(color: Colors.deepOrange),
+                  ),
+          )),
+      Positioned(
+        top: markers.contains(eventData?.marker) ? 47 : 27,
+        child: pointedBottom(),
+      ),
+      Positioned(
+        top: 55,
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: const BoxDecoration(
+            color: Colors.orange,
+            shape: BoxShape.circle,
+          ),
+          child: markers.contains(eventData?.marker)
+              ? const Icon(Icons.flag)
+              : const SizedBox(),
+        ),
+      ),
+      Positioned(
+        top: 50,
+        child: SizedBox(
+          width: 50,
+          height: 50,
+          child: Opacity(
+            opacity: 0.6,
+            child: CustomPaint(
+              painter: CircleMarkerPainter(),
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
 
-// class Anchor {
-//   final double left;
-//   final double top;
+class CircleMarkerPainter extends CustomPainter {
+  Color? color;
+  PaintingStyle? paintingStyle;
+  CircleMarkerPainter({this.color, this.paintingStyle});
+  final _paint = Paint()
+    ..color = Colors.orange
+    ..strokeWidth = 5
+    ..style = PaintingStyle.stroke;
 
-//   Anchor(this.left, this.top);
+  @override
+  void paint(Canvas canvas, Size size) {
+    _paint.color = color ?? Colors.orange;
+    _paint.style = paintingStyle ?? PaintingStyle.stroke;
+    canvas.drawOval(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      _paint,
+    );
+  }
 
-//   Anchor._(double width, double height, AnchorAlign? alignOpt)
-//       : left = _leftOffset(width, alignOpt),
-//         top = _topOffset(height, alignOpt);
-
-//   static double _leftOffset(double width, AnchorAlign? alignOpt) {
-//     switch (alignOpt) {
-//       case AnchorAlign.left:
-//         return 0.0;
-//       case AnchorAlign.right:
-//         return width;
-//       case AnchorAlign.top:
-//       case AnchorAlign.bottom:
-//       case AnchorAlign.center:
-//       default:
-//         return width / 2;
-//     }
-//   }
-
-//   static double _topOffset(double height, AnchorAlign? alignOpt) {
-//     switch (alignOpt) {
-//       case AnchorAlign.top:
-//         return 0.0;
-//       case AnchorAlign.bottom:
-//         return height;
-//       case AnchorAlign.left:
-//       case AnchorAlign.right:
-//       case AnchorAlign.center:
-//       default:
-//         return height / 2;
-//     }
-//   }
-
-//   factory Anchor.forPos(AnchorPos? pos, double width, double height) {
-//     if (pos == null) return Anchor._(width, height, null);
-//     if (pos.value is AnchorAlign) return Anchor._(width, height, pos.value);
-//     if (pos.value is Anchor) return pos.value;
-//     throw Exception('Unsupported AnchorPos value type: ${pos.runtimeType}.');
-//   }
-// }
-
-// class AnchorPos<T> {
-//   AnchorPos._(this.value);
-//   T value;
-//   static AnchorPos exactly(Anchor anchor) => AnchorPos<dynamic>._(anchor);
-//   static AnchorPos align(AnchorAlign alignOpt) =>
-//       AnchorPos<dynamic>._(alignOpt);
-// }
-
-// enum AnchorAlign {
-//   left,
-//   right,
-//   top,
-//   bottom,
-//   center,
-// }
-
-// class Marker {
-//   final LatLng point;
-//   final WidgetBuilder builder;
-//   final double width;
-//   final double height;
-//   final Anchor anchor;
-
-//   Marker({
-//     required this.point,
-//     required this.builder,
-//     this.width = 30.0,
-//     this.height = 30.0,
-//     AnchorPos? anchorPos,
-//   }) : anchor = Anchor.forPos(anchorPos, width, height);
-// }
-
-// // class MarkerLayerWidget extends StatelessWidget {
-// //   final MarkerLayerOptions options;
-
-// //   MarkerLayerWidget({required this.options}) : super(key: options.key);
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     final  mp.MapState mapState = mp.MapState.of(context)!;
-// //     return MarkerLayer(options, mapState, mapState.onMoved);
-// //   }
-// // }
-
-// class MarkerLayer extends StatelessWidget {
-//   final MarkerLayerOptions markerOpts;
-//   final mp.MapState? map;
-//   final Stream<Null>? stream;
-
-//   MarkerLayer(this.markerOpts, this.map, this.stream)
-//       : super(key: markerOpts.key);
-
-//   bool _boundsContainsMarker(fm.Marker marker) {
-//     var pixelPoint = map!.project(marker.point);
-
-//     final width = marker.width - marker.anchor.left;
-//     final height = marker.height - marker.anchor.top;
-
-//     var sw = CustomPoint(pixelPoint.x + width, pixelPoint.y - height);
-//     var ne = CustomPoint(pixelPoint.x - width, pixelPoint.y + height);
-//     return map!.pixelBounds!.containsPartialBounds(Bounds(sw, ne));
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<int?>(
-//       stream: stream, // a Stream<int> or null
-//       builder: (BuildContext context, AsyncSnapshot<int?> snapshot) {
-//         var markers = <Widget>[];
-//         for (var markerOpt in markerOpts.markers) {
-//           var pos = map!.project(markerOpt.point);
-//           pos = pos.multiplyBy(map!.getZoomScale(map!.zoom, map!.zoom)) -
-//               map!.getPixelOrigin()!;
-
-//           var pixelPosX =
-//               (pos.x - (markerOpt.width - markerOpt.anchor.left)).toDouble();
-//           var pixelPosY =
-//               (pos.y - (markerOpt.height - markerOpt.anchor.top)).toDouble();
-
-//           if (!_boundsContainsMarker(markerOpt)) {
-//             continue;
-//           }
-
-//           markers.add(
-//             Positioned(
-//               width: markerOpt.width,
-//               height: markerOpt.height,
-//               left: pixelPosX,
-//               top: pixelPosY,
-//               child: markerOpt.builder(context),
-//             ),
-//           );
-//         }
-//         return Container(
-//           child: Stack(
-//             children: markers,
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}

@@ -7,14 +7,15 @@ import 'package:at_location_flutter/map_content/flutter_map/src/layer/marker_lay
 import 'package:at_location_flutter/utils/constants/colors.dart';
 import 'package:atsign_location_app/presentation/location/widgets/hybridModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart' as fm;
 
-Marker buildMarker(
+fm.Marker buildMarker(
   HybridModel user, {
   bool singleMarker = false,
   Widget? marker,
 }) {
-  return Marker(
-    anchorPos: AnchorPos.align(AnchorAlign.center),
+  return fm.Marker(
+    anchorPos: fm.AnchorPos.align(fm.AnchorAlign.center),
     height: 75,
     width: 50,
     point: user.latLng!,
@@ -43,7 +44,7 @@ Marker buildMarker(
                     child: Icon(
                       Icons.circle,
                       size: 40,
-                      color: AllColors().DARK_BLUE,
+                      color: AllColors().ORANGE,
                     ),
                   ),
                 ],

@@ -174,7 +174,7 @@ class _LocationViewerState extends State<LocationViewer>
                   children: [
                     if (positionStream.isSome())
                       show_location.ArriveMap(
-                        // mapKey,
+                        key: mapKey,
                         mapController: _mapController,
                         location: positionStream.fold(
                           () => null,
@@ -182,12 +182,16 @@ class _LocationViewerState extends State<LocationViewer>
                             return LatLng(a.latitude, a.longitude);
                           },
                         ),
+                        locationListMarker: const IconlyIcon(
+                          path: IconlyCurved.Location_bold,
+                          color: Colors.pink,
+                          size: 70,
+                        ),
                       )
                     else
                       show_location.ArriveMap(
-                        // mapKey,
+                        key: mapKey,
                         mapController: _mapController,
-                        // moveMap: moveMap ?? false,
                       ),
                     //drawer icon
                     Positioned(
@@ -232,7 +236,7 @@ class _LocationViewerState extends State<LocationViewer>
                                 () => LatLng(45, 45),
                                 (a) => LatLng(a.latitude, a.longitude),
                               ),
-                              20,
+                              9,
                             );
                           },
                         ),
@@ -296,7 +300,7 @@ class _LocationViewerState extends State<LocationViewer>
                       child: SizedBox(
                         height: 90,
                         width: 90,
-                        child: Compass(),
+                        child: MyHomePage(),
                       ),
                     ),
                   ],
