@@ -222,15 +222,6 @@ class LocationFacade implements ILocationFacade {
 
   @override
   Stream<Option<Position>> getMyLocationStatus() async* {
-    yield* _getMyLocation();
-  }
-
-  Stream<Option<Position>> _getMyLocation() async* {
-    final newMyLatLng = await getMyLocation();
-    if (newMyLatLng != null) {
-      myLatLng = newMyLatLng;
-    }
-
     final permission = await Geolocator.checkPermission();
 
     if ((permission == LocationPermission.always) ||
@@ -238,12 +229,10 @@ class LocationFacade implements ILocationFacade {
       if (myPosition != null) {
         await myPosition!.close();
       }
-      final c = Geolocator.getPositionStream(
+      final currentPosition = Geolocator.getPositionStream(
         locationSettings: const LocationSettings(distanceFilter: 2),
       );
-
-      final v = c.asyncMap(optionOf);
-      yield* v;
+      yield* currentPosition.asyncMap(optionOf);
     }
   }
 }

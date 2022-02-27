@@ -32,6 +32,7 @@ dependencies:
   flutter_compass: ^0.7.0
   flutter_svg:
   modal_bottom_sheet: ^2.0.0
+  equatable:
 
   flutter_localizations:
     sdk: flutter
@@ -47,8 +48,6 @@ dependencies:
   injectable: ^1.5.3
   bloc_concurrency: ^0.2.0
   json_annotation: ^4.4.0
-
-
 
 
 
@@ -76,6 +75,13 @@ dev_dependencies:
   freezed: ^1.1.1
   injectable_generator: ^1.5.3
   json_serializable: ^6.1.4
+  mockito:
+  bloc_test: ^9.0.2
+
+
+# This overide is to andress this issue in github https://github.com/felangel/mocktail/issues/105
+dependency_overrides:
+  test_api: 0.4.9
 
   very_good_analysis: ^2.4.0
 # For information on the generic Dart part of this file, see the
