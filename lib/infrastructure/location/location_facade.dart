@@ -61,7 +61,7 @@ class LocationFacade implements ILocationFacade {
   }
 
   @override
-  Future<Unit> init(
+  Future<Unit> initializaLocationServices(
     GlobalKey<NavigatorState> navKey,
   ) async {
     allLocationNotifications = [];
@@ -91,7 +91,7 @@ class LocationFacade implements ILocationFacade {
       },
     );
 
-    initialiseLocationSharing(navKey);
+    await initialiseLocationSharing(navKey);
 
     SendLocationNotification().setLocationPrompt(() async {
       await locationPromptDialog(

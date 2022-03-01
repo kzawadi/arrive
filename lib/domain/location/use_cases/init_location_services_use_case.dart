@@ -12,5 +12,5 @@ class InitLocationServicesUseCase {
   Future<Unit> call(
     GlobalKey<NavigatorState> navKey,
   ) async =>
-      _iLocationFacade.init(navKey);
+      _iLocationFacade.initializaLocationServices(navKey);
 }

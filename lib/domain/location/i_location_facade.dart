@@ -16,7 +16,7 @@ abstract class ILocationFacade {
   List<EventAndLocationHybrid>? get allNotifications;
   int? get animateToIndex;
 
-  Future<Unit> init(
+  Future<Unit> initializaLocationServices(
     GlobalKey<NavigatorState> navKey,
   );
 
