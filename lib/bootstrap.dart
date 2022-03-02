@@ -49,7 +49,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
             (value) async {
               await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
                   .then((value) {});
-              runApp(await builder());
+              return runApp(await builder());
             },
           );
 

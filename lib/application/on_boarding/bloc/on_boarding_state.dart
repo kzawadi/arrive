@@ -1,7 +1,6 @@
 part of 'on_boarding_bloc.dart';
 
 @freezed
-@immutable
 class OnBoardingState with _$OnBoardingState {
   const factory OnBoardingState.initial() = _Initial;
   const factory OnBoardingState.loading(AtClientPreference atClientPreference) =
