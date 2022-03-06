@@ -22,7 +22,7 @@ import '../home/drawer.dart' as _i8;
 import '../location/compass/compas_view.dart' as _i7;
 import '../location/location_page.dart' as _i1;
 import '../location/map_widget.dart' as _i6;
-import '../splash/splash.dart' as _i9;
+import '../on_boarding/on_boarding_page.dart' as _i9;
 import '../website_webview/website_webview.dart' as _i5;
 
 class Router extends _i10.RootStackRouter {

@@ -75,7 +75,9 @@ dev_dependencies:
   freezed: ^1.1.1
   injectable_generator: ^1.5.3
   json_serializable: ^6.1.4
-  mockito:
+  # mockito:
+  mocktail: ^0.2.0
+
   bloc_test: ^9.0.2
 
 

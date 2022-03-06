@@ -1,3 +1,4 @@
+import 'package:at_client_mobile/at_client_mobile.dart';
 import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
 import 'package:atsign_location_app/domain/contacts/i_contacts_facade.dart';
 import 'package:atsign_location_app/domain/contacts/use_cases/at_contacts_use_cases.dart';
@@ -8,7 +9,8 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 // import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
+// import 'package:mockito/mockito.dart';
 
 class MockIOnboardingFacade extends Mock implements IAtsignOnBoardingFacade {}
 
@@ -62,43 +64,58 @@ void main() {
           expect(onBoardingBloc.state, const OnBoardingState.initial());
         },
       );
+    },
+  );
 
-      test(
-        'Get AtClient Preference',
-        () {
-          final onBoardingBloc = OnBoardingBloc(
-            _loadAtClientPreferenceUseCase,
-            _getOnBoardedAtSignUseCase,
-            _onBoardDataWhenSuccessfulUseCase,
-            _atContactInitializationUseCase,
-          );
-
-          // final AtClient atClient = AtClientManager.getInstance().atClient;
-          const String atSign = '@kelvin';
-          blocTest<OnBoardingBloc, OnBoardingState>(
-            'emits AuthBloc.authenticated when a user is sign in',
-            // setUp: () {
-            //   when(() => _loadAtClientPreferenceUseCase.call())
-            //       .thenAnswer((_) => Future.value(Right(atClient)));
-            // },
-            build: () => OnBoardingBloc(
-              _loadAtClientPreferenceUseCase,
-              _getOnBoardedAtSignUseCase,
-              _onBoardDataWhenSuccessfulUseCase,
-              _atContactInitializationUseCase,
-            ),
-            act: (bloc) => bloc.add(const OnBoardingEvent.onBoardingAtSign()),
-            expect: () => <OnBoardingState>[
-              OnBoardingState.loadSuccess(some(atSign)),
-            ],
-          );
+  group(
+    'emits AtClient Preference when succesful',
+    () {
+      final atClientPrfs = AtClientPreference();
+      const String atSign = '@kelvin';
+      blocTest<OnBoardingBloc, OnBoardingState>(
+        'emits loading',
+        setUp: () {
+          when(() => _loadAtClientPreferenceUseCase.call())
+              .thenAnswer((_) => Future.value(right(atClientPrfs)));
         },
+        build: () => OnBoardingBloc(
+          _loadAtClientPreferenceUseCase,
+          _getOnBoardedAtSignUseCase,
+          _onBoardDataWhenSuccessfulUseCase,
+          _atContactInitializationUseCase,
+        ),
+        act: (bloc) => bloc.add(const OnBoardingEvent.onBoardingAtSign()),
+        expect: () => <OnBoardingState>[OnBoardingState.loading(atClientPrfs)],
       );
     },
   );
-}
+  group(
+    'Gives AtClientService and atSign then emit OnBoardingState.loadSuccess ',
+    () {
+      // final atClientPrfs = AtClientPreference();
+      const String atSign = '@kelvins';
+      final AtClientService f = AtClientService();
+      final Map<String?, AtClientService> atClientServiceMap = {'': f};
 
-class NoParams extends Equatable {
-  @override
-  List<Object?> get props => [];
+      blocTest<OnBoardingBloc, OnBoardingState>(
+        'emits loadSuccess',
+        setUp: () {
+          when(() => _iAtsignOnBoardingFacade.call())
+              .thenAnswer((_) => optionOf(atSign));
+        },
+        build: () => OnBoardingBloc(
+          _loadAtClientPreferenceUseCase,
+          _getOnBoardedAtSignUseCase,
+          _onBoardDataWhenSuccessfulUseCase,
+          _atContactInitializationUseCase,
+        ),
+        act: (bloc) => bloc.add(
+          OnBoardingEvent.atSignOnBoardingSucces(atClientServiceMap, atSign),
+        ),
+        expect: () => <OnBoardingState>[
+          OnBoardingState.loadSuccess(optionOf(atSign)),
+        ],
+      );
+    },
+  );
 }

@@ -5,7 +5,7 @@ import 'package:atsign_location_app/presentation/home/drawer.dart';
 import 'package:atsign_location_app/presentation/location/compass/compas_view.dart';
 import 'package:atsign_location_app/presentation/location/location_page.dart';
 import 'package:atsign_location_app/presentation/location/map_widget.dart';
-import 'package:atsign_location_app/presentation/splash/splash.dart';
+import 'package:atsign_location_app/presentation/on_boarding/on_boarding_page.dart';
 import 'package:atsign_location_app/presentation/website_webview/website_webview.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:injectable/injectable.dart';

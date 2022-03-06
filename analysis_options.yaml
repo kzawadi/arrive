@@ -29,6 +29,3 @@ exclude:
   - lib/**.gr.dart
   - test/**.mocks.dart
   - test/**.config.dart
-
-    
-
