@@ -39,6 +39,7 @@ class _EventLogState extends State<EventLog>
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 30,

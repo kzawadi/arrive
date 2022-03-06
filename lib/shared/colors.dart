@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AllColors {
-  // AllColors._();
-  // static final AllColors _instance = AllColors._();
-  // factory AllColors() => _instance;
+  factory AllColors() => _instance;
+  AllColors._();
+  static final AllColors _instance = AllColors._();
   // ignore: non_constant_identifier_names
   Color WHITE = const Color(0xFFFFFFFF);
   // ignore: non_constant_identifier_names

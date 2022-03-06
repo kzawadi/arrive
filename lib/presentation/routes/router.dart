@@ -33,7 +33,7 @@ other stuff. AutoRoute does all that for you and much more.
     AutoRoute<dynamic>(page: LocationViewer),
     AutoRoute<dynamic>(page: CompassView),
     AutoRoute<dynamic>(page: SideDrawer),
-    AutoRoute<dynamic>(page: OnBoarding, initial: true),
+    AutoRoute<dynamic>(page: OnBoardingPage, initial: true),
   ],
 )
 class $Router {}

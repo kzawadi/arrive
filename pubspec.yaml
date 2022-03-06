@@ -32,6 +32,7 @@ dependencies:
   flutter_compass: ^0.7.0
   flutter_svg:
   modal_bottom_sheet: ^2.0.0
+  quick_actions: ^0.6.0+10
   equatable:
 
   flutter_localizations:

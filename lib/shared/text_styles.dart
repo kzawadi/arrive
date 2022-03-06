@@ -3,9 +3,9 @@ import 'package:at_onboarding_flutter/services/size_config.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextStyles {
-  // CustomTextStyles._();
-  // static final CustomTextStyles _instance = CustomTextStyles._();
-  // factory CustomTextStyles() => _instance;
+  factory CustomTextStyles() => _instance;
+  CustomTextStyles._();
+  static final CustomTextStyles _instance = CustomTextStyles._();
 
   TextStyle blackPlayfairDisplay38 = TextStyle(
     fontFamily: 'PlayfairDisplay',

@@ -1,9 +1,10 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 class TextStrings {
-  // TextStrings._();
-  // static TextStrings _instance = TextStrings._();
-  // factory TextStrings() => _instance;
+  factory TextStrings() => _instance;
+
+  TextStrings._();
+  static final TextStrings _instance = TextStrings._();
 
   static const String resetButton = 'Reset';
   static const String resetDescription =

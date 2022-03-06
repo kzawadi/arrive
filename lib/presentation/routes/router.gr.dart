@@ -86,9 +86,9 @@ class Router extends _i10.RootStackRouter {
       return _i10.CupertinoPageX<dynamic>(
           routeData: routeData, child: const _i8.SideDrawer());
     },
-    OnBoardingRoute.name: (routeData) {
+    OnBoardingPageRoute.name: (routeData) {
       return _i10.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i9.OnBoarding());
+          routeData: routeData, child: const _i9.OnBoardingPage());
     }
   };
 
@@ -103,7 +103,7 @@ class Router extends _i10.RootStackRouter {
         _i10.RouteConfig(LocationViewerRoute.name, path: '/location-viewer'),
         _i10.RouteConfig(CompassViewRoute.name, path: '/compass-view'),
         _i10.RouteConfig(SideDrawerRoute.name, path: '/side-drawer'),
-        _i10.RouteConfig(OnBoardingRoute.name, path: '/')
+        _i10.RouteConfig(OnBoardingPageRoute.name, path: '/')
       ];
 }
 
@@ -282,9 +282,9 @@ class SideDrawerRoute extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.OnBoarding]
-class OnBoardingRoute extends _i10.PageRouteInfo<void> {
-  const OnBoardingRoute() : super(OnBoardingRoute.name, path: '/');
+/// [_i9.OnBoardingPage]
+class OnBoardingPageRoute extends _i10.PageRouteInfo<void> {
+  const OnBoardingPageRoute() : super(OnBoardingPageRoute.name, path: '/');
 
-  static const String name = 'OnBoardingRoute';
+  static const String name = 'OnBoardingPageRoute';
 }

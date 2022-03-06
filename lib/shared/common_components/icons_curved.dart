@@ -1,6 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:atsign_location_app/shared/common_components/iconly_icon.dart';
+
 class IconlyCurved {
+  factory IconlyCurved() => _instance;
+  IconlyCurved._();
+  static final IconlyCurved _instance = IconlyCurved._();
+
   static const String Activity = 'assets/icons/svgs/curved/Activity.svg';
   static const String AddUser = 'assets/icons/svgs/curved/AddUser.svg';
   static const String ArrowDown1 = 'assets/icons/svgs/curved/ArrowDown.svg';

@@ -1,7 +1,7 @@
 class AllImages {
-  // AllImages._();
-  // static final AllImages _instance = AllImages._();
-  // factory AllImages() => _instance;
+  factory AllImages() => _instance;
+  AllImages._();
+  static final AllImages _instance = AllImages._();
 
   // ignore: non_constant_identifier_names
   String SPLASH_BG = 'assets/images/splash_bg.png';
