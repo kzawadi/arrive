@@ -48,9 +48,9 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
           ),
         );
       },
-      atSignOnBoardingSucces: (value, atSi) async {
+      atSignOnBoardingSucces: (value, atsign) async {
         final Option<String> atSign = _getOnBoardedAtSignUseCase.call();
-        _onBoardDataWhenSuccessfulUseCase(value, atSi);
+        _onBoardDataWhenSuccessfulUseCase(value, atsign);
         await _atContactInitializationUseCase();
         emit(
           OnBoardingState.loadSuccess(atSign),

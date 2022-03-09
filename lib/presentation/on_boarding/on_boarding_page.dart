@@ -5,7 +5,6 @@ import 'package:atsign_location_app/application/location/bloc/location_bloc.dart
 import 'package:atsign_location_app/application/on_boarding/bloc/on_boarding_bloc.dart';
 import 'package:atsign_location_app/application/side_drawer/cubit/drawer_cubit.dart';
 import 'package:atsign_location_app/injections.dart';
-import 'package:atsign_location_app/presentation/events/event_log_page.dart';
 import 'package:atsign_location_app/presentation/on_boarding/on_boarding_form.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +133,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           create: (context) => getIt<DrawerCubit>(),
         ),
       ],
-      child: const EventLog(),
+      child: const OnBoardingForm(),
     );
   }
 }
